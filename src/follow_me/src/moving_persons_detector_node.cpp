@@ -15,13 +15,13 @@
 
 //used for detection of motion
 #define detection_threshold 0.2 //threshold for motion detection
-#define dynamic_threshold 0.75 //to decide if a cluster is static or dynamic
+#define dynamic_threshold 0 //to decide if a cluster is static or dynamic
 
 //Distance entre deux personnes d'un même groupe
 #define group_person_threshold 0.8
 
 //used for detection of moving legs
-#define leg_size_min 0.05
+#define leg_size_min 0.15
 #define leg_size_max 0.30
 
 //used for detection of moving persons
@@ -64,6 +64,10 @@ private:
     int nb_moving_legs_detected;
     geometry_msgs::Point moving_leg_detected[1000];// to store the middle of each moving leg
 
+    //to perform detection of moving legs and to store them
+    int nb_group_detected;
+    geometry_msgs::Point group_detected[1000];// to store the middle of each group
+
     //to perform detection of moving person and store them
     int nb_moving_persons_detected;
     geometry_msgs::Point moving_persons_detected[1000];// to store the middle of each moving person
@@ -89,11 +93,9 @@ moving_persons_detector() {
     sub_scan = n.subscribe("scan", 1, &moving_persons_detector::scanCallback, this);
     sub_robot_moving = n.subscribe("robot_moving", 1, &moving_persons_detector::robot_movingCallback, this);
 
-    pub_moving_persons_detector_marker = n.advertise<visualization_msgs::Marker>("moving_persons_detector", 1);
+    pub_moving_persons_detector_marker = n.advertise<visualization_msgs::Marker>("moving_persons_detector", 1); // Preparing a topic to publish our results. This will be used by the visualization tool rviz
+    pub_moving_persons_detector = n.advertise<geometry_msgs::Point>("goal_to_reach", 1);     // Preparing a topic to publish the goal to reach.
 
-    //Topic pour l'envoie de tableau de personnes
-    pub_moving_persons_detector = n.advertise<visualization_msgs::Marker>("moving_persons_detector_array", 1);
-    
     current_robot_moving = true;
     new_laser = false;
     new_robot = false;
@@ -293,6 +295,69 @@ void detect_moving_legs() {
 
     if ( nb_moving_legs_detected )
         ROS_INFO("%d moving legs have been detected.\n", nb_moving_legs_detected);
+
+}//detect_moving_legs
+
+    // DETECTION OF MOVING PERSON
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+void detect_group() {
+// a moving leg is a cluster:
+// - with a size higher than "leg_size_min";
+// - with a size lower than "leg_size_max;
+// - more than "dynamic_threshold"% of its hits are dynamic (see, cluster_dynamic table)
+
+    ROS_INFO("detecting group");
+
+    int nb_group = 0;//to count the number of group
+
+    int group_start[1000];
+    int group_end[1000];
+    
+    //initialization of the first cluster
+    group_start[0] = 0;
+    group_end[0] = 0;
+
+    int loop;
+    for(loop = 1; loop < nb_moving_legs_detected; loop++) {
+        float d = distancePoints(moving_leg_detected[group_start[nb_group]],
+                                 moving_leg_detected[loop]);
+        if(d <= group_person_threshold){
+            group_end[nb_group]++;
+        }else{
+            nb_group++;
+            group_start[nb_group] = loop;
+            group_end[nb_group] = loop;
+        }
+    }
+
+    nb_group_detected = 0;
+    for(int i = 0; i< nb_group; i++) {
+        if(group_start[i] < group_end[i]){
+            float x1 = moving_leg_detected[group_start[i]].x;
+            float y1 = moving_leg_detected[group_start[i]].y;
+            float x2 = moving_leg_detected[group_end[i]].x;
+            float y2 = moving_leg_detected[group_end[i]].y;
+            geometry_msgs::Point m;
+            group_detected[i].x = (float)(x2+x1)/2;
+            group_detected[i].y = (float)(y2+y1)/2; 
+            
+            display[nb_pts].x = group_detected[nb_group_detected].x;
+            display[nb_pts].y = group_detected[nb_group_detected].y;
+            display[nb_pts].z = group_detected[nb_group_detected].z;
+
+            nb_group_detected++;
+            
+            colors[nb_pts].r = 0;
+            colors[nb_pts].g = 0;
+            colors[nb_pts].b = 0;
+            colors[nb_pts].a = 1.0;
+            nb_pts++;
+        }
+    }
+    
+    if ( nb_moving_legs_detected )
+        ROS_INFO("%d group have been detected.\n", nb_group_detected);
 
 }//detect_moving_legs
 
