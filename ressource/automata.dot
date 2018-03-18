@@ -1,0 +1,27 @@
+digraph robot_aotomata {
+    rankdir=LR;
+    size="8,5"
+
+    labelloc="t";
+    label = "Robot Action";
+    edge [ fontname=Helvetica, fontcolor=red, fontsize=10 ]; 
+    node [shape = doublecircle];
+    node [shape = circle];
+    graph [ bgcolor=lightgray, resolution=128, fontname=Arial, fontcolor=blue, fontsize=10 ]; 
+    node [ fontname=Arial, fontcolor=blue, fontsize=10]; 
+
+    sensor -> perception;
+    robot_moving -> perception [label = "robot_is_moving"]; 
+    perception -> group_detector [label = "moving_person[]"];
+
+    group_detector -> decision [label = "goal_to_reach"];
+    decision -> group_detector  [label = "goal_reached"];
+    
+    decision -> rotation [label = "rotation_to_do"];
+    rotation -> decision [label = "rotation_done"];
+    decision -> translation [label = "translation_to_do"];
+    decision -> translation [label = "translation_done"];
+    obstacle_detection -> translation [label = "closest_obstacle"];
+    rotation -> motors;
+    translation -> motors;
+}
