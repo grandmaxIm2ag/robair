@@ -25,8 +25,7 @@
 #include "geometry_msgs/PoseArray.h"
 #include "geometry_msgs/Pose.h"
 
-#define COUNTOF(x) (sizeof(x)/sizeof(*x))
-#define group_person_threshold 3
+#define group_person_threshold 1
 
 using namespace std;
 
@@ -38,6 +37,8 @@ private:
     ros::Subscriber sub_detect_person;
     //Receive robot moving
     ros::Subscriber sub_robot_moving;
+    //Receive robot position
+    ros::Subscriber sub_robot_position;
     //Publish goal_to_reach
     ros::Publisher pub_group_detector;
     //Publish display
@@ -62,6 +63,7 @@ private:
     //Nb person detected
     int nb_person_detected;
     //to check if the robot is moving or not
+    geometry_msgs::Point robot_position;
     bool new_robot;
     bool previous_robot_moving;
     bool current_robot_moving;
@@ -72,6 +74,7 @@ public:
         sub_robot_moving = n.subscribe("robot_moving", 1, &group_detection::robot_movingCallback, this);
         //Réception du tableau de personne
         sub_detect_person = n.subscribe("moving_persons_detector_array", 1,&group_detection::perso_callback, this );
+        sub_robot_position = n.subscribe("goal_reached", 1,&group_detection::position_callback, this );
         pub_group_detector_marker = n.advertise<visualization_msgs::Marker>("group_detector", 1);
         pub_group_detector = n.advertise<geometry_msgs::Point>("goal_to_reach", 1);
 
@@ -79,16 +82,19 @@ public:
         new_robot = false;
         new_goal = false;
         ros::Rate r(10);
+        robot_position.x = 0;
+        robot_position.y = 0;
         while (ros::ok()) {
             ros::spinOnce();
             update();
             r.sleep();
         }
     }
+    
     void perso_callback(const geometry_msgs::PoseArray::
                         ConstPtr& array){
         
-        nb_person_detected = COUNTOF(array);
+        nb_person_detected = array->poses.size();
         
         for(int i=0; i<nb_person_detected; i++){
             person_detected[i].x = array->poses[i].position.x;
@@ -98,18 +104,42 @@ public:
         return;
         
     }
-    void position_callback(const geometry_msgs::Point::ConstPtr& g);
+    
+    void position_callback(const geometry_msgs::Point::ConstPtr& g){
+        robot_position.x = g->x;
+        robot_position.y = g->y;
+    }
+
+    geometry_msgs::Point closest_group() {
+        int i_min = 0;
+        float dist_min = 0, d;
+        for(int i =0; i<nb_group_detected; i++){
+            d = distancePoints(robot_position, group_detected[i]);
+            if (d <= dist_min) {
+                i_min = i;
+                dist_min = d;
+            }
+        }
+        return group_detected[i_min];
+    }
+    
     void update() {
         if ( new_data ) {
             new_data = false;
             nb_pts = 0;
-            if ( !current_robot_moving ) {
+            if ( !current_robot_moving) {
                 ROS_INFO("robot is not moving");
+
                 //we search for moving persons in 4 steps
                 detect_group();
-                //to publish the goal_to_reach
+
+                //graphical display of the results
+                populateMarkerTopic();
+
                 if(new_goal) {
                     new_goal = false;
+                    goal_to_reach.x = closest_group().x;
+                    goal_to_reach.y = closest_group().y;
                     pub_group_detector.publish(goal_to_reach);
                 }
             }
@@ -133,9 +163,11 @@ public:
         group_start[0] = 0;
         group_end[0] = 0;
         int loop;
+        ROS_INFO("nb person = %d", nb_person_detected);
         for(loop = 1; loop < nb_person_detected; loop++) {
             float d;
             d=distancePoints(person_detected[group_start[nb_group]],person_detected[loop]);
+            ROS_INFO("distance = %f", d);
             if(d <= group_person_threshold){
                 group_end[nb_group]++;
             }else{
@@ -146,7 +178,7 @@ public:
         }      
         nb_group_detected = 0;
         for(int i = 0; i< nb_group; i++) {
-            if(group_start[i] < group_end[i]){
+            if(group_start[i] <= group_end[i]){
                 float x1 = person_detected[group_start[i]].x;
                 float y1 = person_detected[group_start[i]].y;
                 float x2 = person_detected[group_end[i]].x;
@@ -161,21 +193,20 @@ public:
 
                 nb_group_detected++;
             
-                colors[nb_pts].r = 0;
+                colors[nb_pts].r = 1;
                 colors[nb_pts].g = 0;
                 colors[nb_pts].b = 0;
                 colors[nb_pts].a = 1.0;
                 nb_pts++;
+                new_goal=true;
             }
         }
     
-        if ( nb_group_detected )
-            ROS_INFO("%d group have been detected.\n", nb_group_detected);
+        ROS_INFO("%d group have been detected.\n", nb_group_detected);
     }
 
     // Distance between two points
     float distancePoints(geometry_msgs::Point pa, geometry_msgs::Point pb) {
-
         return sqrt(pow((pa.x-pb.x),2.0) + pow((pa.y-pb.y),2.0));
 
     }
@@ -277,7 +308,6 @@ public:
     }
 
     void robot_movingCallback(const std_msgs::Bool::ConstPtr& state) {
-
         new_robot = true;
         ROS_INFO("New data of robot_moving received");
         previous_robot_moving = current_robot_moving;
@@ -287,7 +317,7 @@ public:
 };
 
 int main(int argc, char **argv){
-    ros::init(argc, argv, "moving_persons_detector");
+    ros::init(argc, argv, "group_detection");
 
     group_detection bsObject;
 

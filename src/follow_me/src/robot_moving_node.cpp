@@ -45,7 +45,7 @@ public:
 robot_moving_lectures() {
 
     // communication with person_detector
-    pub_robot_moving = n.advertise<std_msgs::Bool>("robot_moving", 1);   
+    pub_robot_moving = n.advertise<std_msgs::Bool>("robot_moving", 2);   
 
     // communication with odometry
     sub_odometry = n.subscribe("odom", 1, &robot_moving_lectures::odomCallback, this);

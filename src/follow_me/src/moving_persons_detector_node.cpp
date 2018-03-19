@@ -6,6 +6,8 @@
 #include "sensor_msgs/LaserScan.h"
 #include "visualization_msgs/Marker.h"
 #include "geometry_msgs/Point.h"
+#include "geometry_msgs/PoseArray.h"
+#include "geometry_msgs/Pose.h"
 #include "std_msgs/ColorRGBA.h"
 #include <cmath>
 #include "std_msgs/Bool.h"
@@ -94,7 +96,7 @@ moving_persons_detector() {
     sub_robot_moving = n.subscribe("robot_moving", 1, &moving_persons_detector::robot_movingCallback, this);
 
     pub_moving_persons_detector_marker = n.advertise<visualization_msgs::Marker>("moving_persons_detector", 1); // Preparing a topic to publish our results. This will be used by the visualization tool rviz
-    pub_moving_persons_detector = n.advertise<geometry_msgs::Point>("goal_to_reach", 1);     // Preparing a topic to publish the goal to reach.
+    pub_moving_persons_detector = n.advertise<geometry_msgs::PoseArray>("moving_persons_detector_array", 1);     // Preparing a topic to publish the goal to reach.
 
     current_robot_moving = true;
     new_laser = false;
@@ -135,16 +137,19 @@ void update() {
             perform_clustering();//to perform clustering
             detect_moving_legs();//to detect moving legs using cluster
             detect_moving_persons();//to detect moving_persons using moving legs detected
-            //detect_group();//to detect group using moving person detected
-            
+            if(nb_moving_persons_detected) {
+                geometry_msgs::Pose p;
+                geometry_msgs::PoseArray array;
+                
+                for(int i=0; i<nb_moving_persons_detected; i++) {
+                    p.position.x = moving_persons_detected[i].x;
+                    p.position.y = moving_persons_detected[i].y;
+                    array.poses.push_back(p);
+                }
+                pub_moving_persons_detector.publish(array);
+            }
             //graphical display of the results
             populateMarkerTopic();
-
-            //to publish the goal_to_reach
-            if(new_goal) {
-                new_goal = false;
-                pub_moving_persons_detector.publish(goal_to_reach);
-            }
         }
         else
             ROS_INFO("robot is moving");
