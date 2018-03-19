@@ -5,6 +5,7 @@
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \usepackage[margin=0.5in]{geometry}
+\usepackage{tikz}
 
 \title{Projet de Robotique : Comportement du Robot}
 \author{Groupe 7}
@@ -28,8 +29,9 @@
 \end{algorithm}
 
 \begin{center}
-\includegraphics[scale=0.6]{v1_action_robot.png}
+\includegraphics[scale=0.6]{action_v1.png}
 \end{center}
+
 \subsection{Les personnes}
 
 C'est le noeud : moving\_person\_detector qui d\'etecte les personnes.
@@ -46,10 +48,7 @@ distance minimale de e. C'est le noeud group\_detector qui choisi le
 groupe \`a rejoindre.
 
 \section{architecture}
-
-\begin{center}
-\includegraphics[scale=0.6]{automata.jpg}
-\end{center}
+\input{automate.tex}
 
 \section{Partage du travail}
 
