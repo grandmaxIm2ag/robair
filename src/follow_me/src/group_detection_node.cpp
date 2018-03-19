@@ -94,12 +94,14 @@ public:
     void perso_callback(const geometry_msgs::PoseArray::
                         ConstPtr& array){
         
-        nb_person_detected = array->poses.size();
-        
+        len = array->poses.size();
+     	geometry::Point tmp[1000]; 
         for(int i=0; i<nb_person_detected; i++){
-            person_detected[i].x = array->poses[i].position.x;
-            person_detected[i].y = array->poses[i].position.y;
+            tmp[i].x = array->poses[i].position.x;
+            tmp[i].y = array->poses[i].position.y;
         }
+	for(int i =0; i<len;i++){
+	}
         new_data = true;
         return;
         
