@@ -26,6 +26,8 @@
 #include "geometry_msgs/Pose.h"
 
 #define group_person_threshold 1
+#define dist_person_tracker 0.1
+#define active_threshold 10
 
 using namespace std;
 
@@ -60,8 +62,11 @@ private:
     geometry_msgs::Point group_detected[1000];
     //Person detected 
     geometry_msgs::Point person_detected[1000];
+    geometry_msgs::Point active_person[1000];
+    int score[1000];
     //Nb person detected
     int nb_person_detected;
+    int nb_person_active;
     //to check if the robot is moving or not
     geometry_msgs::Point robot_position;
     bool new_robot;
@@ -93,15 +98,51 @@ public:
     
     void perso_callback(const geometry_msgs::PoseArray::
                         ConstPtr& array){
-        
-        len = array->poses.size();
-     	geometry::Point tmp[1000]; 
-        for(int i=0; i<nb_person_detected; i++){
+        int len = array->poses.size();
+     	geometry_msgs::Point tmp[len];
+
+        //On récupert les points envoyés par moving_person_node
+        for(int i=0; i<len; i++){
             tmp[i].x = array->poses[i].position.x;
             tmp[i].y = array->poses[i].position.y;
         }
-	for(int i =0; i<len;i++){
-	}
+        //On abaisse le score de tous les points
+        for(int j=0; j<nb_person_detected; j++){
+            score[j]--;
+        }
+        
+        for(int i =0; i<len; i++){
+            bool b = true;
+            for(int j=0; j<nb_person_detected; j++){
+                if(distancePoints(tmp[i], person_detected[j])>dist_person_tracker){
+                    person_detected[j].x=tmp[i].x;
+                    person_detected[j].y=tmp[i].y;
+                    score[j]++;
+                    b=false;
+                    break;
+                }
+            }
+            if(b){
+                person_detected[nb_person_detected].x = tmp[i].x;
+                person_detected[nb_person_detected].y = tmp[i].y;
+                score[nb_person_detected]=1;
+                nb_person_detected++;
+            }
+        }
+        
+        nb_person_active = 0;
+        for(int i=0; i<nb_person_detected; i++) {
+            if(score[i]>0){
+                active_person[nb_person_active].x = person_detected[i].x;
+                active_person[nb_person_active].y = person_detected[i].y;
+                nb_person_active++;
+            }
+        }
+        /*
+        for(int i=0; i<nb_person_detected; i++) {
+            ROS_INFO("(%f, %f), %d\n", active_person[i].x,
+                     active_person[i].x,score[i]);
+        }*/
         new_data = true;
         return;
         
@@ -156,7 +197,7 @@ public:
     void detect_group() {
         ROS_INFO("detecting group");
         
-        int nb_group = 0;//to count the number of group
+        int nb_group = 1;//to count the number of group
 
         int group_start[1000];
         int group_end[1000];
@@ -165,10 +206,10 @@ public:
         group_start[0] = 0;
         group_end[0] = 0;
         int loop;
-        ROS_INFO("nb person = %d", nb_person_detected);
-        for(loop = 1; loop < nb_person_detected; loop++) {
+        ROS_INFO("nb person = %d", nb_person_active);
+        for(loop = 1; loop < nb_person_active; loop++) {
             float d;
-            d=distancePoints(person_detected[group_start[nb_group]],person_detected[loop]);
+            d=distancePoints(active_person[loop-1],active_person[loop]);
             ROS_INFO("distance = %f", d);
             if(d <= group_person_threshold){
                 group_end[nb_group]++;
@@ -179,12 +220,12 @@ public:
             }
         }      
         nb_group_detected = 0;
-        for(int i = 0; i< nb_group; i++) {
+        for(int i = 0; i< nb_group+1; i++) {
             if(group_start[i] <= group_end[i]){
-                float x1 = person_detected[group_start[i]].x;
-                float y1 = person_detected[group_start[i]].y;
-                float x2 = person_detected[group_end[i]].x;
-                float y2 = person_detected[group_end[i]].y;
+                float x1 = active_person[group_start[i]].x;
+                float y1 = active_person[group_start[i]].y;
+                float x2 = active_person[group_end[i]].x;
+                float y2 = active_person[group_end[i]].y;
                 geometry_msgs::Point m;
                 group_detected[i].x = (float)(x2+x1)/2;
                 group_detected[i].y = (float)(y2+y1)/2; 
