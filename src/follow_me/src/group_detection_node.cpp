@@ -25,55 +25,123 @@
 #include "geometry_msgs/PoseArray.h"
 #include "geometry_msgs/Pose.h"
 
+/**
+ * Constante représentant la distance maximal entre deux personnes d'un même groupe
+ */
 #define group_person_threshold 1
+/**
+ *
+ */
 #define dist_person_tracker 0.1
+/**
+ *
+ */
 #define active_threshold 10
 
 using namespace std;
 
+/**
+ * Classe représentant le noeud pour la détection des groupes 
+ */
 class group_detection {
 private:
-    
+    /**
+     *
+     */
     ros::NodeHandle n;
-    //Receive the set of detected persons
+    /**
+     *Receive the set of detected persons
+     */
     ros::Subscriber sub_detect_person;
-    //Receive robot moving
+    /**
+     * Receive robot moving
+     */
     ros::Subscriber sub_robot_moving;
-    //Receive robot position
+    /**
+     *Receive robot position
+     */
     ros::Subscriber sub_robot_position;
-    //Publish goal_to_reach
+    /**
+     *Publish goal_to_reach
+     */
     ros::Publisher pub_group_detector;
-    //Publish display
+    /**
+     *Publish display
+     */
     ros::Publisher pub_group_detector_marker;
+    /**
+     * Booléen indiquant si de nouvelles données ont été reçu
+     */
     bool new_data;
+    /**
+     * Booléen indiquant si un nouveau but a été trouvé
+     */
     bool new_goal;
 
     // GRAPHICAL DISPLAY
+    /**
+     * Nombre de point à afficher
+     */
     int nb_pts;
+    /**
+     * Les point à afficher
+     */
     geometry_msgs::Point display[2000];
+    /**
+     * La couleur des différents points
+     */
     std_msgs::ColorRGBA colors[2000];
     
-    //to store the goal to reach that we will be published
-    geometry_msgs::Point goal_to_reach;
+    /**
+     *to store the goal to reach that we will be published
+     */
+     geometry_msgs::Point goal_to_reach;
 
-    //to perform detection of moving legs and to store them
+    /**
+     *to perform detection of moving legs and to store them
+     */
     int nb_group_detected;
-    // to store the middle of each group
+    /**
+     * to store the middle of each group
+     */
     geometry_msgs::Point group_detected[1000];
-    //Person detected 
+    /**
+     *Person detected
+     */ 
     geometry_msgs::Point person_detected[1000];
+    /**
+     * Personne active
+     */
     geometry_msgs::Point active_person[1000];
+    /**
+     * Score des différentes personnes
+     */
     int score[1000];
-    //Nb person detected
+    /**
+     *Nb person detected
+     */
     int nb_person_detected;
+    /**
+     * Nombre de personnes actives
+     */
     int nb_person_active;
-    //to check if the robot is moving or not
+    
     geometry_msgs::Point robot_position;
+    /**
+     * Booléen indiquatn que le robot s'est arrêté
+     */
     bool new_robot;
+    /**
+     * Permet de savoir si le robot à changer de position
+     */
     bool previous_robot_moving;
     bool current_robot_moving;
 public:
 
+    /**
+     * \fn group_detection()
+     * Constructeur de la classe group_detection
+     */
     group_detection(){
         //Réception : Robot mouvant ou non
         sub_robot_moving = n.subscribe("robot_moving", 1, &group_detection::robot_movingCallback, this);
@@ -95,7 +163,14 @@ public:
             r.sleep();
         }
     }
-    
+
+    /**
+     * \fn perso_callback(const geometry_msgs::PoseArray::ConstPtr& array)
+     *
+     * Callback pour la réception des points des personnes
+     *
+     * \param array les personnes détectés
+     */
     void perso_callback(const geometry_msgs::PoseArray::
                         ConstPtr& array){
         int len = array->poses.size();
@@ -138,21 +213,30 @@ public:
                 nb_person_active++;
             }
         }
-        /*
-        for(int i=0; i<nb_person_detected; i++) {
-            ROS_INFO("(%f, %f), %d\n", active_person[i].x,
-                     active_person[i].x,score[i]);
-        }*/
+        
         new_data = true;
         return;
         
     }
-    
+
+    /**
+     * \fn position_callback(const geometry_msgs::Point::ConstPtr& g)
+     *
+     * \brief Callback pour la réception de la position courante du robot
+     *
+     * \param g la position du robot
+     */
     void position_callback(const geometry_msgs::Point::ConstPtr& g){
         robot_position.x = g->x;
         robot_position.y = g->y;
     }
 
+    /**
+     * \fn geometry_msgs::Point closest_group()
+     *
+     * \brief renvoie le groupe le plus proche du robot
+     * \return le groupe le plus proche
+     */  
     geometry_msgs::Point closest_group() {
         int i_min = 0;
         float dist_min = 0, d;
@@ -165,7 +249,11 @@ public:
         }
         return group_detected[i_min];
     }
-    
+
+    /**
+     *\fn update ()
+     *\brief met à jours le noeud
+     */
     void update() {
         if ( new_data ) {
             new_data = false;
@@ -193,7 +281,11 @@ public:
         else
             ROS_INFO("wait for data");
     }
-    
+
+    /**
+     * \fn void detect_group ()
+     * \brief Recherche les différents groupes
+     */
     void detect_group() {
         ROS_INFO("detecting group");
         
@@ -254,7 +346,11 @@ public:
 
     }
 
-    // Draw the field of view and other references
+    /**
+     * \fn void populateMarkerReference()
+     *
+     * \brief Draw the field of view and other references
+     */ 
     void populateMarkerReference() {
 
         visualization_msgs::Marker references;
@@ -308,6 +404,9 @@ public:
 
     }
 
+    /**
+     * \fn void populateMarkerTopic()
+     */
     void populateMarkerTopic(){
 
         visualization_msgs::Marker marker;

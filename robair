@@ -1,0 +1,65 @@
+#!/bin/sh
+
+TELEOPERATION=0
+DEPLACEMENT=0
+ROSCORE=0
+ROSBAG=0
+ROSBAG_FILE=
+
+while [ "$1" != "" ]; do
+    PARAM=`echo $1 | awk -F= '{print $1}'`
+    VALUE=`echo $1 | awk -F= '{print $2}'`
+    case $PARAM in
+        -h | --help)
+            cat .usage.txt
+            exit
+            ;;
+        -de | --deplacement_enable)
+            DEPLACEMENT=1
+            ;;
+        -te | --teleoperation_enable)
+            TELEOPERATION=1
+            ;;
+        -r | --roscore)
+            ROSCORE=1
+            ROSBAG=1
+            ;;
+        *)
+            if [ $ROSBAG -eq 1 ]
+            then
+            ROSBAG_FILE=$PARAM
+            else    
+            echo "ERROR: unknown parameter \"$PARAM\""
+            cat .usage.txt
+            exit 1
+            fi
+            ;;
+    esac
+    shift
+done
+
+if [ $ROSCORE -eq 1 ]
+then
+gnome-terminal -e roscore
+gnome-terminal -e 'rosbag play rosbag_data/moving_person.bag'
+fi
+
+gnome-terminal -e 'rosrun 'follow_me moving_persons_detector_node'
+gnome-terminal -e 'rosrun follow_me group_detector_node'
+gnome-terminal -e 'rosrun follow_me robot_moving_node'
+gnome-terminal -e rviz
+
+if [ $TELEOPERATION -eq 1 ]
+then
+gnome-terminal -e 'rosrun follow_me obstacle_detection_node'
+gnome-terminal -e 'rosrun teleoperation teleoperation.py'
+fi
+
+
+if [ $DEPLACEMENT -eq 1 ]
+then
+gnome-terminal -e 'rosrun follow_me obstacle_detection_node'
+gnome-terminal -e 'rosrun follow_me decision_node'
+gnome-terminal -e 'rosrun follow_me translation_action_node'
+gnome-terminal -e 'rosrun follow_me rotation_action_node'
+fi
