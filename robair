@@ -41,28 +41,27 @@ done
 export ROS_MASTER_URI=http://192.168.1.34:11311 
 export ROS_IP=192.168.1.101
 
-gnome-terminal -e "rosrun follow_me moving_persons_detector_node ;read"
-gnome-terminal -e "rosrun follow_me group_detection_node ; read"
-gnome-terminal -e "rosrun follow_me robot_moving_node ; read"
-gnome-terminal -e rviz
+gnome-terminal -e "rosrun follow_me moving_persons_detector_node" &
+gnome-terminal -e "rosrun follow_me group_detection_node" &
+gnome-terminal -e "rosrun follow_me robot_moving_node" &
 
 if [ $ROSCORE -eq 1 ]
 then
 gnome-terminal -e roscore
-gnome-terminal -e "rosbag play rosbag_data/moving_person.bag;read"
+gnome-terminal -e "rosbag play rosbag_data/moving_person.bag;read" &
 fi
 
 if [ $TELEOPERATION -eq 1 ]
 then
-gnome-terminal -e "rosrun follow_me obstacle_detection_node;read"
-gnome-terminal -e "rosrun teleoperation teleoperation.py;read"
+gnome-terminal -e "rosrun follow_me obstacle_detection_node" &
+gnome-terminal -e "rosrun teleoperation teleoperation_node.py" &
 fi
 
 
 if [ $DEPLACEMENT -eq 1 ]
 then
-gnome-terminal -e "rosrun follow_me obstacle_detection_node;read"
-gnome-terminal -e "rosrun follow_me decision_node;read"
-gnome-terminal -e "rosrun follow_me translation_action_node;read"
-gnome-terminal -e "rosrun follow_me rotation_action_node;read"
+gnome-terminal -e "rosrun follow_me obstacle_detection_node " &
+gnome-terminal -e "rosrun follow_me translation_action_node" &
+gnome-terminal -e "rosrun follow_me rotation_action_node" &
+gnome-terminal -e "rosrun follow_me decision_node" &
 fi

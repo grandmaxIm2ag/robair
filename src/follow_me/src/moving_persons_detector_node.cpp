@@ -158,6 +158,7 @@ void update() {
     else
         ROS_INFO("wait for data");
 
+    
 }// update
 
 // DETECTION OF MOTION

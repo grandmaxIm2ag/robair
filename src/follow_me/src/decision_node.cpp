@@ -5,6 +5,7 @@
 #include "nav_msgs/Odometry.h"
 #include "std_msgs/String.h"
 #include "std_msgs/Float32.h"
+#include "std_msgs/Bool.h"
 #include <cmath>
 #include <tf/transform_datatypes.h>
 #include <cstdlib>
@@ -36,7 +37,10 @@ private:
      * Pour la réception du point à atteindre
      */
     ros::Subscriber sub_goal_to_reach;
-
+    /**
+     *
+     */
+    ros::Subscriber sub_token;
     // communication with rotation_action
     /**
      *Pour la publication la rotation à faire
@@ -89,18 +93,25 @@ private:
     /**
      */
     geometry_msgs::Point goal_reached;
-
+    /**
+     */
+  bool goal;
+  bool random_move;
+  bool token;
 public:
 
     /**
      * Constructeur de la classe Decision
      */
     decision() {
+        goal = false;
+        token = false;
+        random_move = false;
         srand(time(NULL));
         // communication with moving_persons_detector or person_tracker
         pub_goal_reached = n.advertise<geometry_msgs::Point>("goal_reached", 1);
         sub_goal_to_reach = n.subscribe("goal_to_reach", 1, &decision::goal_to_reachCallback, this);
-
+	sub_token = n.subscribe("token", 1, &decision::token_Callback, this);
         // communication with rotation_action
         pub_rotation_to_do = n.advertise<std_msgs::Float32>("rotation_to_do", 0);
         sub_rotation_done = n.subscribe("rotation_done", 1, &decision::rotation_doneCallback, this);
@@ -163,22 +174,27 @@ public:
 
                 ROS_INFO("(decision_node) /goal_reached (%f, %f)", msg_goal_reached.x, msg_goal_reached.y);
                 pub_goal_reached.publish(msg_goal_reached);
-
-                usleep(100000);
+		usleep(100000);
                 ROS_INFO("En attente d'un nouveau but");
-            }
+	    }
 
-        }else{
+        }else if (! random_move && token && ! new_goal_to_reach) {
             //On bouge aléatoirement
-            translation_to_do = rand() % 2;
-            rotation_to_do = ( (rand() * M_PI) - (M_PI/2)  );
-            ROS_INFO("(decision_node) /rotation_to_do: %f", rotation_to_do*180/M_PI);
-            std_msgs::Float32 msg_rotation_to_do;
-            msg_rotation_to_do.data=rotation_to_do;
-            pub_rotation_to_do.publish(msg_rotation_to_do);
+	  ROS_INFO("Goal : %d", new_goal_to_reach);
+	    random_move = true;
+	    token = false;
+            translation_to_do = (rand() % 2)+1;
+	    if(translation_to_do){
+	        cond_rotation = true;
+	        float p = (float) rand() / (float) (RAND_MAX / M_PI);
+	        rotation_to_do = ( p - (M_PI/2)  );
+	        //we first perform the /rotation_to_do
+	        ROS_INFO("!!! (decision_node) /rotation_to_do: %f", rotation_to_do*180/M_PI);
+	        std_msgs::Float32 msg_rotation_to_do;
+	        msg_rotation_to_do.data=rotation_to_do;
+	        pub_rotation_to_do.publish(msg_rotation_to_do);
+	    }
         }
-
-        new_goal_to_reach = false;
 
         //we receive an ack from rotation_action_node. So, we perform the /translation_to_do
         if ( new_rotation_done ) {
@@ -186,7 +202,7 @@ public:
             cond_rotation = false;
             new_rotation_done = false;
 
-            //the rotation_to_do is done so we perform the translation_to_do
+            //the rotation_to_do is0 done so we perform the translation_to_do
             ROS_INFO("(decision_node) /translation_to_do: %f", translation_to_do);
             std_msgs::Float32 msg_translation_to_do;
             msg_translation_to_do.data = translation_to_do;
@@ -207,7 +223,10 @@ public:
             //to complete
         
             ROS_INFO(" ");
+	    random_move = false;
             ROS_INFO("(decision_node) waiting for a /goal_to_reach");
+	    ROS_INFO("En attente d'un nouveau but");
+	    new_goal_to_reach = false;
         }
 
     }// update
@@ -232,7 +251,11 @@ public:
     void rotation_doneCallback(const std_msgs::Float32::ConstPtr& a) {
         // process the angle received from the rotation node
         new_rotation_done = true;
-        rotation_done = a->data;
+	rotation_done = a->data;
+    }
+
+    void token_Callback(const std_msgs::Bool::ConstPtr& a ){
+      token = a->data;
     }
     /**
      *\fn translation_doneCallback(const std_msgs::Float32::ConstPtr& r)

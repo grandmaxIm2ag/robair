@@ -170,7 +170,6 @@ void odomCallback(const nav_msgs::Odometry::ConstPtr& o) {
 }
 
 void rotation_to_doCallback(const std_msgs::Float32::ConstPtr & a) {
-
     new_rotation_to_do = true;
     rotation_to_do = a->data;
 
