@@ -44,7 +44,7 @@ gnome-terminal -e roscore
 gnome-terminal -e 'rosbag play rosbag_data/moving_person.bag'
 fi
 
-gnome-terminal -e 'rosrun 'follow_me moving_persons_detector_node'
+gnome-terminal -e 'rosrun follow_me moving_persons_detector_node'
 gnome-terminal -e 'rosrun follow_me group_detector_node'
 gnome-terminal -e 'rosrun follow_me robot_moving_node'
 gnome-terminal -e rviz
