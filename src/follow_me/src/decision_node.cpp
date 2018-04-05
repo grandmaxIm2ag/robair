@@ -95,9 +95,9 @@ private:
     geometry_msgs::Point goal_reached;
     /**
      */
-  bool goal;
-  bool random_move;
-  bool token;
+    bool goal;
+    bool random_move;
+    bool token;
 public:
 
     /**
@@ -111,7 +111,7 @@ public:
         // communication with moving_persons_detector or person_tracker
         pub_goal_reached = n.advertise<geometry_msgs::Point>("goal_reached", 1);
         sub_goal_to_reach = n.subscribe("goal_to_reach", 1, &decision::goal_to_reachCallback, this);
-	sub_token = n.subscribe("token", 1, &decision::token_Callback, this);
+        sub_token = n.subscribe("token", 1, &decision::token_Callback, this);
         // communication with rotation_action
         pub_rotation_to_do = n.advertise<std_msgs::Float32>("rotation_to_do", 0);
         sub_rotation_done = n.subscribe("rotation_done", 1, &decision::rotation_doneCallback, this);
@@ -142,10 +142,15 @@ public:
      */
     void update() {
 
+        //Si on a pas de jeton, on ne se met pas à jours
+        if(! token) {
+            return;
+        }
+        
         // we receive a new /goal_to_reach and robair is not doing a translation or a rotation
         if ( ( new_goal_to_reach ) && ( !cond_translation ) && ( !cond_rotation ) ) {
 
-            ROS_INFO("(decision_node) /goal_to_reach received: (%f, %f)", goal_to_reach.x, goal_to_reach.y);
+            //ROS_INFO("(decision_node) /goal_to_reach received: (%f, %f)", goal_to_reach.x, goal_to_reach.y);
 
             // we have a rotation and a translation to perform
             // we compute the /translation_to_do
@@ -162,7 +167,7 @@ public:
                     rotation_to_do *=-1;
 
                 //we first perform the /rotation_to_do
-                ROS_INFO("(decision_node) /rotation_to_do: %f", rotation_to_do*180/M_PI);
+                //ROS_INFO("(decision_node) /rotation_to_do: %f", rotation_to_do*180/M_PI);
                 std_msgs::Float32 msg_rotation_to_do;
                 msg_rotation_to_do.data=rotation_to_do;
                 pub_rotation_to_do.publish(msg_rotation_to_do);
@@ -172,38 +177,38 @@ public:
                 msg_goal_reached.x = 0;
                 msg_goal_reached.y = 0;
 
-                ROS_INFO("(decision_node) /goal_reached (%f, %f)", msg_goal_reached.x, msg_goal_reached.y);
+                //ROS_INFO("(decision_node) /goal_reached (%f, %f)", msg_goal_reached.x, msg_goal_reached.y);
                 pub_goal_reached.publish(msg_goal_reached);
-		usleep(100000);
-                ROS_INFO("En attente d'un nouveau but");
-	    }
+                usleep(100000);
+                //ROS_INFO("En attente d'un nouveau but");
+            }
 
         }else if (! random_move && token && ! new_goal_to_reach) {
             //On bouge aléatoirement
-	  ROS_INFO("Goal : %d", new_goal_to_reach);
-	    random_move = true;
-	    token = false;
+            //ROS_INFO("Goal : %d", new_goal_to_reach);
+            random_move = true;
+            token = false;
             translation_to_do = (rand() % 2)+1;
-	    if(translation_to_do){
-	        cond_rotation = true;
-	        float p = (float) rand() / (float) (RAND_MAX / M_PI);
-	        rotation_to_do = ( p - (M_PI/2)  );
-	        //we first perform the /rotation_to_do
-	        ROS_INFO("!!! (decision_node) /rotation_to_do: %f", rotation_to_do*180/M_PI);
-	        std_msgs::Float32 msg_rotation_to_do;
-	        msg_rotation_to_do.data=rotation_to_do;
-	        pub_rotation_to_do.publish(msg_rotation_to_do);
-	    }
+            if(translation_to_do){
+                cond_rotation = true;
+                float p = (float) rand() / (float) (RAND_MAX / M_PI);
+                rotation_to_do = ( p - (M_PI/2)  );
+                //we first perform the /rotation_to_do
+                //ROS_INFO("!!! (decision_node) /rotation_to_do: %f", rotation_to_do*180/M_PI);
+                std_msgs::Float32 msg_rotation_to_do;
+                msg_rotation_to_do.data=rotation_to_do;
+                pub_rotation_to_do.publish(msg_rotation_to_do);
+            }
         }
 
         //we receive an ack from rotation_action_node. So, we perform the /translation_to_do
         if ( new_rotation_done ) {
-            ROS_INFO("(decision_node) /rotation_done : %f", rotation_done*180/M_PI);
+            //ROS_INFO("(decision_node) /rotation_done : %f", rotation_done*180/M_PI);
             cond_rotation = false;
             new_rotation_done = false;
 
             //the rotation_to_do is0 done so we perform the translation_to_do
-            ROS_INFO("(decision_node) /translation_to_do: %f", translation_to_do);
+            //ROS_INFO("(decision_node) /translation_to_do: %f", translation_to_do);
             std_msgs::Float32 msg_translation_to_do;
             msg_translation_to_do.data = translation_to_do;
             pub_translation_to_do.publish(msg_translation_to_do);
@@ -211,7 +216,7 @@ public:
 
         //we receive an ack from translation_action_node. So, we send an ack to the moving_persons_detector_node
         if ( new_translation_done ) {
-            ROS_INFO("(decision_node) /translation_done : %f\n", translation_done);
+            //ROS_INFO("(decision_node) /translation_done : %f\n", translation_done);
             cond_translation = false;
             new_translation_done = false;
 
@@ -219,14 +224,15 @@ public:
             geometry_msgs::Point msg_goal_reached;
             msg_goal_reached.x = translation_done * cos(rotation_done);
             msg_goal_reached.y = translation_done * sin(rotation_done);
-            ROS_INFO("(decision_node) /goal_reached (%f, %f)", msg_goal_reached.x, msg_goal_reached.y);
+            //ROS_INFO("(decision_node) /goal_reached (%f, %f)", msg_goal_reached.x, msg_goal_reached.y);
             //to complete
         
             ROS_INFO(" ");
-	    random_move = false;
-            ROS_INFO("(decision_node) waiting for a /goal_to_reach");
-	    ROS_INFO("En attente d'un nouveau but");
-	    new_goal_to_reach = false;
+            random_move = false;
+            //ROS_INFO("(decision_node) waiting for a /goal_to_reach");
+            //ROS_INFO("En attente d'un nouveau but");
+            new_goal_to_reach = false;
+            token = false;
         }
 
     }// update
@@ -238,6 +244,7 @@ public:
      */
     void goal_to_reachCallback(const geometry_msgs::Point::ConstPtr& g) {
         // process the goal received from moving_persons detector
+        ROS_INFO("Nouveau but\n");
         new_goal_to_reach = true;
         goal_to_reach.x = g->x;
         goal_to_reach.y = g->y;
@@ -251,11 +258,12 @@ public:
     void rotation_doneCallback(const std_msgs::Float32::ConstPtr& a) {
         // process the angle received from the rotation node
         new_rotation_done = true;
-	rotation_done = a->data;
+        rotation_done = a->data;
     }
 
     void token_Callback(const std_msgs::Bool::ConstPtr& a ){
-      token = a->data;
+        ROS_INFO("Nouveau jeton");
+        token = a->data;
     }
     /**
      *\fn translation_doneCallback(const std_msgs::Float32::ConstPtr& r)

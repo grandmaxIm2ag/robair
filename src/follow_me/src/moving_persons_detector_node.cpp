@@ -17,7 +17,7 @@
 
 //used for detection of motion
 #define detection_threshold 0.2 //threshold for motion detection
-#define dynamic_threshold 0 //to decide if a cluster is static or dynamic
+#define dynamic_threshold 0.3 //to decide if a cluster is static or dynamic
 
 //Distance entre deux personnes d'un même groupe
 #define group_person_threshold 0.8

@@ -33,6 +33,10 @@
 /**
  *
  */
+#define reset_tracker 10
+/**
+ *
+ */
 #define dist_person_tracker 0.1
 /**
  *
@@ -141,10 +145,14 @@ private:
      */
     bool previous_robot_moving;
     bool current_robot_moving;
-  /**
-   *
-   */
-  bool goal_reach;
+    /**
+     *
+     */
+    bool goal_reach;
+    /**
+     * Le nombre de scan depuis le dernier reset
+     */
+    int nb_iter;
 public:
 
     /**
@@ -152,7 +160,7 @@ public:
      * Constructeur de la classe group_detection
      */
     group_detection(){
-      goal_reach=true;
+        goal_reach=true;
         //Réception : Robot mouvant ou non
         sub_robot_moving = n.subscribe("robot_moving", 1, &group_detection::robot_movingCallback, this);
         //Réception du tableau de personne
@@ -160,7 +168,7 @@ public:
         sub_robot_position = n.subscribe("goal_reached", 1,&group_detection::position_callback, this );
         pub_group_detector_marker = n.advertise<visualization_msgs::Marker>("group_detector", 1);
         pub_group_detector = n.advertise<geometry_msgs::Point>("goal_to_reach", 1);
-	pub_token = n.advertise<std_msgs::Bool>("token",0);
+        pub_token = n.advertise<std_msgs::Bool>("token",0);
         current_robot_moving = true;
         new_robot = false;
         new_goal = false;
@@ -174,6 +182,14 @@ public:
         }
     }
 
+    /**
+     *
+     */
+    void reset() {
+        nb_person_detected = 0;
+        nb_person_active = 0;
+    }
+    
     /**
      * \fn perso_callback(const geometry_msgs::PoseArray::ConstPtr& array)
      *
@@ -191,11 +207,7 @@ public:
             tmp[i].x = array->poses[i].position.x;
             tmp[i].y = array->poses[i].position.y;
         }
-        //On abaisse le score de tous les points
-        for(int j=0; j<nb_person_detected; j++){
-            score[j]--;
-        }
-        
+
         for(int i =0; i<len; i++){
             bool b = true;
             for(int j=0; j<nb_person_detected; j++){
@@ -210,7 +222,7 @@ public:
             if(b){
                 person_detected[nb_person_detected].x = tmp[i].x;
                 person_detected[nb_person_detected].y = tmp[i].y;
-                score[nb_person_detected]=10;
+                score[nb_person_detected]=5;
                 nb_person_detected++;
             }
         }
@@ -223,14 +235,30 @@ public:
                 nb_person_active++;
             }
         }
-	for (int i=0; i<nb_person_detected; i++) {
-	  ROS_INFO("(%f, %f) score=%d", person_detected[i].x, person_detected[i].y, score[i]);
-	}
         new_data = true;
         return;
         
     }
 
+    /**
+     *
+     */
+    void print_active() {
+        ROS_INFO("%d prsonnes actives", nb_person_active);
+        for (int i=0; i<nb_person_active; i++) {
+            ROS_INFO("(%f, %f) score=%d", active_person[i].x, active_person[i].y, score[i]);
+        }
+    }
+
+    /**
+     *
+     */
+    void decrease_score() {
+        //On abaisse le score de tous les points
+        for(int j=0; j<nb_person_detected; j++){
+            score[j]--;
+        }
+    }
     /**
      * \fn position_callback(const geometry_msgs::Point::ConstPtr& g)
      *
@@ -241,7 +269,7 @@ public:
     void position_callback(const geometry_msgs::Point::ConstPtr& g){
         robot_position.x = g->x;
         robot_position.y = g->y;
-	goal_reach=true;
+        goal_reach=true;
     }
 
     /**
@@ -268,36 +296,47 @@ public:
      *\brief met à jours le noeud
      */
     void update() {
+        decrease_score();
+        nb_group_detected = 0;
+        //print_active();
+        nb_iter++;
+        nb_pts = 0;
         if ( new_data ) {
             new_data = false;
             nb_pts = 0;
-            if ( !current_robot_moving) {
-                ROS_INFO("robot is not moving");
+            if ( ! current_robot_moving) {
+                //ROS_INFO("robot is not moving");
 
                 //we search for moving persons in 4 steps
-                detect_group();
+                if(nb_person_active > 0)
+                    detect_group();
 
                 //graphical display of the results
                 populateMarkerTopic();
 
                 if(nb_group_detected) {
                     new_goal = false;
-		    goal_reach = false;
+                    goal_reach = false;
                     goal_to_reach.x = closest_group().x;
                     goal_to_reach.y = closest_group().y;
                     pub_group_detector.publish(goal_to_reach);
                 }
+                std_msgs::Bool msg_token;
+                msg_token.data = true;
+                pub_token.publish(msg_token);
             }
             else
-                ROS_INFO("robot is moving");
-            ROS_INFO("\n");
-	    std_msgs::Bool msg_token;
-            msg_token.data = (nb_group_detected == 0);
-            pub_token.publish(msg_token);
-
-	}
+                ;//ROS_INFO("robot is moving");
+            //ROS_INFO("\n");
+    }
         else
-            ROS_INFO("wait for data");
+            ;//ROS_INFO("wait for data");
+
+
+        //On fait un reset au bout de reset_tracker itération
+        if(nb_iter % reset_tracker == 0) {
+            reset();
+        }
     }
 
     /**
@@ -305,7 +344,7 @@ public:
      * \brief Recherche les différents groupes
      */
     void detect_group() {
-        ROS_INFO("detecting group");
+        //ROS_INFO("detecting group");
         
         int nb_group = 0;//to count the number of group
 
@@ -316,11 +355,11 @@ public:
         group_start[0] = 0;
         group_end[0] = 0;
         int loop;
-        ROS_INFO("nb per0son = %d", nb_person_active);
+        //ROS_INFO("nb per0son = %d", nb_person_active);
         for(loop = 1; loop < nb_person_active; loop++) {
             float d;
             d=distancePoints(active_person[loop-1],active_person[loop]);
-            ROS_INFO("distance = %f", d);
+            //ROS_INFO("distance = %f", d);
             if(d <= group_person_threshold){
                 group_end[nb_group]++;
             }else{
@@ -361,7 +400,6 @@ public:
     // Distance between two points
     float distancePoints(geometry_msgs::Point pa, geometry_msgs::Point pb) {
         return sqrt(pow((pa.x-pb.x),2.0) + pow((pa.y-pb.y),2.0));
-
     }
 
     /**
@@ -457,7 +495,7 @@ public:
             c.b = colors[loop].b;
             c.a = colors[loop].a;
 
-            //ROS_INFO("(%f, %f, %f) with rgba (%f, %f, %f, %f)", p.x, p.y, p.z, c.r, c.g, c.b, c.a);
+            ////ROS_INFO("(%f, %f, %f) with rgba (%f, %f, %f, %f)", p.x, p.y, p.z, c.r, c.g, c.b, c.a);
             marker.points.push_back(p);
             marker.colors.push_back(c);
         }
@@ -469,7 +507,7 @@ public:
 
     void robot_movingCallback(const std_msgs::Bool::ConstPtr& state) {
         new_robot = true;
-        ROS_INFO("New data of robot_moving received");
+        //ROS_INFO("New data of robot_moving received");
         previous_robot_moving = current_robot_moving;
         current_robot_moving = state->data;
 
