@@ -1,4 +1,3 @@
-
 // Signal handling
 #include <signal.h>
 
@@ -25,6 +24,7 @@
 #include "std_msgs/MultiArrayDimension.h"
 #include "geometry_msgs/PoseArray.h"
 #include "geometry_msgs/Pose.h"
+#include <ctime>
 
 /**
  * Constante représentant la distance maximal entre deux personnes d'un même groupe
@@ -67,7 +67,11 @@ private:
      */
     ros::Subscriber sub_robot_position;
     /**
-     *Publish goal_to_reach
+     *Receive token
+     */
+    ros::Subscriber sub_token;
+    /**
+     *Publish token
      */
     ros::Publisher pub_token;
     /**
@@ -104,7 +108,7 @@ private:
     /**
      *to store the goal to reach that we will be published
      */
-     geometry_msgs::Point goal_to_reach;
+    geometry_msgs::Point goal_to_reach;
 
     /**
      *to perform detection of moving legs and to store them
@@ -153,6 +157,10 @@ private:
      * Le nombre de scan depuis le dernier reset
      */
     int nb_iter;
+    /**
+     *
+     */
+    bool token;
 public:
 
     /**
@@ -160,14 +168,23 @@ public:
      * Constructeur de la classe group_detection
      */
     group_detection(){
+        token = false;
         goal_reach=true;
+        srand(time(NULL));
         //Réception : Robot mouvant ou non
-        sub_robot_moving = n.subscribe("robot_moving", 1, &group_detection::robot_movingCallback, this);
+        sub_robot_moving = n.subscribe("robot_moving", 1, &group_detection::
+                                       robot_movingCallback, this);
+        sub_token = n.subscribe("token_moving_group", 0, &group_detection::
+                                       token_Callback, this);
         //Réception du tableau de personne
-        sub_detect_person = n.subscribe("moving_persons_detector_array", 1,&group_detection::perso_callback, this );
-        sub_robot_position = n.subscribe("goal_reached", 1,&group_detection::position_callback, this );
-        pub_group_detector_marker = n.advertise<visualization_msgs::Marker>("group_detector", 1);
-        pub_group_detector = n.advertise<geometry_msgs::Point>("goal_to_reach", 1);
+        sub_detect_person = n.subscribe("moving_persons_detector_array", 1,
+                                        &group_detection::perso_callback, this);
+        sub_robot_position = n.subscribe("goal_reached", 1,&group_detection::
+                                         position_callback, this );
+        pub_group_detector_marker = n.advertise<visualization_msgs
+                                                ::Marker>("group_detector", 1);
+        pub_group_detector = n.advertise<geometry_msgs
+                                         ::Point>("goal_to_reach", 1);
         pub_token = n.advertise<std_msgs::Bool>("token",0);
         current_robot_moving = true;
         new_robot = false;
@@ -201,7 +218,7 @@ public:
                         ConstPtr& array){
         int len = array->poses.size();
      	geometry_msgs::Point tmp[len];
-	new_goal = true;
+        new_goal = true;
         //On récupert les points envoyés par moving_person_node
         for(int i=0; i<len; i++){
             tmp[i].x = array->poses[i].position.x;
@@ -211,7 +228,8 @@ public:
         for(int i =0; i<len; i++){
             bool b = true;
             for(int j=0; j<nb_person_detected; j++){
-                if(distancePoints(tmp[i], person_detected[j])>dist_person_tracker){
+                if(distancePoints(tmp[i],person_detected[j])>
+                   dist_person_tracker){
                     person_detected[j].x=tmp[i].x;
                     person_detected[j].y=tmp[i].y;
                     score[j]++;
@@ -236,17 +254,23 @@ public:
             }
         }
         new_data = true;
-        return;
-        
     }
 
+    /**
+     *
+     */
+    void token_Callback(const std_msgs::Bool::ConstPtr& a ){
+        ROS_INFO("Nouveau jeton %d", new_data);
+        token = true;
+    }
     /**
      *
      */
     void print_active() {
         ROS_INFO("%d prsonnes actives", nb_person_active);
         for (int i=0; i<nb_person_active; i++) {
-            ROS_INFO("(%f, %f) score=%d", active_person[i].x, active_person[i].y, score[i]);
+            ROS_INFO("(%f, %f) score=%d", active_person[i].x, active_person[i].y
+                     , score[i]);
         }
     }
 
@@ -296,49 +320,69 @@ public:
      *\brief met à jours le noeud
      */
     void update() {
-        decrease_score();
-        nb_group_detected = 0;
-        //print_active();
-        nb_iter++;
-        nb_pts = 0;
-        if ( new_data ) {
-            new_data = false;
+        if(token){
+            token=false;
+            decrease_score();
+            nb_group_detected = 0;
+            //print_active();
+            nb_iter++;
             nb_pts = 0;
-            if ( ! current_robot_moving) {
-                //ROS_INFO("robot is not moving");
+            if ( new_data ) {
+                new_data = false;
+                nb_pts = 0;
+                if ( ! current_robot_moving) {
+                    //ROS_INFO("robot is not moving");
 
-                //we search for moving persons in 4 steps
-                if(nb_person_active > 0)
-                    detect_group();
+                    //we search for moving persons in 4 steps
+                    if(nb_person_active > 0)
+                        detect_group();
 
-                //graphical display of the results
-                populateMarkerTopic();
-
-                if(nb_group_detected) {
+                    //graphical display of the results
+                    populateMarkerTopic();
+                    if(nb_iter % reset_tracker == 0) {
+                        new_goal = false;
+                        goal_reach = false;
+                        if(nb_group_detected) {
+                            ROS_INFO("Normal Move\n");
+                            goal_to_reach.x = closest_group().x;
+                            goal_to_reach.y = closest_group().y;
+                        }else {
+                            ROS_INFO("Random Move, %d\n", nb_iter);
+                            goal_to_reach.x = (float) rand() /(float)(RAND_MAX/2)-1;
+                            goal_to_reach.y = (float) rand() / (float)(RAND_MAX/2);
+                        }
+                        reset();
+                        pub_group_detector.publish(goal_to_reach);
+                        send_token();
+                    }
+                }
+                else{
+                    //ROS_INFO("robot is moving");
+                }
+            }
+            else {
+                if(nb_iter % reset_tracker == 0) {
                     new_goal = false;
                     goal_reach = false;
-                    goal_to_reach.x = closest_group().x;
-                    goal_to_reach.y = closest_group().y;
+                    ROS_INFO("Random Move, %d\n", nb_iter);
+                    goal_to_reach.x = (float) rand() /(float)(RAND_MAX/2)-1;
+                    goal_to_reach.y = (float) rand() / (float)(RAND_MAX/2);
+                    reset();
                     pub_group_detector.publish(goal_to_reach);
+                    send_token();
                 }
-                std_msgs::Bool msg_token;
-                msg_token.data = true;
-                pub_token.publish(msg_token);
             }
-            else
-                ;//ROS_INFO("robot is moving");
-            //ROS_INFO("\n");
-    }
-        else
-            ;//ROS_INFO("wait for data");
-
-
-        //On fait un reset au bout de reset_tracker itération
-        if(nb_iter % reset_tracker == 0) {
-            reset();
         }
     }
 
+    /**
+     *
+     */
+    void send_token() {
+        std_msgs::Bool msg_token;
+        msg_token.data = true;
+        pub_token.publish(msg_token);
+    }
     /**
      * \fn void detect_group ()
      * \brief Recherche les différents groupes
@@ -495,7 +539,6 @@ public:
             c.b = colors[loop].b;
             c.a = colors[loop].a;
 
-            ////ROS_INFO("(%f, %f, %f) with rgba (%f, %f, %f, %f)", p.x, p.y, p.z, c.r, c.g, c.b, c.a);
             marker.points.push_back(p);
             marker.colors.push_back(c);
         }
@@ -515,6 +558,7 @@ public:
 };
 
 int main(int argc, char **argv){
+    ROS_INFO("Group Detection Node");
     ros::init(argc, argv, "group_detection");
 
     group_detection bsObject;

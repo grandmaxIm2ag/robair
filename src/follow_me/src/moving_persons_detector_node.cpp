@@ -88,13 +88,17 @@ private:
 
     bool new_laser;//to check if new data of laser is available or not
     bool new_robot;//to check if new data of robot_moving is available or not
-
+    /**
+     *Publish token
+     */
+    ros::Publisher pub_token;
+    
 public:
 moving_persons_detector() {
 
     sub_scan = n.subscribe("scan", 1, &moving_persons_detector::scanCallback, this);
     sub_robot_moving = n.subscribe("robot_moving", 1, &moving_persons_detector::robot_movingCallback, this);
-
+    pub_token = n.advertise<std_msgs::Bool>("token_moving_group",0);
     pub_moving_persons_detector_marker = n.advertise<visualization_msgs::Marker>("moving_persons_detector", 1); // Preparing a topic to publish our results. This will be used by the visualization tool rviz
     pub_moving_persons_detector = n.advertise<geometry_msgs::PoseArray>("moving_persons_detector_array", 1);     // Preparing a topic to publish the goal to reach.
 
@@ -117,6 +121,7 @@ moving_persons_detector() {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 void update() {
     // we wait for new data of the laser and of the robot_moving_node to perform laser processing
+
     
     if ( new_laser && new_robot ) {
         new_laser = false;
@@ -150,6 +155,7 @@ void update() {
             }
             //graphical display of the results
             populateMarkerTopic();
+            send_token();
         }
         else
             ROS_INFO("robot is moving");
@@ -566,6 +572,15 @@ void populateMarkerTopic(){
 
 }
 
+    /**
+     *
+     */
+    void send_token() {
+        std_msgs::Bool msg_token;
+        msg_token.data = true;
+        pub_token.publish(msg_token);
+    }
+    
 };
 
 int main(int argc, char **argv){
