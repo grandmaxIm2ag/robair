@@ -17,18 +17,22 @@
 
 //used for detection of motion
 #define detection_threshold 0.2 //threshold for motion detection
-#define dynamic_threshold 0.3 //to decide if a cluster is static or dynamic
+#define dynamic_threshold 0 //to decide if a cluster is static or dynamic
 
 //Distance entre deux personnes d'un même groupe
 #define group_person_threshold 0.8
 
 //used for detection of moving legs
-#define leg_size_min 0.15
-#define leg_size_max 0.30
+#define leg_size_min 0.05
+#define leg_size_max 0.25
 
 //used for detection of moving persons
 #define legs_distance_max 0.7
 
+#define distance_person 1
+
+#define iter_person 10
+#define min_view 7
 using namespace std;
 
 class moving_persons_detector {
@@ -66,10 +70,6 @@ private:
     int nb_moving_legs_detected;
     geometry_msgs::Point moving_leg_detected[1000];// to store the middle of each moving leg
 
-    //to perform detection of moving legs and to store them
-    int nb_group_detected;
-    geometry_msgs::Point group_detected[1000];// to store the middle of each group
-
     //to perform detection of moving person and store them
     int nb_moving_persons_detected;
     geometry_msgs::Point moving_persons_detected[1000];// to store the middle of each moving person
@@ -92,464 +92,401 @@ private:
      *Publish token
      */
     ros::Publisher pub_token;
-    
+    int nb_iter;
+    int score[1000];
+    /**
+     *to perform detection of moving legs and to store them
+     */
+    int nb_group_detected;
+    /**
+     * to store the middle of each group
+     */
+    geometry_msgs::Point group_detected[1000];
 public:
-moving_persons_detector() {
+    moving_persons_detector() {
+        nb_iter=0;
+        sub_scan = n.subscribe("scan", 1, &moving_persons_detector::scanCallback, this);
+        sub_robot_moving = n.subscribe("robot_moving", 1, &moving_persons_detector::robot_movingCallback, this);
+        pub_token = n.advertise<std_msgs::Bool>("token_moving_group",0);
+        pub_moving_persons_detector_marker = n.advertise<visualization_msgs::Marker>("moving_persons_detector", 1); // Preparing a topic to publish our results. This will be used by the visualization tool rviz
+        pub_moving_persons_detector = n.advertise<geometry_msgs::PoseArray>("moving_persons_detector_array", 1);     // Preparing a topic to publish the goal to reach.
 
-    sub_scan = n.subscribe("scan", 1, &moving_persons_detector::scanCallback, this);
-    sub_robot_moving = n.subscribe("robot_moving", 1, &moving_persons_detector::robot_movingCallback, this);
-    pub_token = n.advertise<std_msgs::Bool>("token_moving_group",0);
-    pub_moving_persons_detector_marker = n.advertise<visualization_msgs::Marker>("moving_persons_detector", 1); // Preparing a topic to publish our results. This will be used by the visualization tool rviz
-    pub_moving_persons_detector = n.advertise<geometry_msgs::PoseArray>("moving_persons_detector_array", 1);     // Preparing a topic to publish the goal to reach.
-
-    current_robot_moving = true;
-    new_laser = false;
-    new_robot = false;
-    new_goal = false;
-    //INFINTE LOOP TO COLLECT LASER DATA AND PROCESS THEM
-    ros::Rate r(10);// this node will run at 10hz
-    while (ros::ok()) {
-        ros::spinOnce();//each callback is called once to collect new data: laser + robot_moving
-        update();//processing of data
-        r.sleep();//we wait if the processing (ie, callback+update) has taken less than 0.1s (ie, 10 hz)
-    }
-
-}
-
-//UPDATE: main processing of laser data and robot_moving
-/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-void update() {
-    // we wait for new data of the laser and of the robot_moving_node to perform laser processing
-
-    
-    if ( new_laser && new_robot ) {
+        current_robot_moving = true;
         new_laser = false;
         new_robot = false;
-        nb_pts = 0;
+        new_goal = false;
+        //INFINTE LOOP TO COLLECT LASER DATA AND PROCESS THEM
+        ros::Rate r(10);// this node will run at 10hz
+        while (ros::ok()) {
+            ros::spinOnce();//each callback is called once to collect new data: laser + robot_moving
+            update();//processing of data
+            r.sleep();//we wait if the processing (ie, callback+update) has taken less than 0.1s (ie, 10 hz)
+        }
 
-        //if the robot is not moving then we can perform moving persons detection
-        if ( !current_robot_moving ) {
+    }
 
-            ROS_INFO("robot is not moving");
+    void update() {
+        // we wait for new data of the laser and of the robot_moving_node to perform laser processing
 
-            // if the robot was moving previously and now it is not moving now then we store the background
-            if ( previous_robot_moving && !current_robot_moving )
-                store_background();
+        nb_iter++;
+        if ( new_laser && new_robot ) {
+            new_laser = false;
+            new_robot = false;
+            nb_pts = 0;
 
-            //we search for moving persons in 4 steps
-            detect_motion();//to classify each hit of the laser as dynamic or not
-            perform_clustering();//to perform clustering
-            detect_moving_legs();//to detect moving legs using cluster
-            detect_moving_persons();//to detect moving_persons using moving legs detected
-            if(nb_moving_persons_detected) {
-                geometry_msgs::Pose p;
-                geometry_msgs::PoseArray array;
-                
-                for(int i=0; i<nb_moving_persons_detected; i++) {
-                    p.position.x = moving_persons_detected[i].x;
-                    p.position.y = moving_persons_detected[i].y;
-                    array.poses.push_back(p);
+            //if the robot is not moving then we can perform moving persons detection
+            if ( !current_robot_moving ) {
+
+                ROS_INFO("robot is not moving");
+
+                // if the robot was moving previously and now it is not moving now then we store the background
+                if ( previous_robot_moving && !current_robot_moving )
+                    store_background();
+
+                //we search for moving persons in 4 steps
+                detect_motion();//to classify each hit of the laser as dynamic or not
+                perform_clustering();//to perform clustering
+                detect_moving_legs();//to detect moving legs using cluster
+                print_sorce();
+                detect_moving_persons();//to detect moving_persons using moving legs detected
+                if(nb_iter % iter_person == 0){
+                    detect_group();
+                    nb_moving_legs_detected=0;
                 }
-                pub_moving_persons_detector.publish(array);
+                populateMarkerTopic();
             }
-            //graphical display of the results
-            populateMarkerTopic();
-            send_token();
+            else
+                ROS_INFO("robot is moving");
+            ROS_INFO("\n");
         }
         else
-            ROS_INFO("robot is moving");
-        ROS_INFO("\n");
-    }
-    else
-        ROS_INFO("wait for data");
-
-    
+            ROS_INFO("wait for data");
 }// update
 
-// DETECTION OF MOTION
-/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-void store_background() {
-// store all the hits of the laser in the background table
-
-    ROS_INFO("storing background");
-
-    for (int loop=0; loop<nb_beams; loop++)
-        background[loop] = range[loop];
-
-}//init_background
-
-void detect_motion() {
-
-    ROS_INFO("detecting motion");
-
-    for (int loop=0; loop<nb_beams; loop++ ){//loop over all the hits
-        //Compute distance d
-        float x = background[loop] < 0 ? 0-background[loop] : background[loop];
-        float y = range[loop] < 0 ? 0-range[loop] : range[loop];
-        float d = x-y;
-        if (d > detection_threshold){
-            dynamic[loop] = 1;//the current hit is dynamic
-        }else
-            dynamic[loop] = 0;//else its static
-    
+    void send_pose_array() {
+        geometry_msgs::Pose p;
+        geometry_msgs::PoseArray array;
+                
+        for(int i=0; i<nb_moving_persons_detected; i++) {
+            p.position.x = moving_persons_detected[i].x;
+            p.position.y = moving_persons_detected[i].y;
+            array.poses.push_back(p);
+        }
+        pub_moving_persons_detector.publish(array);
     }
-}//detect_motion
 
-// CLUSTERING
-/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-void perform_clustering() {
-//store in the table cluster, the cluster of each hit of the laser
-//if the distance between the previous hit and the current one is lower than "cluster_threshold"
-//then the current hit belongs to the current cluster
-//else we start a new cluster with the current hit and end the current cluster
 
-    ROS_INFO("performing clustering");
+    void store_background() {
+        // store all the hits of the laser in the background table
 
-    nb_cluster = 0;//to count the number of cluster
+        ROS_INFO("storing background");
 
-    //initialization of the first cluster
-    cluster_start[0] = 0;// the first hit is the start of the first cluster
-    cluster[0] = 0;// the first hit belongs to the first cluster
-    cluster_size[nb_cluster]=0;
-    cluster_end[nb_cluster] = 0;
-    int nb_dynamic = 0;// to count the number of hits of the current cluster that are dynamic
-    int nb_elem=1;
-    for( int loop=1; loop<nb_beams; loop++ ){
-        //Compute distance d
-        float d = distancePoints(current_scan[loop],current_scan[loop-1]);
-        //ROS_INFO("distance = %f", d);
-        if(d <= cluster_threshold){
-            cluster_size[nb_cluster]+=d;//update size's cluster
-            cluster_end[nb_cluster] = loop;//update end's cluster
-            if ( dynamic[loop] )
-                nb_dynamic++;
-            nb_elem++;
-        }else{
-            
-            float p = nb_dynamic / (float)nb_elem;
-            if(p >= dynamic_threshold){
-                cluster_dynamic[nb_cluster]=1;
+        for (int loop=0; loop<nb_beams; loop++)
+            background[loop] = range[loop];
+
+    }//init_background
+
+    void detect_motion() {
+        
+
+        ROS_INFO("detecting motion");
+
+        for (int loop=0; loop<nb_beams; loop++ ){//loop over all the hits
+            //Compute distance d
+            float x = background[loop] < 0 ? 0-background[loop] : background[loop];
+            float y = range[loop] < 0 ? 0-range[loop] : range[loop];
+            float d = x-y;
+            if (d > detection_threshold){
+                dynamic[loop] = 1;//the current hit is dynamic
+            }else
+                dynamic[loop] = 0;//else its static
+    
+        }
+    }//detect_motion
+
+    void perform_clustering() {
+        //store in the table cluster, the cluster of each hit of the laser
+        //if the distance between the previous hit and the current one is lower than "cluster_threshold"
+        //then the current hit belongs to the current cluster
+        //else we start a new cluster with the current hit and end the current cluster
+
+        ROS_INFO("performing clustering");
+
+        nb_cluster = 0;//to count the number of cluster
+
+        //initialization of the first cluster
+        cluster_start[0] = 0;// the first hit is the start of the first cluster
+        cluster[0] = 0;// the first hit belongs to the first cluster
+        cluster_size[nb_cluster]=0;
+        cluster_end[nb_cluster] = 0;
+        int nb_dynamic = 0;// to count the number of hits of the current cluster that are dynamic
+        int nb_elem=1;
+        for( int loop=1; loop<nb_beams; loop++ ){
+            //Compute distance d
+            float d = distancePoints(current_scan[loop],current_scan[loop-1]);
+            //ROS_INFO("distance = %f", d);
+            if(d <= cluster_threshold){
+                cluster_size[nb_cluster]+=d;//update size's cluster
+                cluster_end[nb_cluster] = loop;//update end's cluster
+                if ( dynamic[loop] )
+                    nb_dynamic++;
+                nb_elem++;
             }else{
-                cluster_dynamic[nb_cluster]=0;
-            }
-            //            ROS_INFO("cluster[%i]: (%f, %f) -> (%f, %f), size: %f, dynamic: %i, dd %i, nb elem %i", nb_cluster, current_scan[cluster_start[nb_cluster]].x, current_scan[cluster_start[nb_cluster]].y, current_scan[cluster_end[nb_cluster]].x, current_scan[cluster_end[nb_cluster]].y, cluster_size[nb_cluster], cluster_dynamic[nb_cluster], nb_dynamic, nb_elem);
-            nb_dynamic = 0;// to count the number of hits of the current cluster that are dynamic
-            nb_elem=1;
-            nb_cluster++;
-            cluster_start[nb_cluster] = loop;
-            cluster_size[nb_cluster] = 0;
-            cluster_end[nb_cluster] = loop;
-            cluster[loop] = nb_cluster;
-            if ( dynamic[loop] )
-                nb_dynamic++;
             
-        }
-    }
-    if(nb_dynamic >= dynamic_threshold){
-        cluster_dynamic[nb_cluster]=1;
-    }else{
-        cluster_dynamic[nb_cluster]=0;
-    }
-
-    //Compute middles
-    for(int i=0; i<nb_cluster; i++){
-        float x1 = current_scan[cluster_start[i]].x;
-        float y1 = current_scan[cluster_start[i]].y;
-        float x2 = current_scan[cluster_end[i]].x;
-        float y2 = current_scan[cluster_end[i]].y;
-        geometry_msgs::Point m;
-        cluster_middle[i].x = (float)(x2+x1)/2;
-        cluster_middle[i].y = (float)(y2+y1)/2;
-    }
-
-}//perfor_clustering
-
-// DETECTION OF MOVING PERSON
-/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-void detect_moving_legs() {
-// a moving leg is a cluster:
-// - with a size higher than "leg_size_min";
-// - with a size lower than "leg_size_max;
-// - more than "dynamic_threshold"% of its hits are dynamic (see, cluster_dynamic table)
-
-    ROS_INFO("detecting moving legs");
-    nb_moving_legs_detected = 0;
-
-    for (int loop=0; loop<nb_cluster; loop++)//loop over all the clusters
-        if(cluster_size[loop] > leg_size_min &&
-           cluster_size[loop] < leg_size_max &&
-           cluster_dynamic[loop] ){
-
-            // we update the moving_leg_detected table to store the middle of the moving leg
-            moving_leg_detected[nb_moving_legs_detected++] = cluster_middle[loop];
-            //textual display
-            //ROS_INFO("moving leg detected[%i]: cluster[%i]", nb_moving_legs_detected, loop);
+                float p = nb_dynamic / (float)nb_elem;
+                if(p >= dynamic_threshold){
+                    cluster_dynamic[nb_cluster]=1;
+                }else{
+                    cluster_dynamic[nb_cluster]=0;
+                }
+                nb_dynamic = 0;// to count the number of hits of the current cluster that are dynamic
+                nb_elem=1;
+                nb_cluster++;
+                cluster_start[nb_cluster] = loop;
+                cluster_size[nb_cluster] = 0;
+                cluster_end[nb_cluster] = loop;
+                cluster[loop] = nb_cluster;
+                if ( dynamic[loop] )
+                    nb_dynamic++;
             
-            //graphical display
-            for(int loop2=cluster_start[loop]; loop2<=cluster_end[loop]; loop2++) {
-                // moving legs are white
-                display[nb_pts].x = current_scan[loop2].x;
-                display[nb_pts].y = current_scan[loop2].y;
-                display[nb_pts].z = current_scan[loop2].z;
-
-                colors[nb_pts].r = 1;
-                colors[nb_pts].g = 1;
-                colors[nb_pts].b = 1;
-                colors[nb_pts].a = 1.0;
-
-                nb_pts++;
             }
         }
-
-    if ( nb_moving_legs_detected )
-        ROS_INFO("%d moving legs have been detected.\n", nb_moving_legs_detected);
-
-}//detect_moving_legs
-
-    // DETECTION OF MOVING PERSON
-/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-void detect_group() {
-// a moving leg is a cluster:
-// - with a size higher than "leg_size_min";
-// - with a size lower than "leg_size_max;
-// - more than "dynamic_threshold"% of its hits are dynamic (see, cluster_dynamic table)
-
-    ROS_INFO("detecting group");
-
-    int nb_group = 0;//to count the number of group
-
-    int group_start[1000];
-    int group_end[1000];
-    
-    //initialization of the first cluster
-    group_start[0] = 0;
-    group_end[0] = 0;
-
-    int loop;
-    for(loop = 1; loop < nb_moving_legs_detected; loop++) {
-        float d = distancePoints(moving_leg_detected[group_start[nb_group]],
-                                 moving_leg_detected[loop]);
-        if(d <= group_person_threshold){
-            group_end[nb_group]++;
+        if(nb_dynamic >= dynamic_threshold){
+            cluster_dynamic[nb_cluster]=1;
         }else{
-            nb_group++;
-            group_start[nb_group] = loop;
-            group_end[nb_group] = loop;
+            cluster_dynamic[nb_cluster]=0;
         }
-    }
 
-    nb_group_detected = 0;
-    for(int i = 0; i< nb_group; i++) {
-        if(group_start[i] < group_end[i]){
-            float x1 = moving_leg_detected[group_start[i]].x;
-            float y1 = moving_leg_detected[group_start[i]].y;
-            float x2 = moving_leg_detected[group_end[i]].x;
-            float y2 = moving_leg_detected[group_end[i]].y;
+        //Compute middles
+        for(int i=0; i<nb_cluster; i++){
+            float x1 = current_scan[cluster_start[i]].x;
+            float y1 = current_scan[cluster_start[i]].y;
+            float x2 = current_scan[cluster_end[i]].x;
+            float y2 = current_scan[cluster_end[i]].y;
             geometry_msgs::Point m;
-            group_detected[i].x = (float)(x2+x1)/2;
-            group_detected[i].y = (float)(y2+y1)/2; 
-            
-            display[nb_pts].x = group_detected[nb_group_detected].x;
-            display[nb_pts].y = group_detected[nb_group_detected].y;
-            display[nb_pts].z = group_detected[nb_group_detected].z;
+            cluster_middle[i].x = (float)(x2+x1)/2;
+            cluster_middle[i].y = (float)(y2+y1)/2;
+        }
 
-            nb_group_detected++;
-            
-            colors[nb_pts].r = 0;
-            colors[nb_pts].g = 0;
-            colors[nb_pts].b = 0;
+    }//perfor_clustering
+
+    void detect_moving_legs() {
+
+        ROS_INFO("detecting moving legs");
+        int nb_leg = 0;
+        geometry_msgs::Point legs[1000];
+        for (int loop=0; loop<nb_cluster; loop++)
+            if(cluster_size[loop] > leg_size_min && cluster_size[loop] <
+               leg_size_max && cluster_dynamic[loop] )
+                legs[nb_leg++] = cluster_middle[loop];
+
+        for(int i = 0; i < nb_leg; i++) {
+            bool b = true;
+            int i_min = 0;
+            float dist_min = 2;
+            for(int j =0; j<nb_moving_legs_detected; j++) {
+                if(distancePoints(legs[i], moving_leg_detected[j]) < dist_min) {
+                    i_min = j;
+                    dist_min = distancePoints(legs[i], moving_leg_detected[j]);
+                }
+            }
+            ROS_INFO("dist_min = %f",dist_min );
+            if(dist_min > 0.5) {
+                nb_moving_legs_detected++;
+                moving_leg_detected[ nb_moving_legs_detected] = legs[i];
+                score[nb_moving_legs_detected]=1;
+            }else{
+                moving_leg_detected[i_min] = legs[i];
+                score[i_min]++;
+            }
+        }
+
+        for(int j =0; j<nb_moving_legs_detected; j++) {
+            // moving legs are white
+            if(score[j] <= min_view){
+                continue;
+            }
+            display[nb_pts].x = moving_leg_detected[j].x;
+            display[nb_pts].y = moving_leg_detected[j].y;
+            display[nb_pts].z = moving_leg_detected[j].z;
+
+            colors[nb_pts].r = 1;
+            colors[nb_pts].g = 1;
+            colors[nb_pts].b = 1;
             colors[nb_pts].a = 1.0;
+
             nb_pts++;
         }
-    }
-    
-    if ( nb_moving_legs_detected )
-        ROS_INFO("%d group have been detected.\n", nb_group_detected);
+        if ( nb_moving_legs_detected )
+            ROS_INFO("%d moving legs have been detected.\n", nb_moving_legs_detected);
 
-}//detect_moving_legs
+    }//detect_moving_legs
 
-void detect_moving_persons() {
-// a moving person has two moving legs located at less than "legs_distance_max" one from the other
+    void detect_moving_persons() {
+        // a moving person has two moving legs located at less than "legs_distance_max" one from the other
 
-    ROS_INFO("detecting moving persons");
-    nb_moving_persons_detected = 0;
+        ROS_INFO("detecting moving persons");
+        nb_moving_persons_detected = 0;
 
-    for (int loop_leg1=0; loop_leg1<nb_moving_legs_detected; loop_leg1++)//loop over all the legs
-        for (int loop_leg2=loop_leg1+1; loop_leg2<nb_moving_legs_detected; loop_leg2++){//loop over all the legs
-            //Compute distance d
-            float d = distancePoints(moving_leg_detected[loop_leg1],
-                                     moving_leg_detected[loop_leg2]);
-            if (d<=legs_distance_max){
+        for (int loop_leg1=0; loop_leg1<nb_moving_legs_detected; loop_leg1++)//loop over all the legs
+            for (int loop_leg2=loop_leg1+1; loop_leg2<nb_moving_legs_detected; loop_leg2++){//loop over all the legs
+                if(score[loop_leg2]<=min_view || score[loop_leg1]<=min_view)
+                    continue;
+                //Compute distance d
+                float d = distancePoints(moving_leg_detected[loop_leg1],
+                                         moving_leg_detected[loop_leg2]);
+                if (d<=legs_distance_max){
 
-                // we update the moving_persons_detected table to store the middle of the moving person
+                    // we update the moving_persons_detected table to store the middle of the moving person
                 
-                float x2 = moving_leg_detected[loop_leg1].x;
-                float y2 = moving_leg_detected[loop_leg1].y;
-                float x1 = moving_leg_detected[loop_leg2].x;
-                float y1 = moving_leg_detected[loop_leg2].y;
-                moving_persons_detected[nb_moving_persons_detected].x=(x1+x2)/2;
-                moving_persons_detected[nb_moving_persons_detected].y=(y1+y2)/2;
+                    float x2 = moving_leg_detected[loop_leg1].x;
+                    float y2 = moving_leg_detected[loop_leg1].y;
+                    float x1 = moving_leg_detected[loop_leg2].x;
+                    float y1 = moving_leg_detected[loop_leg2].y;
+                    moving_persons_detected[nb_moving_persons_detected].x=(x1+x2)/2;
+                    moving_persons_detected[nb_moving_persons_detected].y=(y1+y2)/2;
                 
-                // textual display
-                ROS_INFO("moving person detected[%i]: leg[%i]+leg[%i] -> (%f, %f)", nb_moving_persons_detected, loop_leg1, loop_leg2, moving_persons_detected[nb_moving_persons_detected].x, moving_persons_detected[nb_moving_persons_detected].y);
+                    // textual display
+                    ROS_INFO("moving person detected[%i]: leg[%i]+leg[%i] -> (%f, %f)", nb_moving_persons_detected, loop_leg1, loop_leg2, moving_persons_detected[nb_moving_persons_detected].x, moving_persons_detected[nb_moving_persons_detected].y);
 
-                // the moving persons are green
-                display[nb_pts].x = moving_persons_detected[nb_moving_persons_detected].x;
-                display[nb_pts].y = moving_persons_detected[nb_moving_persons_detected].y;
-                display[nb_pts].z = moving_persons_detected[nb_moving_persons_detected].z;
+                    // the moving persons are green
+                    display[nb_pts].x = moving_persons_detected[nb_moving_persons_detected].x;
+                    display[nb_pts].y = moving_persons_detected[nb_moving_persons_detected].y;
+                    display[nb_pts].z = moving_persons_detected[nb_moving_persons_detected].z;
 
-                colors[nb_pts].r = 0;
-                colors[nb_pts].g = 1;
-                colors[nb_pts].b = 0;
-                colors[nb_pts].a = 1.0;
+                    colors[nb_pts].r = 0;
+                    colors[nb_pts].g = 1;
+                    colors[nb_pts].b = 0;
+                    colors[nb_pts].a = 1.0;
 
-                nb_pts++;
+                    nb_pts++;
 
-                //update of the goal
-                goal_to_reach.x = moving_persons_detected[nb_moving_persons_detected].x;
-                goal_to_reach.y = moving_persons_detected[nb_moving_persons_detected].y;
+                    //update of the goal
+                    goal_to_reach.x = moving_persons_detected[nb_moving_persons_detected].x;
+                    goal_to_reach.y = moving_persons_detected[nb_moving_persons_detected].y;
 
-                nb_moving_persons_detected++;
-                new_goal = true;
+                    nb_moving_persons_detected++;
+                    new_goal = true;
+                }
             }
+
+        if ( nb_moving_persons_detected )
+            ROS_INFO("%d moving persons have been detected.\n", nb_moving_persons_detected);
+
+    }//detect_moving_persons
+
+    void scanCallback(const sensor_msgs::LaserScan::ConstPtr& scan) {
+
+        new_laser = true;
+        // store the important data related to laserscanner
+        range_min = scan->range_min;
+        range_max = scan->range_max;
+        angle_min = scan->angle_min;
+        angle_max = scan->angle_max;
+        angle_inc = scan->angle_increment;
+        nb_beams = ((-1 * angle_min) + angle_max)/angle_inc;
+        float beam_angle = angle_min;
+        for ( int loop=0 ; loop < nb_beams; loop++, beam_angle += angle_inc ) {
+            if ( ( scan->ranges[loop] < range_max ) && ( scan->ranges[loop] > range_min ) )
+                range[loop] = scan->ranges[loop];
+            else
+                range[loop] = range_max;
+
+            //transform the scan in cartesian framework
+            current_scan[loop].x = range[loop] * cos(beam_angle);
+            current_scan[loop].y = range[loop] * sin(beam_angle);
+            current_scan[loop].z = 0.0;
         }
+    }//scanCallback
 
-    if ( nb_moving_persons_detected )
-        ROS_INFO("%d moving persons have been detected.\n", nb_moving_persons_detected);
+    void robot_movingCallback(const std_msgs::Bool::ConstPtr& state) {
 
-}//detect_moving_persons
+        new_robot = true;
+        ROS_INFO("New data of robot_moving received");
+        previous_robot_moving = current_robot_moving;
+        current_robot_moving = state->data;
 
-//CALLBACKS
-/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-void scanCallback(const sensor_msgs::LaserScan::ConstPtr& scan) {
+    }//robot_movingCallback
 
-    new_laser = true;
-    // store the important data related to laserscanner
-    range_min = scan->range_min;
-    range_max = scan->range_max;
-    angle_min = scan->angle_min;
-    angle_max = scan->angle_max;
-    angle_inc = scan->angle_increment;
-    nb_beams = ((-1 * angle_min) + angle_max)/angle_inc;
-    /*
-    ROS_INFO("New data of laser received +++++");
-    ROS_INFO("range_min, range_max: %f, %f", range_min, range_max);
-    ROS_INFO("angle_min: %f", angle_min*180/M_PI);
-    ROS_INFO("angle_max: %f", angle_max*180/M_PI);
-    ROS_INFO("angle_increment: %f", angle_inc*180/M_PI);
-    ROS_INFO("number_of_beams: %d", nb_beams);
-*/
-    // store the range and the coordinates in cartesian framework of each hit
-    float beam_angle = angle_min;
-    for ( int loop=0 ; loop < nb_beams; loop++, beam_angle += angle_inc ) {
-        if ( ( scan->ranges[loop] < range_max ) && ( scan->ranges[loop] > range_min ) )
-            range[loop] = scan->ranges[loop];
-        else
-            range[loop] = range_max;
-
-        //transform the scan in cartesian framework
-        current_scan[loop].x = range[loop] * cos(beam_angle);
-        current_scan[loop].y = range[loop] * sin(beam_angle);
-        current_scan[loop].z = 0.0;
+    // Distance between two points
+    float distancePoints(geometry_msgs::Point pa, geometry_msgs::Point pb) {
+        return sqrt(pow((pa.x-pb.x),2.0) + pow((pa.y-pb.y),2.0));
     }
-}//scanCallback
 
-void robot_movingCallback(const std_msgs::Bool::ConstPtr& state) {
+    // Draw the field of view and other references
+    void populateMarkerReference() {
 
-    new_robot = true;
-    ROS_INFO("New data of robot_moving received");
-    previous_robot_moving = current_robot_moving;
-    current_robot_moving = state->data;
+        visualization_msgs::Marker references;
 
-}//robot_movingCallback
+        references.header.frame_id = "laser";
+        references.header.stamp = ros::Time::now();
+        references.ns = "example";
+        references.id = 1;
+        references.type = visualization_msgs::Marker::LINE_STRIP;
+        references.action = visualization_msgs::Marker::ADD;
+        references.pose.orientation.w = 1;
 
-// Distance between two points
-float distancePoints(geometry_msgs::Point pa, geometry_msgs::Point pb) {
+        references.scale.x = 0.02;
 
-    return sqrt(pow((pa.x-pb.x),2.0) + pow((pa.y-pb.y),2.0));
+        references.color.r = 1.0f;
+        references.color.g = 1.0f;
+        references.color.b = 1.0f;
+        references.color.a = 1.0;
+        geometry_msgs::Point v;
 
-}
-
-// Draw the field of view and other references
-void populateMarkerReference() {
-
-    visualization_msgs::Marker references;
-
-    references.header.frame_id = "laser";
-    references.header.stamp = ros::Time::now();
-    references.ns = "example";
-    references.id = 1;
-    references.type = visualization_msgs::Marker::LINE_STRIP;
-    references.action = visualization_msgs::Marker::ADD;
-    references.pose.orientation.w = 1;
-
-    references.scale.x = 0.02;
-
-    references.color.r = 1.0f;
-    references.color.g = 1.0f;
-    references.color.b = 1.0f;
-    references.color.a = 1.0;
-    geometry_msgs::Point v;
-
-    v.x =  0.02 * cos(-2.356194);
-    v.y =  0.02 * sin(-2.356194);
-    v.z = 0.0;
-    references.points.push_back(v);
-
-    v.x =  5.6 * cos(-2.356194);
-    v.y =  5.6 * sin(-2.356194);
-    v.z = 0.0;
-    references.points.push_back(v);
-
-    float beam_angle = -2.356194 + 0.006136;
-    // first and last beam are already included
-    for (int i=0 ; i< 723; i++, beam_angle += 0.006136){
-        v.x =  5.6 * cos(beam_angle);
-        v.y =  5.6 * sin(beam_angle);
+        v.x =  0.02 * cos(-2.356194);
+        v.y =  0.02 * sin(-2.356194);
         v.z = 0.0;
         references.points.push_back(v);
+
+        v.x =  5.6 * cos(-2.356194);
+        v.y =  5.6 * sin(-2.356194);
+        v.z = 0.0;
+        references.points.push_back(v);
+
+        float beam_angle = -2.356194 + 0.006136;
+        // first and last beam are already included
+        for (int i=0 ; i< 723; i++, beam_angle += 0.006136){
+            v.x =  5.6 * cos(beam_angle);
+            v.y =  5.6 * sin(beam_angle);
+            v.z = 0.0;
+            references.points.push_back(v);
+        }
+
+        v.x =  5.6 * cos(2.092350);
+        v.y =  5.6 * sin(2.092350);
+        v.z = 0.0;
+        references.points.push_back(v);
+
+        v.x =  0.02 * cos(2.092350);
+        v.y =  0.02 * sin(2.092350);
+        v.z = 0.0;
+        references.points.push_back(v);
+
+        pub_moving_persons_detector_marker.publish(references);
+
     }
 
-    v.x =  5.6 * cos(2.092350);
-    v.y =  5.6 * sin(2.092350);
-    v.z = 0.0;
-    references.points.push_back(v);
+    void populateMarkerTopic(){
 
-    v.x =  0.02 * cos(2.092350);
-    v.y =  0.02 * sin(2.092350);
-    v.z = 0.0;
-    references.points.push_back(v);
+        visualization_msgs::Marker marker;
 
-    pub_moving_persons_detector_marker.publish(references);
+        marker.header.frame_id = "laser";
+        marker.header.stamp = ros::Time::now();
+        marker.ns = "example";
+        marker.id = 0;
+        marker.type = visualization_msgs::Marker::POINTS;
+        marker.action = visualization_msgs::Marker::ADD;
 
-}
+        marker.pose.orientation.w = 1;
 
-void populateMarkerTopic(){
+        marker.scale.x = 0.05;
+        marker.scale.y = 0.05;
 
-    visualization_msgs::Marker marker;
+        marker.color.a = 1.0;
 
-    marker.header.frame_id = "laser";
-    marker.header.stamp = ros::Time::now();
-    marker.ns = "example";
-    marker.id = 0;
-    marker.type = visualization_msgs::Marker::POINTS;
-    marker.action = visualization_msgs::Marker::ADD;
-
-    marker.pose.orientation.w = 1;
-
-    marker.scale.x = 0.05;
-    marker.scale.y = 0.05;
-
-    marker.color.a = 1.0;
-
-    ROS_INFO("%i points to display", nb_pts);
-    for (int loop = 0; loop < nb_pts; loop++) {
+        ROS_INFO("%i points to display", nb_pts);
+        for (int loop = 0; loop < nb_pts; loop++) {
             geometry_msgs::Point p;
             std_msgs::ColorRGBA c;
 
@@ -567,10 +504,10 @@ void populateMarkerTopic(){
             marker.colors.push_back(c);
         }
 
-    pub_moving_persons_detector_marker.publish(marker);
-    populateMarkerReference();
+        pub_moving_persons_detector_marker.publish(marker);
+        populateMarkerReference();
 
-}
+    }
 
     /**
      *
@@ -580,7 +517,82 @@ void populateMarkerTopic(){
         msg_token.data = true;
         pub_token.publish(msg_token);
     }
+
+    /**
+     *
+     */
+    void print_sorce() {
+        ROS_INFO("Score : "); 
+        for(int i=0; i<nb_moving_legs_detected; i++)
+            ROS_INFO("%d", score[i]);
+    }
+
+    /**
+     *
+     */
+    void reset_score(){
+        for(int i=0; i<1000; i++)
+            score[i]=0;
+    }
+
+    /**
+     * \fn void detect_group ()
+     * \brief Recherche les différents groupes
+     */
+    void detect_group() {
+        //ROS_INFO("detecting group");
+        
+        int nb_group = 0;//to count the number of group
+
+        int group_start[1000];
+        int group_end[1000];
     
+        //initialization of the first cluster
+        group_start[0] = 0;
+        group_end[0] = 0;
+        int loop;
+        //ROS_INFO("nb per0son = %d", nb_person_active);
+        for(loop = 1; loop < nb_moving_persons_detected; loop++) {
+            float d;
+            d=distancePoints(moving_persons_detected[loop-1],moving_persons_detected[loop]);
+            //ROS_INFO("distance = %f", d);
+            if(d <= group_person_threshold){
+                group_end[nb_group]++;
+            }else{
+                nb_group++;
+                group_start[nb_group] = loop;
+                group_end[nb_group] = loop;
+            }
+        }      
+        nb_group_detected = 0;
+        for(int i = 0; i< nb_group+1; i++) {
+            if(group_start[i] <= group_end[i]){
+                float x1 = moving_persons_detected[group_start[i]].x;
+                float y1 = moving_persons_detected[group_start[i]].y;
+                float x2 = moving_persons_detected[group_end[i]].x;
+                float y2 = moving_persons_detected[group_end[i]].y;
+                geometry_msgs::Point m;
+                group_detected[i].x = (float)(x2+x1)/2;
+                group_detected[i].y = (float)(y2+y1)/2; 
+            
+                display[nb_pts].x = group_detected[nb_group_detected].x;
+                display[nb_pts].y = group_detected[nb_group_detected].y;
+                display[nb_pts].z = group_detected[nb_group_detected].z;
+
+                nb_group_detected++;
+            
+                colors[nb_pts].r = 1;
+                colors[nb_pts].g = 0;
+                colors[nb_pts].b = 0;
+                colors[nb_pts].a = 1.0;
+                nb_pts++;
+                new_goal=true;
+            }
+        }
+    
+        ROS_INFO("%d group have been detected.\n", nb_group_detected);
+    }
+
 };
 
 int main(int argc, char **argv){
