@@ -85,7 +85,10 @@ private:
     //to check if the robot is moving or not
     bool previous_robot_moving;
     bool current_robot_moving;
-
+    /**
+     *Publish goal_to_reach
+     */
+    ros::Publisher pub_goal_to_reach;
     bool new_laser;//to check if new data of laser is available or not
     bool new_robot;//to check if new data of robot_moving is available or not
     /**
@@ -109,7 +112,7 @@ public:
         sub_robot_moving = n.subscribe("robot_moving", 1, &moving_persons_detector::robot_movingCallback, this);
         pub_token = n.advertise<std_msgs::Bool>("token_moving_group",0);
         pub_moving_persons_detector_marker = n.advertise<visualization_msgs::Marker>("moving_persons_detector", 1); // Preparing a topic to publish our results. This will be used by the visualization tool rviz
-        pub_moving_persons_detector = n.advertise<geometry_msgs::PoseArray>("moving_persons_detector_array", 1);     // Preparing a topic to publish the goal to reach.
+        pub_moving_persons_detector = n.advertise<geometry_msgs::PoseArray>("goal_to_reach", 1);// Preparing a topic to publish the goal to reach.
 
         current_robot_moving = true;
         new_laser = false;
@@ -152,6 +155,7 @@ public:
                 if(nb_iter % iter_person == 0){
                     detect_group();
                     nb_moving_legs_detected=0;
+                    nb_group_detected=0;
                 }
                 populateMarkerTopic();
             }
@@ -161,20 +165,26 @@ public:
         }
         else
             ROS_INFO("wait for data");
+        
+        if(nb_iter % iter_person == 0){
+            nb_group_detected=0;
+            detect_group();
+            nb_moving_legs_detected=0;
+        }
 }// update
 
-    void send_pose_array() {
-        geometry_msgs::Pose p;
-        geometry_msgs::PoseArray array;
-                
-        for(int i=0; i<nb_moving_persons_detected; i++) {
-            p.position.x = moving_persons_detected[i].x;
-            p.position.y = moving_persons_detected[i].y;
-            array.poses.push_back(p);
+    void send_goal_to_reach() {
+        bool detected = nb_group_detected > 0;
+        if(detected){
+            goal_to_reach.x = closest_group().x;
+            goal_to_reach.y = closest_group().y;
+        }else{
+            goal_to_reach.x = (float) rand() /(float)(RAND_MAX/2)-1;
+            goal_to_reach.y = (float) rand() / (float)(RAND_MAX/2);
         }
-        pub_moving_persons_detector.publish(array);
+        send_token(detected);
+        pub_goal_to_reach.publish(goal_to_reach);
     }
-
 
     void store_background() {
         // store all the hits of the laser in the background table
@@ -375,6 +385,28 @@ public:
 
     }//detect_moving_persons
 
+    /**
+     * \fn geometry_msgs::Point closest_group()
+     *
+     * \brief renvoie le groupe le plus proche du robot
+     * \return le groupe le plus proche
+     */  
+    geometry_msgs::Point closest_group() {
+        int i_min = 0;
+        float dist_min = 0, d;
+        geometry_msgs::Point robot_position;
+        robot_position.x=0;
+        robot_position.y=0;
+        for(int i =0; i<nb_group_detected; i++){
+            d = distancePoints(robot_position, group_detected[i]);
+            if (d <= dist_min) {
+                i_min = i;
+                dist_min = d;
+            }
+        }
+        return group_detected[i_min];
+    }
+    
     void scanCallback(const sensor_msgs::LaserScan::ConstPtr& scan) {
 
         new_laser = true;
@@ -512,9 +544,9 @@ public:
     /**
      *
      */
-    void send_token() {
+    void send_token(bool b) {
         std_msgs::Bool msg_token;
-        msg_token.data = true;
+        msg_token.data = b;
         pub_token.publish(msg_token);
     }
 
