@@ -1,0 +1,109 @@
+\hypertarget{classdecision}{}\section{decision Class Reference}
+\label{classdecision}\index{decision@{decision}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classdecision_a00772c969f42d590e57f3eb37bafe6a6}{decision} ()
+\item 
+void \hyperlink{classdecision_a5fbd0cdaffc906d31560227560136b59}{update} ()\hypertarget{classdecision_a5fbd0cdaffc906d31560227560136b59}{}\label{classdecision_a5fbd0cdaffc906d31560227560136b59}
+
+\begin{DoxyCompactList}\small\item\em Met à jour le noeud. \end{DoxyCompactList}\item 
+void \hyperlink{classdecision_afddf261c387d28dde5e6881343518ca7}{goal\+\_\+to\+\_\+reach\+Callback} (const geometry\+\_\+msgs\+::\+Point\+::\+Const\+Ptr \&g)
+\begin{DoxyCompactList}\small\item\em Callback pour l\textquotesingle{}inscription au topic goal\+\_\+to\+\_\+reach. \end{DoxyCompactList}\item 
+void \hyperlink{classdecision_ad6c2257e2304ad3a078d2b64cf425caa}{rotation\+\_\+done\+Callback} (const std\+\_\+msgs\+::\+Float32\+::\+Const\+Ptr \&a)
+\begin{DoxyCompactList}\small\item\em Callback pour l\textquotesingle{}inscription au rotation\+\_\+done. \end{DoxyCompactList}\item 
+void {\bfseries token\+\_\+\+Callback} (const std\+\_\+msgs\+::\+Bool\+::\+Const\+Ptr \&a)\hypertarget{classdecision_a7e0da40a27e1c320329a5b81f6044c57}{}\label{classdecision_a7e0da40a27e1c320329a5b81f6044c57}
+
+\item 
+void \hyperlink{classdecision_ab874f222aac437a05fe8bc8c5d8963b4}{translation\+\_\+done\+Callback} (const std\+\_\+msgs\+::\+Float32\+::\+Const\+Ptr \&r)
+\begin{DoxyCompactList}\small\item\em Callback pour l\textquotesingle{}inscription au translation\+\_\+done. \end{DoxyCompactList}\item 
+float \hyperlink{classdecision_a1b6988efc70e0a25ddb7be0f372d2ad2}{distance\+Points} (geometry\+\_\+msgs\+::\+Point pa, geometry\+\_\+msgs\+::\+Point pb)
+\begin{DoxyCompactList}\small\item\em Revoie la distance entre deux points. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{decision@{decision}!decision@{decision}}
+\index{decision@{decision}!decision@{decision}}
+\subsubsection[{\texorpdfstring{decision()}{decision()}}]{\setlength{\rightskip}{0pt plus 5cm}decision\+::decision (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classdecision_a00772c969f42d590e57f3eb37bafe6a6}{}\label{classdecision_a00772c969f42d590e57f3eb37bafe6a6}
+Constructeur de la classe Decision 
+
+\subsection{Member Function Documentation}
+\index{decision@{decision}!distance\+Points@{distance\+Points}}
+\index{distance\+Points@{distance\+Points}!decision@{decision}}
+\subsubsection[{\texorpdfstring{distance\+Points(geometry\+\_\+msgs\+::\+Point pa, geometry\+\_\+msgs\+::\+Point pb)}{distancePoints(geometry_msgs::Point pa, geometry_msgs::Point pb)}}]{\setlength{\rightskip}{0pt plus 5cm}decision\+::distance\+Points (
+\begin{DoxyParamCaption}
+\item[{geometry\+\_\+msgs\+::\+Point}]{pa, }
+\item[{geometry\+\_\+msgs\+::\+Point}]{pb}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classdecision_a1b6988efc70e0a25ddb7be0f372d2ad2}{}\label{classdecision_a1b6988efc70e0a25ddb7be0f372d2ad2}
+
+
+Revoie la distance entre deux points. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pa} & le premier point \\
+\hline
+{\em pb} & le second point \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+la distance entre le point pa et le point pb 
+\end{DoxyReturn}
+\index{decision@{decision}!goal\+\_\+to\+\_\+reach\+Callback@{goal\+\_\+to\+\_\+reach\+Callback}}
+\index{goal\+\_\+to\+\_\+reach\+Callback@{goal\+\_\+to\+\_\+reach\+Callback}!decision@{decision}}
+\subsubsection[{\texorpdfstring{goal\+\_\+to\+\_\+reach\+Callback(const geometry\+\_\+msgs\+::\+Point\+::\+Const\+Ptr \&g)}{goal_to_reachCallback(const geometry_msgs::Point::ConstPtr &g)}}]{\setlength{\rightskip}{0pt plus 5cm}decision\+::goal\+\_\+to\+\_\+reach\+Callback (
+\begin{DoxyParamCaption}
+\item[{const geometry\+\_\+msgs\+::\+Point\+::\+Const\+Ptr \&}]{g}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classdecision_afddf261c387d28dde5e6881343518ca7}{}\label{classdecision_afddf261c387d28dde5e6881343518ca7}
+
+
+Callback pour l\textquotesingle{}inscription au topic goal\+\_\+to\+\_\+reach. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & le point reçu \\
+\hline
+\end{DoxyParams}
+\index{decision@{decision}!rotation\+\_\+done\+Callback@{rotation\+\_\+done\+Callback}}
+\index{rotation\+\_\+done\+Callback@{rotation\+\_\+done\+Callback}!decision@{decision}}
+\subsubsection[{\texorpdfstring{rotation\+\_\+done\+Callback(const std\+\_\+msgs\+::\+Float32\+::\+Const\+Ptr \&a)}{rotation_doneCallback(const std_msgs::Float32::ConstPtr &a)}}]{\setlength{\rightskip}{0pt plus 5cm}decision\+::rotation\+\_\+done\+Callback (
+\begin{DoxyParamCaption}
+\item[{const std\+\_\+msgs\+::\+Float32\+::\+Const\+Ptr \&}]{a}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classdecision_ad6c2257e2304ad3a078d2b64cf425caa}{}\label{classdecision_ad6c2257e2304ad3a078d2b64cf425caa}
+
+
+Callback pour l\textquotesingle{}inscription au rotation\+\_\+done. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & l\textquotesingle{}angle parcouru \\
+\hline
+\end{DoxyParams}
+\index{decision@{decision}!translation\+\_\+done\+Callback@{translation\+\_\+done\+Callback}}
+\index{translation\+\_\+done\+Callback@{translation\+\_\+done\+Callback}!decision@{decision}}
+\subsubsection[{\texorpdfstring{translation\+\_\+done\+Callback(const std\+\_\+msgs\+::\+Float32\+::\+Const\+Ptr \&r)}{translation_doneCallback(const std_msgs::Float32::ConstPtr &r)}}]{\setlength{\rightskip}{0pt plus 5cm}decision\+::translation\+\_\+done\+Callback (
+\begin{DoxyParamCaption}
+\item[{const std\+\_\+msgs\+::\+Float32\+::\+Const\+Ptr \&}]{r}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classdecision_ab874f222aac437a05fe8bc8c5d8963b4}{}\label{classdecision_ab874f222aac437a05fe8bc8c5d8963b4}
+
+
+Callback pour l\textquotesingle{}inscription au translation\+\_\+done. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & distance effectuée \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/maxence/robair/src/follow\+\_\+me/src/\hyperlink{decision__node_8cpp}{decision\+\_\+node.\+cpp}\end{DoxyCompactItemize}

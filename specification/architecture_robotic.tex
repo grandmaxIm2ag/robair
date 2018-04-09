@@ -1,0 +1,154 @@
+\documentclass{article}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage[]{algorithm2e}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{tikz}
+\pagestyle{empty}
+\SetKw{KwBy}{by}
+
+\title{Projet de Robotique : Comportement du Robot}
+\author{Groupe 7}
+\begin{document}
+
+\maketitle
+
+\section{Comportement du Robot}
+\begin{algorithm}[H]
+  \While{True}{
+    D\'etection des personnes()\\
+    D\'etection des groupes()\\
+    Rejoindre un groupe()\\
+  }
+  \caption{Comportement g\'en\'eral}
+\end{algorithm}
+
+\subsection{D\'etection des personnes}
+
+C'est le noeud : moving\_person\_detector qui d\'etecte les personnes.
+
+\begin{algorithm}[H]
+  $nb\_active\_leg \gets 0$ \\
+  $nb\_person \gets 0 $ \\
+  active\_leg : les diff\'erentes jambes \\
+  score : les diff\'erents scores pour les jambes \\
+  persons : les diff\'erentes personnes \\
+  \For{$i\gets0$ \KwTo $10$}{
+    $D \gets laser\_data$ \\
+    $i \gets 0$ \\
+    C : les diff\'erents clusters \\
+    $c_i.debut \gets d_0$\\
+    $c_i.fin \gets d_0$\\
+    \ForEach{$d_j \in D$}{
+      \If{distance($d_{j-1}, d_j$) < 0.01}{
+        $c_i.fin \gets d_j$ \\
+      }
+      \Else{
+        $i \gets i+1$ \\
+        $c_i.debut \gets d_j$\\
+        $c_i.fin \gets d_j$\\
+      }
+    }
+    $i\gets0$ \\
+    Legs : Les jambes rep\'er\'ees \\
+    \ForEach{$c_j \in C$}{
+      \If{$c_j \geq 0.15 \wedge c_j \leq 0.3 $}{
+        $Legs_i \gets c_j$ \\
+        $i \gets i+1$ \\
+      }
+    }
+    \ForEach{$l_i \in Legs$}{
+      \If{$\exists l'_j | distance(l_i, l_j) < 0.05 $}{
+        $score_j \gets score_j + 1$
+      }\Else{
+        $active\_leg_{nb\_active\_leg} \gets l_i$
+        $score_{nb\_active\_leg} \gets 1$
+        $nb\_active\_leg \gets nb\_active\_leg+1$
+      }
+    }
+    $i \gets 0$ \\
+    \ForEach{$l_j \in active\_leg$}{
+      \ForEach{$l_k \in active\_leg$}{
+        \If{$l_k \neq l_j \wedge distance(l_k, l_j) \leq 0.75 \wedge score_j >
+          5 \wedge score_k > 5$}{
+          $person_i \gets \frac{d_j + dk}{2}$ \\
+          $i \gets i + 1$
+        }
+      }
+    }
+    
+  }
+  \caption{D\'etection des Personnes}
+\end{algorithm}
+
+\subsection{Les groupes}
+
+On consid\`ere comme groupe, un ensemble d'au moins deux personnes, o\`u chaque
+personne \`a un voisin \`a moins d'un metre. C'est le noeud group\_detector qui
+d\'etecte les groupes.\\
+Si il ' y a au moins un groupe, le groupe vers lequel se d\'eplace le robot est
+le groupe le plu proche du robot. Pour \'eviter que le robot reste devant le
+m\^eme groupe, le robot doit se d\'eplacer vers un groupe qui se trouve \`a une
+distance minimale de e. C'est le noeud group\_detector qui choisi le
+groupe \`a rejoindre.
+
+
+\begin{algorithm}[H]
+  clust\_person : les diff\'erents clusters de personnes \\
+  $i\gets0$ \\
+  $clust\_person_i.debut \gets p_0$
+  $clust\_person_i.fin \gets p_0$
+  \ForEach{$p_j \in persons$}{
+      \If{distance($p_{j-1}, p_j$) < 1}{
+        $clust\_personc_i.fin \gets p_j$ \\
+      }
+      \Else{
+        $i \gets i+1$ \\
+        $clust\_person_i.debut \gets p_j$\\
+        $clust\_person_1.fin \gets p_j$\\
+      }
+  }
+  groups : les diff\'erents groupes \\
+  $nb\_group \gets 0$ \\
+  \ForEach{$c_i \in clust\_persons$}{
+      \If{$c_i \geq 2$}{
+        $groups_{nb\_group} \gets c_i$ \\
+        $nb\_group \gets nb\_group +1$
+      }
+  }
+  \caption{D\'etection des Groupes}
+\end{algorithm}
+
+\subsection{D\'eplacement}
+
+\begin{algorithm}[H]
+  goal\_to\_reach : le but \`a atteindre \\
+  token : le jeton \\
+  \If{$nb\_group \neq 0$}{
+    $goal\_to\_reach \gets closest\_group()$\\
+    $token \gets true$ \\
+  }\Else{
+    $goal\_to\_reach \gets random\_point()$\\
+    $token \gets false$ \\
+  }
+  publish(token)\\
+  publish(goal\_to\_reach)\\
+  \caption{Envoie du but}
+\end{algorithm}
+
+\begin{algorithm}[H]
+  $translation\_to\_do \gets translation(goal\_to\_reach)$\\
+  $rotation\_to\_do \gets rotation(goal\_to\_reach)$\\
+  publish(rotation\_to\_do)\\
+  publish(translation\_to\_do)\\
+  \If{token}{
+    $rotation\_to\_do \gets \pi$\\
+    publish(rotation\_to\_do)
+  }
+  \caption{R\'eception du but}
+\end{algorithm}
+\section{architecture}
+\input{automate.tex}
+
+\end{document}

@@ -1,0 +1,49 @@
+\begin{theindex}
+
+  \item {/home/maxence/robair/src/follow\+\_\+me/src/decision\+\_\+node.\+cpp}, 
+		\hyperpage{9}
+
+  \indexspace
+
+  \item {closest\+\_\+group}
+    \subitem {moving\+\_\+persons\+\_\+detector}, \hyperpage{7}
+
+  \indexspace
+
+  \item {decision}, \hyperpage{5}
+    \subitem {decision}, \hyperpage{5}
+    \subitem {distance\+Points}, \hyperpage{5}
+    \subitem {goal\+\_\+to\+\_\+reach\+Callback}, \hyperpage{6}
+    \subitem {rotation\+\_\+done\+Callback}, \hyperpage{6}
+    \subitem {translation\+\_\+done\+Callback}, \hyperpage{6}
+  \item {distance\+Points}
+    \subitem {decision}, \hyperpage{5}
+
+  \indexspace
+
+  \item {goal\+\_\+to\+\_\+reach\+Callback}
+    \subitem {decision}, \hyperpage{6}
+
+  \indexspace
+
+  \item {moving\+\_\+persons\+\_\+detector}, \hyperpage{6}
+    \subitem {closest\+\_\+group}, \hyperpage{7}
+
+  \indexspace
+
+  \item {obstacle\+\_\+detection}, \hyperpage{7}
+
+  \indexspace
+
+  \item {robot\+\_\+moving\+\_\+lectures}, \hyperpage{7}
+  \item {rotation\+\_\+action}, \hyperpage{8}
+  \item {rotation\+\_\+done\+Callback}
+    \subitem {decision}, \hyperpage{6}
+
+  \indexspace
+
+  \item {translation\+\_\+action}, \hyperpage{8}
+  \item {translation\+\_\+done\+Callback}
+    \subitem {decision}, \hyperpage{6}
+
+\end{theindex}

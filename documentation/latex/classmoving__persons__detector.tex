@@ -1,0 +1,77 @@
+\hypertarget{classmoving__persons__detector}{}\section{moving\+\_\+persons\+\_\+detector Class Reference}
+\label{classmoving__persons__detector}\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries update} ()\hypertarget{classmoving__persons__detector_a22fd235d29f4a41b4e7904b76738baed}{}\label{classmoving__persons__detector_a22fd235d29f4a41b4e7904b76738baed}
+
+\item 
+void {\bfseries send\+\_\+goal\+\_\+to\+\_\+reach} ()\hypertarget{classmoving__persons__detector_ac80c809c589313490eb280cbce223228}{}\label{classmoving__persons__detector_ac80c809c589313490eb280cbce223228}
+
+\item 
+void {\bfseries store\+\_\+background} ()\hypertarget{classmoving__persons__detector_ac0ecfeda0495b2ba7f7004851fd67e82}{}\label{classmoving__persons__detector_ac0ecfeda0495b2ba7f7004851fd67e82}
+
+\item 
+void {\bfseries detect\+\_\+motion} ()\hypertarget{classmoving__persons__detector_ab556a848049a07681112fc60aac58bda}{}\label{classmoving__persons__detector_ab556a848049a07681112fc60aac58bda}
+
+\item 
+void {\bfseries perform\+\_\+clustering} ()\hypertarget{classmoving__persons__detector_a5ecb03bfa3c5fffbdd16da4ed7a255d8}{}\label{classmoving__persons__detector_a5ecb03bfa3c5fffbdd16da4ed7a255d8}
+
+\item 
+void {\bfseries detect\+\_\+moving\+\_\+legs} ()\hypertarget{classmoving__persons__detector_a53e036c28def16757dac2850231ed614}{}\label{classmoving__persons__detector_a53e036c28def16757dac2850231ed614}
+
+\item 
+void {\bfseries detect\+\_\+moving\+\_\+persons} ()\hypertarget{classmoving__persons__detector_af7e1bb275af1ca1a6a062d1162d4100e}{}\label{classmoving__persons__detector_af7e1bb275af1ca1a6a062d1162d4100e}
+
+\item 
+geometry\+\_\+msgs\+::\+Point \hyperlink{classmoving__persons__detector_a56e54848546290d3dd0c06956763ee30}{closest\+\_\+group} ()
+\begin{DoxyCompactList}\small\item\em renvoie le groupe le plus proche du robot \end{DoxyCompactList}\item 
+void {\bfseries scan\+Callback} (const sensor\+\_\+msgs\+::\+Laser\+Scan\+::\+Const\+Ptr \&scan)\hypertarget{classmoving__persons__detector_a598d9cca5f0b1a46b784a9f888ae850d}{}\label{classmoving__persons__detector_a598d9cca5f0b1a46b784a9f888ae850d}
+
+\item 
+void {\bfseries robot\+\_\+moving\+Callback} (const std\+\_\+msgs\+::\+Bool\+::\+Const\+Ptr \&state)\hypertarget{classmoving__persons__detector_abeba4f8d5ceb0a1b3d6033dc5747fb21}{}\label{classmoving__persons__detector_abeba4f8d5ceb0a1b3d6033dc5747fb21}
+
+\item 
+float {\bfseries distance\+Points} (geometry\+\_\+msgs\+::\+Point pa, geometry\+\_\+msgs\+::\+Point pb)\hypertarget{classmoving__persons__detector_aa48199ec508ad8deadbbc063bb0aeb5b}{}\label{classmoving__persons__detector_aa48199ec508ad8deadbbc063bb0aeb5b}
+
+\item 
+void {\bfseries populate\+Marker\+Reference} ()\hypertarget{classmoving__persons__detector_a77dddf81140f2bdac9d2e601ab300e67}{}\label{classmoving__persons__detector_a77dddf81140f2bdac9d2e601ab300e67}
+
+\item 
+void {\bfseries populate\+Marker\+Topic} ()\hypertarget{classmoving__persons__detector_ad91162912d72e16901b739eb8a4a8d93}{}\label{classmoving__persons__detector_ad91162912d72e16901b739eb8a4a8d93}
+
+\item 
+void {\bfseries send\+\_\+token} (bool b)\hypertarget{classmoving__persons__detector_a6859b1e4f51fbd7e39c325acddfb1b60}{}\label{classmoving__persons__detector_a6859b1e4f51fbd7e39c325acddfb1b60}
+
+\item 
+void {\bfseries print\+\_\+sorce} ()\hypertarget{classmoving__persons__detector_a361fe077962345d7cba41cd160d3d52a}{}\label{classmoving__persons__detector_a361fe077962345d7cba41cd160d3d52a}
+
+\item 
+void {\bfseries reset\+\_\+score} ()\hypertarget{classmoving__persons__detector_afe1315f98a8619409542ccd29938a006}{}\label{classmoving__persons__detector_afe1315f98a8619409542ccd29938a006}
+
+\item 
+void \hyperlink{classmoving__persons__detector_a963302ef27df7f685e48ab4d0c5cb674}{detect\+\_\+group} ()\hypertarget{classmoving__persons__detector_a963302ef27df7f685e48ab4d0c5cb674}{}\label{classmoving__persons__detector_a963302ef27df7f685e48ab4d0c5cb674}
+
+\begin{DoxyCompactList}\small\item\em Recherche les différents groupes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!closest\+\_\+group@{closest\+\_\+group}}
+\index{closest\+\_\+group@{closest\+\_\+group}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{closest\+\_\+group()}{closest_group()}}]{\setlength{\rightskip}{0pt plus 5cm}geometry\+\_\+msgs\+::\+Point moving\+\_\+persons\+\_\+detector\+::closest\+\_\+group (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classmoving__persons__detector_a56e54848546290d3dd0c06956763ee30}{}\label{classmoving__persons__detector_a56e54848546290d3dd0c06956763ee30}
+
+
+renvoie le groupe le plus proche du robot 
+
+\begin{DoxyReturn}{Returns}
+le groupe le plus proche 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/maxence/robair/src/follow\+\_\+me/src/moving\+\_\+persons\+\_\+detector\+\_\+node.\+cpp\end{DoxyCompactItemize}
