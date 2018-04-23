@@ -23,13 +23,13 @@
 #define group_person_threshold 0.8
 
 //used for detection of moving legs
-#define leg_size_min 0.05
-#define leg_size_max 0.25
+#define leg_size_min 0.1
+#define leg_size_max 0.3
 
 //used for detection of moving persons
-#define legs_distance_max 0.7
+#define legs_distance_max 1
 
-#define distance_person 1
+#define distance_person 1.5
 
 #define iter_person 10
 #define min_view 7
@@ -179,8 +179,8 @@ public:
             goal_to_reach.y = closest_group().y;
         }else{
             ROS_INFO("Random");
-            goal_to_reach.x = ((float) rand() / RAND_MAX) - 0.5;
-            goal_to_reach.y = (float) rand() / RAND_MAX;
+            goal_to_reach.x = ( (float) rand() /(RAND_MAX/4) )-2.0;
+            goal_to_reach.y = (float) rand() / (RAND_MAX/2);
         }
         send_token(detected);
         pub_goal_to_reach.publish(goal_to_reach);
@@ -552,7 +552,8 @@ public:
             group_start[0] = 0;
             group_end[0] = 0;
             int loop;
-            //ROS_INFO("nb per0son = %d", nb_person_active);
+
+	    //ROS_INFO("nb per0son = %d", nb_person_active);
             for(loop = 1; loop < nb_moving_persons_detected; loop++) {
                 float d;
                 d=distancePoints(moving_persons_detected[loop-1],moving_persons_detected[loop]);
@@ -564,7 +565,8 @@ public:
                     group_start[nb_group] = loop;
                     group_end[nb_group] = loop;
                 }
-            }      
+            }
+	    
             nb_group_detected = 0;
             for(int i = 0; i< nb_group+1; i++) {
                 if(group_start[i] < group_end[i]){
@@ -593,7 +595,6 @@ public:
         }
         ROS_INFO("%d group have been detected.\n", nb_group_detected);
     }
-
 };
 
 int main(int argc, char **argv){

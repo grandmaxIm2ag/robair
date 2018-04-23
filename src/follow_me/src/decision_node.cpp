@@ -20,7 +20,7 @@ using namespace std;
  * \author Groupe 7
  */
 
-#define duration_sleep 2
+#define duration_sleep 10
 class decision {
 private:
 
@@ -195,7 +195,13 @@ public:
             }else{
                 ROS_INFO("Fin demi tours");
                 halfturn = false;
-                send_finish_move(true);
+		token = false;
+		ROS_INFO("J'attend");
+		ros::Duration(duration_sleep).sleep();
+		ROS_INFO("Je pars");
+		std_msgs::Float32 msg_translation_to_do;
+                msg_translation_to_do.data = 1;
+                pub_translation_to_do.publish(msg_translation_to_do);
             }
         }
 
@@ -222,8 +228,8 @@ public:
                 pub_rotation_to_do.publish(msg_rotation_to_do);
                 token=false;
                 halfturn = true;
-                ros::Duration(duration_sleep).sleep();
-            }else{
+	    }else{
+		ROS_INFO("J'ai fini");
                 send_finish_move(true);
             }
         }
