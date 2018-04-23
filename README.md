@@ -12,7 +12,8 @@
 	rosrun node
 ## Clonage du projet
 
-Avant de cloner le projet vérifiez que [Ros Kinetic et ses dépendances ont bien été installés](http://wiki.ros.org/kinetic/Installation/Ubuntu).
+Avant de cloner le projet vérifiez que [Ros Kinetic et ses dépendances ont bien été installés](http://wiki.ros.org/kinetic/Installation/Ubuntu) que
+que la package [sound_play](https://answers.ros.org/question/260933/how-to-install-sound_play/).
 
 	git clone https://github.com/grandmaxIm2ag/catkin_ws.git
 	catkin_make
