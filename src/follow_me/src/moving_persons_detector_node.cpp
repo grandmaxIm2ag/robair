@@ -180,7 +180,8 @@ public:
         }else{
             ROS_INFO("Random");
             goal_to_reach.x = ( (float) rand() /(RAND_MAX/4) )-2.0;
-            goal_to_reach.y = (float) rand() / (RAND_MAX/2);
+            goal_to_reach.y = (goal_to_reach.x >= 0 ? 2.5 - goal_to_reach.x :
+			       2.5 - (0-goal_to_reach.x)) ;
         }
         send_token(detected);
         pub_goal_to_reach.publish(goal_to_reach);
@@ -196,7 +197,7 @@ public:
     void detect_motion() {
         for (int loop=0; loop<nb_beams; loop++ ){//loop over all the hits
             //Compute distance d
-            float x = background[loop] < 0 ? 0-background[loop] : background[loop];
+            float x = background[loop]<0?0-background[loop]:background[loop];
             float y = range[loop] < 0 ? 0-range[loop] : range[loop];
             float d = x-y;
             if (d > detection_threshold){
@@ -329,13 +330,18 @@ public:
                     float y2 = moving_leg_detected[loop_leg1].y;
                     float x1 = moving_leg_detected[loop_leg2].x;
                     float y1 = moving_leg_detected[loop_leg2].y;
-                    moving_persons_detected[nb_moving_persons_detected].x=(x1+x2)/2;
-                    moving_persons_detected[nb_moving_persons_detected].y=(y1+y2)/2;
+                    moving_persons_detected[nb_moving_persons_detected].x
+			=(x1+x2)/2;
+                    moving_persons_detected[nb_moving_persons_detected].y
+			=(y1+y2)/2;
              
                     // the moving persons are green
-                    display[nb_pts].x = moving_persons_detected[nb_moving_persons_detected].x;
-                    display[nb_pts].y = moving_persons_detected[nb_moving_persons_detected].y;
-                    display[nb_pts].z = moving_persons_detected[nb_moving_persons_detected].z;
+                    display[nb_pts].x = moving_persons_detected
+			[nb_moving_persons_detected].x;
+                    display[nb_pts].y = moving_persons_detected
+			[nb_moving_persons_detected].y;
+                    display[nb_pts].z = moving_persons_detected
+			[nb_moving_persons_detected].z;
 
                     colors[nb_pts].r = 0;
                     colors[nb_pts].g = 1;
@@ -345,8 +351,10 @@ public:
                     nb_pts++;
 
                     //update of the goal
-                    goal_to_reach.x = moving_persons_detected[nb_moving_persons_detected].x;
-                    goal_to_reach.y = moving_persons_detected[nb_moving_persons_detected].y;
+                    goal_to_reach.x = moving_persons_detected
+			[nb_moving_persons_detected].x;
+                    goal_to_reach.y = moving_persons_detected
+			[nb_moving_persons_detected].y;
 
                     nb_moving_persons_detected++;
                     new_goal = true;
