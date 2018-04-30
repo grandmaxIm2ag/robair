@@ -1,0 +1,162 @@
+\hypertarget{classrotation__action}{}\section{Référence de la classe rotation\+\_\+action}
+\label{classrotation__action}\index{rotation\+\_\+action@{rotation\+\_\+action}}
+
+
+Gère la rotation du robot.  
+
+
+\subsection*{Fonctions membres publiques}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classrotation__action_af35b8bf6548d1992bacff66a3cea57df}{rotation\+\_\+action} ()
+\begin{DoxyCompactList}\small\item\em constructeur \end{DoxyCompactList}\item 
+void \hyperlink{classrotation__action_a36329542f86b36a25dcc5b281a0b8aed}{update} ()
+\begin{DoxyCompactList}\small\item\em mise à jours du noeud \end{DoxyCompactList}\item 
+void \hyperlink{classrotation__action_a6d541aa63299c89c26dfb3eda1478a13}{odom\+Callback} (const nav\+\_\+msgs\+::\+Odometry\+::\+Const\+Ptr \&o)
+\begin{DoxyCompactList}\small\item\em callback de l\textquotesingle{}ondométrie \end{DoxyCompactList}\item 
+void \hyperlink{classrotation__action_ad23f7b68ddafdca515cbb32dc8c6464e}{rotation\+\_\+to\+\_\+do\+Callback} (const std\+\_\+msgs\+::\+Float32\+::\+Const\+Ptr \&a)
+\begin{DoxyCompactList}\small\item\em callback de la rotation à éffectuer \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Attributs privés}
+\begin{DoxyCompactItemize}
+\item 
+ros\+::\+Node\+Handle \hyperlink{classrotation__action_a116971b35f73ec6dcb7ca53be6bbf459}{n}
+\item 
+ros\+::\+Publisher \hyperlink{classrotation__action_a15e1e82d0cd1cbfb2080f567eb638cd7}{pub\+\_\+cmd\+\_\+vel}
+\item 
+ros\+::\+Subscriber \hyperlink{classrotation__action_a86ae333af7e86815629ff69e01d95322}{sub\+\_\+odometry}
+\item 
+ros\+::\+Publisher \hyperlink{classrotation__action_a82d1885ad30462c65d09b87396f81a5f}{pub\+\_\+rotation\+\_\+done}
+\item 
+ros\+::\+Subscriber \hyperlink{classrotation__action_a859728fbc860bab7d39ea5b31751300f}{sub\+\_\+rotation\+\_\+to\+\_\+do}
+\item 
+float \hyperlink{classrotation__action_a16ed43ef2421913d1ed7a663a973d70b}{rotation\+\_\+to\+\_\+do}
+\item 
+float \hyperlink{classrotation__action_a50ba64db1407af812c76311ab05e3512}{rotation\+\_\+done}
+\item 
+bool \hyperlink{classrotation__action_aef9c5870964a99497c26b756bc9d5b94}{cond\+\_\+rotation}
+\item 
+bool \hyperlink{classrotation__action_a6c0a078ebfc8c1679dca30f78c307dfb}{new\+\_\+rotation\+\_\+to\+\_\+do}
+\item 
+bool \hyperlink{classrotation__action_a1c23e033725b84f96b0dcd8669220e99}{new\+\_\+odom}
+\item 
+float \hyperlink{classrotation__action_a6e3e3cac7a7f2365d030ad704e04c5a6}{init\+\_\+orientation}
+\item 
+float \hyperlink{classrotation__action_a6fe4eb8e6d6bfbdb424c7d230567cb05}{current\+\_\+orientation}
+\item 
+float \hyperlink{classrotation__action_a058362ccfef2bc879166a0b1c2d1fe07}{error\+\_\+integral}
+\item 
+float \hyperlink{classrotation__action_aadce9a6acc78dc94cabadf60f6205977}{error\+\_\+previous}
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Gère la rotation du robot. 
+
+\subsection{Documentation des constructeurs et destructeur}
+\index{rotation\+\_\+action@{rotation\+\_\+action}!rotation\+\_\+action@{rotation\+\_\+action}}
+\index{rotation\+\_\+action@{rotation\+\_\+action}!rotation\+\_\+action@{rotation\+\_\+action}}
+\subsubsection[{\texorpdfstring{rotation\+\_\+action()}{rotation_action()}}]{\setlength{\rightskip}{0pt plus 5cm}rotation\+\_\+action\+::rotation\+\_\+action (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classrotation__action_af35b8bf6548d1992bacff66a3cea57df}{}\label{classrotation__action_af35b8bf6548d1992bacff66a3cea57df}
+
+
+constructeur 
+
+
+
+\subsection{Documentation des fonctions membres}
+\index{rotation\+\_\+action@{rotation\+\_\+action}!odom\+Callback@{odom\+Callback}}
+\index{odom\+Callback@{odom\+Callback}!rotation\+\_\+action@{rotation\+\_\+action}}
+\subsubsection[{\texorpdfstring{odom\+Callback(const nav\+\_\+msgs\+::\+Odometry\+::\+Const\+Ptr \&o)}{odomCallback(const nav_msgs::Odometry::ConstPtr &o)}}]{\setlength{\rightskip}{0pt plus 5cm}rotation\+\_\+action\+::odom\+Callback (
+\begin{DoxyParamCaption}
+\item[{const nav\+\_\+msgs\+::\+Odometry\+::\+Const\+Ptr \&}]{o}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classrotation__action_a6d541aa63299c89c26dfb3eda1478a13}{}\label{classrotation__action_a6d541aa63299c89c26dfb3eda1478a13}
+
+
+callback de l\textquotesingle{}ondométrie 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em o} & le massage de l\textquotesingle{}ndomètre \\
+\hline
+\end{DoxyParams}
+\index{rotation\+\_\+action@{rotation\+\_\+action}!rotation\+\_\+to\+\_\+do\+Callback@{rotation\+\_\+to\+\_\+do\+Callback}}
+\index{rotation\+\_\+to\+\_\+do\+Callback@{rotation\+\_\+to\+\_\+do\+Callback}!rotation\+\_\+action@{rotation\+\_\+action}}
+\subsubsection[{\texorpdfstring{rotation\+\_\+to\+\_\+do\+Callback(const std\+\_\+msgs\+::\+Float32\+::\+Const\+Ptr \&a)}{rotation_to_doCallback(const std_msgs::Float32::ConstPtr &a)}}]{\setlength{\rightskip}{0pt plus 5cm}rotation\+\_\+action\+::rotation\+\_\+to\+\_\+do\+Callback (
+\begin{DoxyParamCaption}
+\item[{const std\+\_\+msgs\+::\+Float32\+::\+Const\+Ptr \&}]{r}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classrotation__action_ad23f7b68ddafdca515cbb32dc8c6464e}{}\label{classrotation__action_ad23f7b68ddafdca515cbb32dc8c6464e}
+
+
+callback de la rotation à éffectuer 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em a} & la valeur de la rotation \\
+\hline
+\end{DoxyParams}
+\index{rotation\+\_\+action@{rotation\+\_\+action}!update@{update}}
+\index{update@{update}!rotation\+\_\+action@{rotation\+\_\+action}}
+\subsubsection[{\texorpdfstring{update()}{update()}}]{\setlength{\rightskip}{0pt plus 5cm}rotation\+\_\+action\+::update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classrotation__action_a36329542f86b36a25dcc5b281a0b8aed}{}\label{classrotation__action_a36329542f86b36a25dcc5b281a0b8aed}
+
+
+mise à jours du noeud 
+
+
+
+\subsection{Documentation des données membres}
+\index{rotation\+\_\+action@{rotation\+\_\+action}!cond\+\_\+rotation@{cond\+\_\+rotation}}
+\index{cond\+\_\+rotation@{cond\+\_\+rotation}!rotation\+\_\+action@{rotation\+\_\+action}}
+\subsubsection[{\texorpdfstring{cond\+\_\+rotation}{cond_rotation}}]{\setlength{\rightskip}{0pt plus 5cm}bool rotation\+\_\+action\+::cond\+\_\+rotation\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classrotation__action_aef9c5870964a99497c26b756bc9d5b94}{}\label{classrotation__action_aef9c5870964a99497c26b756bc9d5b94}
+boolean to check if we still have to rotate or not \index{rotation\+\_\+action@{rotation\+\_\+action}!current\+\_\+orientation@{current\+\_\+orientation}}
+\index{current\+\_\+orientation@{current\+\_\+orientation}!rotation\+\_\+action@{rotation\+\_\+action}}
+\subsubsection[{\texorpdfstring{current\+\_\+orientation}{current_orientation}}]{\setlength{\rightskip}{0pt plus 5cm}float rotation\+\_\+action\+::current\+\_\+orientation\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classrotation__action_a6fe4eb8e6d6bfbdb424c7d230567cb05}{}\label{classrotation__action_a6fe4eb8e6d6bfbdb424c7d230567cb05}
+Orientation courrante \index{rotation\+\_\+action@{rotation\+\_\+action}!error\+\_\+integral@{error\+\_\+integral}}
+\index{error\+\_\+integral@{error\+\_\+integral}!rotation\+\_\+action@{rotation\+\_\+action}}
+\subsubsection[{\texorpdfstring{error\+\_\+integral}{error_integral}}]{\setlength{\rightskip}{0pt plus 5cm}float rotation\+\_\+action\+::error\+\_\+integral\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classrotation__action_a058362ccfef2bc879166a0b1c2d1fe07}{}\label{classrotation__action_a058362ccfef2bc879166a0b1c2d1fe07}
+Intégrale de l\textquotesingle{}erreur \index{rotation\+\_\+action@{rotation\+\_\+action}!error\+\_\+previous@{error\+\_\+previous}}
+\index{error\+\_\+previous@{error\+\_\+previous}!rotation\+\_\+action@{rotation\+\_\+action}}
+\subsubsection[{\texorpdfstring{error\+\_\+previous}{error_previous}}]{\setlength{\rightskip}{0pt plus 5cm}float rotation\+\_\+action\+::error\+\_\+previous\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classrotation__action_aadce9a6acc78dc94cabadf60f6205977}{}\label{classrotation__action_aadce9a6acc78dc94cabadf60f6205977}
+Erreur précédente \index{rotation\+\_\+action@{rotation\+\_\+action}!init\+\_\+orientation@{init\+\_\+orientation}}
+\index{init\+\_\+orientation@{init\+\_\+orientation}!rotation\+\_\+action@{rotation\+\_\+action}}
+\subsubsection[{\texorpdfstring{init\+\_\+orientation}{init_orientation}}]{\setlength{\rightskip}{0pt plus 5cm}float rotation\+\_\+action\+::init\+\_\+orientation\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classrotation__action_a6e3e3cac7a7f2365d030ad704e04c5a6}{}\label{classrotation__action_a6e3e3cac7a7f2365d030ad704e04c5a6}
+orientation initiale \index{rotation\+\_\+action@{rotation\+\_\+action}!n@{n}}
+\index{n@{n}!rotation\+\_\+action@{rotation\+\_\+action}}
+\subsubsection[{\texorpdfstring{n}{n}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Node\+Handle rotation\+\_\+action\+::n\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classrotation__action_a116971b35f73ec6dcb7ca53be6bbf459}{}\label{classrotation__action_a116971b35f73ec6dcb7ca53be6bbf459}
+Le noeud \index{rotation\+\_\+action@{rotation\+\_\+action}!new\+\_\+odom@{new\+\_\+odom}}
+\index{new\+\_\+odom@{new\+\_\+odom}!rotation\+\_\+action@{rotation\+\_\+action}}
+\subsubsection[{\texorpdfstring{new\+\_\+odom}{new_odom}}]{\setlength{\rightskip}{0pt plus 5cm}bool rotation\+\_\+action\+::new\+\_\+odom\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classrotation__action_a1c23e033725b84f96b0dcd8669220e99}{}\label{classrotation__action_a1c23e033725b84f96b0dcd8669220e99}
+check if new data from odometry are available \index{rotation\+\_\+action@{rotation\+\_\+action}!new\+\_\+rotation\+\_\+to\+\_\+do@{new\+\_\+rotation\+\_\+to\+\_\+do}}
+\index{new\+\_\+rotation\+\_\+to\+\_\+do@{new\+\_\+rotation\+\_\+to\+\_\+do}!rotation\+\_\+action@{rotation\+\_\+action}}
+\subsubsection[{\texorpdfstring{new\+\_\+rotation\+\_\+to\+\_\+do}{new_rotation_to_do}}]{\setlength{\rightskip}{0pt plus 5cm}bool rotation\+\_\+action\+::new\+\_\+rotation\+\_\+to\+\_\+do\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classrotation__action_a6c0a078ebfc8c1679dca30f78c307dfb}{}\label{classrotation__action_a6c0a078ebfc8c1679dca30f78c307dfb}
+check if a new /rotation\+\_\+to\+\_\+do is available or not \index{rotation\+\_\+action@{rotation\+\_\+action}!pub\+\_\+cmd\+\_\+vel@{pub\+\_\+cmd\+\_\+vel}}
+\index{pub\+\_\+cmd\+\_\+vel@{pub\+\_\+cmd\+\_\+vel}!rotation\+\_\+action@{rotation\+\_\+action}}
+\subsubsection[{\texorpdfstring{pub\+\_\+cmd\+\_\+vel}{pub_cmd_vel}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Publisher rotation\+\_\+action\+::pub\+\_\+cmd\+\_\+vel\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classrotation__action_a15e1e82d0cd1cbfb2080f567eb638cd7}{}\label{classrotation__action_a15e1e82d0cd1cbfb2080f567eb638cd7}
+communication with cmd\+\_\+vel to send command to the mobile robot \index{rotation\+\_\+action@{rotation\+\_\+action}!pub\+\_\+rotation\+\_\+done@{pub\+\_\+rotation\+\_\+done}}
+\index{pub\+\_\+rotation\+\_\+done@{pub\+\_\+rotation\+\_\+done}!rotation\+\_\+action@{rotation\+\_\+action}}
+\subsubsection[{\texorpdfstring{pub\+\_\+rotation\+\_\+done}{pub_rotation_done}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Publisher rotation\+\_\+action\+::pub\+\_\+rotation\+\_\+done\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classrotation__action_a82d1885ad30462c65d09b87396f81a5f}{}\label{classrotation__action_a82d1885ad30462c65d09b87396f81a5f}
+communication with decision \index{rotation\+\_\+action@{rotation\+\_\+action}!rotation\+\_\+done@{rotation\+\_\+done}}
+\index{rotation\+\_\+done@{rotation\+\_\+done}!rotation\+\_\+action@{rotation\+\_\+action}}
+\subsubsection[{\texorpdfstring{rotation\+\_\+done}{rotation_done}}]{\setlength{\rightskip}{0pt plus 5cm}float rotation\+\_\+action\+::rotation\+\_\+done\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classrotation__action_a50ba64db1407af812c76311ab05e3512}{}\label{classrotation__action_a50ba64db1407af812c76311ab05e3512}
+\index{rotation\+\_\+action@{rotation\+\_\+action}!rotation\+\_\+to\+\_\+do@{rotation\+\_\+to\+\_\+do}}
+\index{rotation\+\_\+to\+\_\+do@{rotation\+\_\+to\+\_\+do}!rotation\+\_\+action@{rotation\+\_\+action}}
+\subsubsection[{\texorpdfstring{rotation\+\_\+to\+\_\+do}{rotation_to_do}}]{\setlength{\rightskip}{0pt plus 5cm}float rotation\+\_\+action\+::rotation\+\_\+to\+\_\+do\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classrotation__action_a16ed43ef2421913d1ed7a663a973d70b}{}\label{classrotation__action_a16ed43ef2421913d1ed7a663a973d70b}
+rotation a effectuer \index{rotation\+\_\+action@{rotation\+\_\+action}!sub\+\_\+odometry@{sub\+\_\+odometry}}
+\index{sub\+\_\+odometry@{sub\+\_\+odometry}!rotation\+\_\+action@{rotation\+\_\+action}}
+\subsubsection[{\texorpdfstring{sub\+\_\+odometry}{sub_odometry}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Subscriber rotation\+\_\+action\+::sub\+\_\+odometry\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classrotation__action_a86ae333af7e86815629ff69e01d95322}{}\label{classrotation__action_a86ae333af7e86815629ff69e01d95322}
+communication with odometry \index{rotation\+\_\+action@{rotation\+\_\+action}!sub\+\_\+rotation\+\_\+to\+\_\+do@{sub\+\_\+rotation\+\_\+to\+\_\+do}}
+\index{sub\+\_\+rotation\+\_\+to\+\_\+do@{sub\+\_\+rotation\+\_\+to\+\_\+do}!rotation\+\_\+action@{rotation\+\_\+action}}
+\subsubsection[{\texorpdfstring{sub\+\_\+rotation\+\_\+to\+\_\+do}{sub_rotation_to_do}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Subscriber rotation\+\_\+action\+::sub\+\_\+rotation\+\_\+to\+\_\+do\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classrotation__action_a859728fbc860bab7d39ea5b31751300f}{}\label{classrotation__action_a859728fbc860bab7d39ea5b31751300f}
+Inscription à rotation\+\_\+to\+\_\+do 
+
+La documentation de cette classe a été générée à partir du fichier suivant \+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{rotation__action__node_8cpp}{rotation\+\_\+action\+\_\+node.\+cpp}\end{DoxyCompactItemize}

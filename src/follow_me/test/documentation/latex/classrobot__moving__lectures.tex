@@ -1,0 +1,124 @@
+\hypertarget{classrobot__moving__lectures}{}\section{Référence de la classe robot\+\_\+moving\+\_\+lectures}
+\label{classrobot__moving__lectures}\index{robot\+\_\+moving\+\_\+lectures@{robot\+\_\+moving\+\_\+lectures}}
+
+
+Vérifie que le robot est en mouvement.  
+
+
+\subsection*{Fonctions membres publiques}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classrobot__moving__lectures_a8478ab9f406be0e791438c0df17b2516}{robot\+\_\+moving\+\_\+lectures} ()
+\begin{DoxyCompactList}\small\item\em constructeur \end{DoxyCompactList}\item 
+void \hyperlink{classrobot__moving__lectures_a3dff7330383e900e6c7885241cc5d8a9}{odom\+Callback} (const nav\+\_\+msgs\+::\+Odometry\+::\+Const\+Ptr \&o)
+\begin{DoxyCompactList}\small\item\em callback de l\textquotesingle{}ondométrie \end{DoxyCompactList}\item 
+void \hyperlink{classrobot__moving__lectures_a3456c6058e70f014540d76fd92f943ab}{update} ()
+\begin{DoxyCompactList}\small\item\em mise à jour du noeud \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Attributs privés}
+\begin{DoxyCompactItemize}
+\item 
+ros\+::\+Node\+Handle \hyperlink{classrobot__moving__lectures_a82552b8a3b185283febb51fceac11aad}{n}
+\item 
+ros\+::\+Publisher \hyperlink{classrobot__moving__lectures_aac8988bf2f9e44849d2ca98bbbdda9ab}{pub\+\_\+robot\+\_\+moving}
+\item 
+ros\+::\+Subscriber \hyperlink{classrobot__moving__lectures_aaadaf3fdebc47dffb5c8b90faf019b09}{sub\+\_\+odometry}
+\item 
+geometry\+\_\+msgs\+::\+Point \hyperlink{classrobot__moving__lectures_ae6187e99da86dd6b41c5052278a84d93}{position}
+\item 
+geometry\+\_\+msgs\+::\+Point \hyperlink{classrobot__moving__lectures_a64795c4c36e3297d78c3a4a89010a07f}{not\+\_\+moving\+\_\+position}
+\item 
+float \hyperlink{classrobot__moving__lectures_a8dec7729789a291520b1da07550cfc1b}{orientation}
+\item 
+float \hyperlink{classrobot__moving__lectures_a72e1bcf012f8491fbb695516c8d74d5a}{not\+\_\+moving\+\_\+orientation}
+\item 
+int \hyperlink{classrobot__moving__lectures_ac470bc68819e9de23d97c8d5024e69eb}{count}
+\item 
+bool \hyperlink{classrobot__moving__lectures_aa045b2d358ed1da9911eb1bcaa5a58ea}{moving}
+\item 
+bool \hyperlink{classrobot__moving__lectures_a1bdd03baed3531faaee9dd857bd5d6ce}{new\+\_\+odom}
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Vérifie que le robot est en mouvement. 
+
+\subsection{Documentation des constructeurs et destructeur}
+\index{robot\+\_\+moving\+\_\+lectures@{robot\+\_\+moving\+\_\+lectures}!robot\+\_\+moving\+\_\+lectures@{robot\+\_\+moving\+\_\+lectures}}
+\index{robot\+\_\+moving\+\_\+lectures@{robot\+\_\+moving\+\_\+lectures}!robot\+\_\+moving\+\_\+lectures@{robot\+\_\+moving\+\_\+lectures}}
+\subsubsection[{\texorpdfstring{robot\+\_\+moving\+\_\+lectures()}{robot_moving_lectures()}}]{\setlength{\rightskip}{0pt plus 5cm}robot\+\_\+moving\+\_\+lectures\+::robot\+\_\+moving\+\_\+lectures (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classrobot__moving__lectures_a8478ab9f406be0e791438c0df17b2516}{}\label{classrobot__moving__lectures_a8478ab9f406be0e791438c0df17b2516}
+
+
+constructeur 
+
+
+
+\subsection{Documentation des fonctions membres}
+\index{robot\+\_\+moving\+\_\+lectures@{robot\+\_\+moving\+\_\+lectures}!odom\+Callback@{odom\+Callback}}
+\index{odom\+Callback@{odom\+Callback}!robot\+\_\+moving\+\_\+lectures@{robot\+\_\+moving\+\_\+lectures}}
+\subsubsection[{\texorpdfstring{odom\+Callback(const nav\+\_\+msgs\+::\+Odometry\+::\+Const\+Ptr \&o)}{odomCallback(const nav_msgs::Odometry::ConstPtr &o)}}]{\setlength{\rightskip}{0pt plus 5cm}robot\+\_\+moving\+\_\+lectures\+::odom\+Callback (
+\begin{DoxyParamCaption}
+\item[{const nav\+\_\+msgs\+::\+Odometry\+::\+Const\+Ptr \&}]{o}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classrobot__moving__lectures_a3dff7330383e900e6c7885241cc5d8a9}{}\label{classrobot__moving__lectures_a3dff7330383e900e6c7885241cc5d8a9}
+
+
+callback de l\textquotesingle{}ondométrie 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em o} & le message \\
+\hline
+\end{DoxyParams}
+\index{robot\+\_\+moving\+\_\+lectures@{robot\+\_\+moving\+\_\+lectures}!update@{update}}
+\index{update@{update}!robot\+\_\+moving\+\_\+lectures@{robot\+\_\+moving\+\_\+lectures}}
+\subsubsection[{\texorpdfstring{update()}{update()}}]{\setlength{\rightskip}{0pt plus 5cm}robot\+\_\+moving\+\_\+lectures\+::update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classrobot__moving__lectures_a3456c6058e70f014540d76fd92f943ab}{}\label{classrobot__moving__lectures_a3456c6058e70f014540d76fd92f943ab}
+
+
+mise à jour du noeud 
+
+
+
+\subsection{Documentation des données membres}
+\index{robot\+\_\+moving\+\_\+lectures@{robot\+\_\+moving\+\_\+lectures}!count@{count}}
+\index{count@{count}!robot\+\_\+moving\+\_\+lectures@{robot\+\_\+moving\+\_\+lectures}}
+\subsubsection[{\texorpdfstring{count}{count}}]{\setlength{\rightskip}{0pt plus 5cm}int robot\+\_\+moving\+\_\+lectures\+::count\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classrobot__moving__lectures_ac470bc68819e9de23d97c8d5024e69eb}{}\label{classrobot__moving__lectures_ac470bc68819e9de23d97c8d5024e69eb}
+\index{robot\+\_\+moving\+\_\+lectures@{robot\+\_\+moving\+\_\+lectures}!moving@{moving}}
+\index{moving@{moving}!robot\+\_\+moving\+\_\+lectures@{robot\+\_\+moving\+\_\+lectures}}
+\subsubsection[{\texorpdfstring{moving}{moving}}]{\setlength{\rightskip}{0pt plus 5cm}bool robot\+\_\+moving\+\_\+lectures\+::moving\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classrobot__moving__lectures_aa045b2d358ed1da9911eb1bcaa5a58ea}{}\label{classrobot__moving__lectures_aa045b2d358ed1da9911eb1bcaa5a58ea}
+\index{robot\+\_\+moving\+\_\+lectures@{robot\+\_\+moving\+\_\+lectures}!n@{n}}
+\index{n@{n}!robot\+\_\+moving\+\_\+lectures@{robot\+\_\+moving\+\_\+lectures}}
+\subsubsection[{\texorpdfstring{n}{n}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Node\+Handle robot\+\_\+moving\+\_\+lectures\+::n\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classrobot__moving__lectures_a82552b8a3b185283febb51fceac11aad}{}\label{classrobot__moving__lectures_a82552b8a3b185283febb51fceac11aad}
+Le noeud \index{robot\+\_\+moving\+\_\+lectures@{robot\+\_\+moving\+\_\+lectures}!new\+\_\+odom@{new\+\_\+odom}}
+\index{new\+\_\+odom@{new\+\_\+odom}!robot\+\_\+moving\+\_\+lectures@{robot\+\_\+moving\+\_\+lectures}}
+\subsubsection[{\texorpdfstring{new\+\_\+odom}{new_odom}}]{\setlength{\rightskip}{0pt plus 5cm}bool robot\+\_\+moving\+\_\+lectures\+::new\+\_\+odom\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classrobot__moving__lectures_a1bdd03baed3531faaee9dd857bd5d6ce}{}\label{classrobot__moving__lectures_a1bdd03baed3531faaee9dd857bd5d6ce}
+check if new data of odometry is available or not \index{robot\+\_\+moving\+\_\+lectures@{robot\+\_\+moving\+\_\+lectures}!not\+\_\+moving\+\_\+orientation@{not\+\_\+moving\+\_\+orientation}}
+\index{not\+\_\+moving\+\_\+orientation@{not\+\_\+moving\+\_\+orientation}!robot\+\_\+moving\+\_\+lectures@{robot\+\_\+moving\+\_\+lectures}}
+\subsubsection[{\texorpdfstring{not\+\_\+moving\+\_\+orientation}{not_moving_orientation}}]{\setlength{\rightskip}{0pt plus 5cm}float robot\+\_\+moving\+\_\+lectures\+::not\+\_\+moving\+\_\+orientation\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classrobot__moving__lectures_a72e1bcf012f8491fbb695516c8d74d5a}{}\label{classrobot__moving__lectures_a72e1bcf012f8491fbb695516c8d74d5a}
+\index{robot\+\_\+moving\+\_\+lectures@{robot\+\_\+moving\+\_\+lectures}!not\+\_\+moving\+\_\+position@{not\+\_\+moving\+\_\+position}}
+\index{not\+\_\+moving\+\_\+position@{not\+\_\+moving\+\_\+position}!robot\+\_\+moving\+\_\+lectures@{robot\+\_\+moving\+\_\+lectures}}
+\subsubsection[{\texorpdfstring{not\+\_\+moving\+\_\+position}{not_moving_position}}]{\setlength{\rightskip}{0pt plus 5cm}geometry\+\_\+msgs\+::\+Point robot\+\_\+moving\+\_\+lectures\+::not\+\_\+moving\+\_\+position\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classrobot__moving__lectures_a64795c4c36e3297d78c3a4a89010a07f}{}\label{classrobot__moving__lectures_a64795c4c36e3297d78c3a4a89010a07f}
+\index{robot\+\_\+moving\+\_\+lectures@{robot\+\_\+moving\+\_\+lectures}!orientation@{orientation}}
+\index{orientation@{orientation}!robot\+\_\+moving\+\_\+lectures@{robot\+\_\+moving\+\_\+lectures}}
+\subsubsection[{\texorpdfstring{orientation}{orientation}}]{\setlength{\rightskip}{0pt plus 5cm}float robot\+\_\+moving\+\_\+lectures\+::orientation\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classrobot__moving__lectures_a8dec7729789a291520b1da07550cfc1b}{}\label{classrobot__moving__lectures_a8dec7729789a291520b1da07550cfc1b}
+L\textquotesingle{}orientation \index{robot\+\_\+moving\+\_\+lectures@{robot\+\_\+moving\+\_\+lectures}!position@{position}}
+\index{position@{position}!robot\+\_\+moving\+\_\+lectures@{robot\+\_\+moving\+\_\+lectures}}
+\subsubsection[{\texorpdfstring{position}{position}}]{\setlength{\rightskip}{0pt plus 5cm}geometry\+\_\+msgs\+::\+Point robot\+\_\+moving\+\_\+lectures\+::position\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classrobot__moving__lectures_ae6187e99da86dd6b41c5052278a84d93}{}\label{classrobot__moving__lectures_ae6187e99da86dd6b41c5052278a84d93}
+La position \index{robot\+\_\+moving\+\_\+lectures@{robot\+\_\+moving\+\_\+lectures}!pub\+\_\+robot\+\_\+moving@{pub\+\_\+robot\+\_\+moving}}
+\index{pub\+\_\+robot\+\_\+moving@{pub\+\_\+robot\+\_\+moving}!robot\+\_\+moving\+\_\+lectures@{robot\+\_\+moving\+\_\+lectures}}
+\subsubsection[{\texorpdfstring{pub\+\_\+robot\+\_\+moving}{pub_robot_moving}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Publisher robot\+\_\+moving\+\_\+lectures\+::pub\+\_\+robot\+\_\+moving\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classrobot__moving__lectures_aac8988bf2f9e44849d2ca98bbbdda9ab}{}\label{classrobot__moving__lectures_aac8988bf2f9e44849d2ca98bbbdda9ab}
+communication with person\+\_\+detector \index{robot\+\_\+moving\+\_\+lectures@{robot\+\_\+moving\+\_\+lectures}!sub\+\_\+odometry@{sub\+\_\+odometry}}
+\index{sub\+\_\+odometry@{sub\+\_\+odometry}!robot\+\_\+moving\+\_\+lectures@{robot\+\_\+moving\+\_\+lectures}}
+\subsubsection[{\texorpdfstring{sub\+\_\+odometry}{sub_odometry}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Subscriber robot\+\_\+moving\+\_\+lectures\+::sub\+\_\+odometry\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classrobot__moving__lectures_aaadaf3fdebc47dffb5c8b90faf019b09}{}\label{classrobot__moving__lectures_aaadaf3fdebc47dffb5c8b90faf019b09}
+communication with odometry 
+
+La documentation de cette classe a été générée à partir du fichier suivant \+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{robot__moving__node_8cpp}{robot\+\_\+moving\+\_\+node.\+cpp}\end{DoxyCompactItemize}

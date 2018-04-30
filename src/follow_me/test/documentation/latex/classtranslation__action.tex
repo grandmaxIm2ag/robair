@@ -1,0 +1,214 @@
+\hypertarget{classtranslation__action}{}\section{Référence de la classe translation\+\_\+action}
+\label{classtranslation__action}\index{translation\+\_\+action@{translation\+\_\+action}}
+
+
+Gère les translations du robot.  
+
+
+\subsection*{Fonctions membres publiques}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classtranslation__action_ac01e66be5d9431bbef8f70ad6d6afbd8}{translation\+\_\+action} ()
+\begin{DoxyCompactList}\small\item\em constructeur \end{DoxyCompactList}\item 
+void \hyperlink{classtranslation__action_a4d7d7c1b4d541bba2d845cc09f9512bf}{update} ()
+\begin{DoxyCompactList}\small\item\em ise à jours du noeud \end{DoxyCompactList}\item 
+void \hyperlink{classtranslation__action_acb5844271ec154e13c895e8aca3290e6}{odom\+Callback} (const nav\+\_\+msgs\+::\+Odometry\+::\+Const\+Ptr \&o)
+\begin{DoxyCompactList}\small\item\em callback de l\textquotesingle{}ondométrie \end{DoxyCompactList}\item 
+void \hyperlink{classtranslation__action_af58c03fe7e2e0f0db2a05bb30044468d}{translation\+\_\+to\+\_\+do\+Callback} (const std\+\_\+msgs\+::\+Float32\+::\+Const\+Ptr \&r)
+\begin{DoxyCompactList}\small\item\em callback de la translation à éffectuer \end{DoxyCompactList}\item 
+void \hyperlink{classtranslation__action_a0528c5a0dc70e70d026f97219ddc1a9b}{closest\+\_\+obstacle\+Callback} (const geometry\+\_\+msgs\+::\+Point\+::\+Const\+Ptr \&obs)
+\begin{DoxyCompactList}\small\item\em callback de l\textquotesingle{}onstacle le plus proche \end{DoxyCompactList}\item 
+float \hyperlink{classtranslation__action_a63ef7dff8b7b1e3e44b8b72389b2bc53}{distance\+Points} (geometry\+\_\+msgs\+::\+Point pa, geometry\+\_\+msgs\+::\+Point pb)
+\begin{DoxyCompactList}\small\item\em Revoie la distance entre deux points. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Attributs privés}
+\begin{DoxyCompactItemize}
+\item 
+ros\+::\+Node\+Handle \hyperlink{classtranslation__action_a778b85167923da6ca704d6acfa7947ed}{n}
+\item 
+ros\+::\+Subscriber \hyperlink{classtranslation__action_ae6cf88e1a84564744bc11d0973b10cd5}{sub\+\_\+odometry}
+\item 
+ros\+::\+Publisher \hyperlink{classtranslation__action_a8e07db9c45af311e71fe1927b6aeb424}{pub\+\_\+translation\+\_\+done}
+\item 
+ros\+::\+Subscriber \hyperlink{classtranslation__action_aeb8895ac2cc5a98f5f10e28ebc2117e6}{sub\+\_\+translation\+\_\+to\+\_\+do}
+\item 
+ros\+::\+Publisher \hyperlink{classtranslation__action_a1a4a9e78d808b6d86ca8f59a510b7639}{pub\+\_\+cmd\+\_\+vel}
+\item 
+ros\+::\+Subscriber \hyperlink{classtranslation__action_af307cb9a0696fcefff6665f9332ddb7e}{sub\+\_\+obstacle\+\_\+detection}
+\item 
+bool \hyperlink{classtranslation__action_ac46c0be691bf4f3a281dc5295718a672}{new\+\_\+translation\+\_\+to\+\_\+do}
+\item 
+bool \hyperlink{classtranslation__action_aeb14a0c0ae0c7b25150d20752b587c3c}{new\+\_\+odom}
+\item 
+bool \hyperlink{classtranslation__action_a27a6e128fa79d4e87a4d28f5fcb163dc}{init\+\_\+obstacle}
+\item 
+geometry\+\_\+msgs\+::\+Point \hyperlink{classtranslation__action_aa8774a6f4dbbab014e9c8672ee048f7f}{start\+\_\+position}
+\item 
+geometry\+\_\+msgs\+::\+Point \hyperlink{classtranslation__action_ab631cf920d18e691fcafb05c5d014baf}{current\+\_\+position}
+\item 
+float \hyperlink{classtranslation__action_a5811a9d811697668e153543dfaf1d2d0}{translation\+\_\+to\+\_\+do}
+\item 
+float \hyperlink{classtranslation__action_a08c753f34a47c55ae61a7e2f1533b3cf}{error\+\_\+integral}
+\item 
+float \hyperlink{classtranslation__action_aa3ac2f4fc74779444d7dcf4c6b92ec11}{error\+\_\+previous}
+\item 
+int \hyperlink{classtranslation__action_a421febcf8951d829dc2d6f1087cc1fc5}{cond\+\_\+translation}
+\item 
+geometry\+\_\+msgs\+::\+Point \hyperlink{classtranslation__action_a3057bf4271e7198ad8ded2daf07f8f4e}{closest\+\_\+obstacle}
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Gère les translations du robot. 
+
+\subsection{Documentation des constructeurs et destructeur}
+\index{translation\+\_\+action@{translation\+\_\+action}!translation\+\_\+action@{translation\+\_\+action}}
+\index{translation\+\_\+action@{translation\+\_\+action}!translation\+\_\+action@{translation\+\_\+action}}
+\subsubsection[{\texorpdfstring{translation\+\_\+action()}{translation_action()}}]{\setlength{\rightskip}{0pt plus 5cm}translation\+\_\+action\+::translation\+\_\+action (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classtranslation__action_ac01e66be5d9431bbef8f70ad6d6afbd8}{}\label{classtranslation__action_ac01e66be5d9431bbef8f70ad6d6afbd8}
+
+
+constructeur 
+
+
+
+\subsection{Documentation des fonctions membres}
+\index{translation\+\_\+action@{translation\+\_\+action}!closest\+\_\+obstacle\+Callback@{closest\+\_\+obstacle\+Callback}}
+\index{closest\+\_\+obstacle\+Callback@{closest\+\_\+obstacle\+Callback}!translation\+\_\+action@{translation\+\_\+action}}
+\subsubsection[{\texorpdfstring{closest\+\_\+obstacle\+Callback(const geometry\+\_\+msgs\+::\+Point\+::\+Const\+Ptr \&obs)}{closest_obstacleCallback(const geometry_msgs::Point::ConstPtr &obs)}}]{\setlength{\rightskip}{0pt plus 5cm}translation\+\_\+action\+::closest\+\_\+obstacle\+Callback (
+\begin{DoxyParamCaption}
+\item[{const geometry\+\_\+msgs\+::\+Point\+::\+Const\+Ptr \&}]{obs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classtranslation__action_a0528c5a0dc70e70d026f97219ddc1a9b}{}\label{classtranslation__action_a0528c5a0dc70e70d026f97219ddc1a9b}
+
+
+callback de l\textquotesingle{}onstacle le plus proche 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em obs} & position de l\textquotesingle{}obstacle \\
+\hline
+\end{DoxyParams}
+\index{translation\+\_\+action@{translation\+\_\+action}!distance\+Points@{distance\+Points}}
+\index{distance\+Points@{distance\+Points}!translation\+\_\+action@{translation\+\_\+action}}
+\subsubsection[{\texorpdfstring{distance\+Points(geometry\+\_\+msgs\+::\+Point pa, geometry\+\_\+msgs\+::\+Point pb)}{distancePoints(geometry_msgs::Point pa, geometry_msgs::Point pb)}}]{\setlength{\rightskip}{0pt plus 5cm}translation\+\_\+action\+::distance\+Points (
+\begin{DoxyParamCaption}
+\item[{geometry\+\_\+msgs\+::\+Point}]{pa, }
+\item[{geometry\+\_\+msgs\+::\+Point}]{pb}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classtranslation__action_a63ef7dff8b7b1e3e44b8b72389b2bc53}{}\label{classtranslation__action_a63ef7dff8b7b1e3e44b8b72389b2bc53}
+
+
+Revoie la distance entre deux points. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em pa} & le premier point \\
+\hline
+{\em pb} & le second point \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+la distance entre le point pa et le point pb 
+\end{DoxyReturn}
+\index{translation\+\_\+action@{translation\+\_\+action}!odom\+Callback@{odom\+Callback}}
+\index{odom\+Callback@{odom\+Callback}!translation\+\_\+action@{translation\+\_\+action}}
+\subsubsection[{\texorpdfstring{odom\+Callback(const nav\+\_\+msgs\+::\+Odometry\+::\+Const\+Ptr \&o)}{odomCallback(const nav_msgs::Odometry::ConstPtr &o)}}]{\setlength{\rightskip}{0pt plus 5cm}translation\+\_\+action\+::odom\+Callback (
+\begin{DoxyParamCaption}
+\item[{const nav\+\_\+msgs\+::\+Odometry\+::\+Const\+Ptr \&}]{o}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classtranslation__action_acb5844271ec154e13c895e8aca3290e6}{}\label{classtranslation__action_acb5844271ec154e13c895e8aca3290e6}
+
+
+callback de l\textquotesingle{}ondométrie 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em o} & le massage de l\textquotesingle{}ndomètre \\
+\hline
+\end{DoxyParams}
+\index{translation\+\_\+action@{translation\+\_\+action}!translation\+\_\+to\+\_\+do\+Callback@{translation\+\_\+to\+\_\+do\+Callback}}
+\index{translation\+\_\+to\+\_\+do\+Callback@{translation\+\_\+to\+\_\+do\+Callback}!translation\+\_\+action@{translation\+\_\+action}}
+\subsubsection[{\texorpdfstring{translation\+\_\+to\+\_\+do\+Callback(const std\+\_\+msgs\+::\+Float32\+::\+Const\+Ptr \&r)}{translation_to_doCallback(const std_msgs::Float32::ConstPtr &r)}}]{\setlength{\rightskip}{0pt plus 5cm}translation\+\_\+action\+::translation\+\_\+to\+\_\+do\+Callback (
+\begin{DoxyParamCaption}
+\item[{const std\+\_\+msgs\+::\+Float32\+::\+Const\+Ptr \&}]{r}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classtranslation__action_af58c03fe7e2e0f0db2a05bb30044468d}{}\label{classtranslation__action_af58c03fe7e2e0f0db2a05bb30044468d}
+
+
+callback de la translation à éffectuer 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em r} & la valeur de la translation \\
+\hline
+\end{DoxyParams}
+\index{translation\+\_\+action@{translation\+\_\+action}!update@{update}}
+\index{update@{update}!translation\+\_\+action@{translation\+\_\+action}}
+\subsubsection[{\texorpdfstring{update()}{update()}}]{\setlength{\rightskip}{0pt plus 5cm}translation\+\_\+action\+::update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classtranslation__action_a4d7d7c1b4d541bba2d845cc09f9512bf}{}\label{classtranslation__action_a4d7d7c1b4d541bba2d845cc09f9512bf}
+
+
+ise à jours du noeud 
+
+
+
+\subsection{Documentation des données membres}
+\index{translation\+\_\+action@{translation\+\_\+action}!closest\+\_\+obstacle@{closest\+\_\+obstacle}}
+\index{closest\+\_\+obstacle@{closest\+\_\+obstacle}!translation\+\_\+action@{translation\+\_\+action}}
+\subsubsection[{\texorpdfstring{closest\+\_\+obstacle}{closest_obstacle}}]{\setlength{\rightskip}{0pt plus 5cm}geometry\+\_\+msgs\+::\+Point translation\+\_\+action\+::closest\+\_\+obstacle\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classtranslation__action_a3057bf4271e7198ad8ded2daf07f8f4e}{}\label{classtranslation__action_a3057bf4271e7198ad8ded2daf07f8f4e}
+Position de l\textquotesingle{}onstable le plus \index{translation\+\_\+action@{translation\+\_\+action}!cond\+\_\+translation@{cond\+\_\+translation}}
+\index{cond\+\_\+translation@{cond\+\_\+translation}!translation\+\_\+action@{translation\+\_\+action}}
+\subsubsection[{\texorpdfstring{cond\+\_\+translation}{cond_translation}}]{\setlength{\rightskip}{0pt plus 5cm}int translation\+\_\+action\+::cond\+\_\+translation\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classtranslation__action_a421febcf8951d829dc2d6f1087cc1fc5}{}\label{classtranslation__action_a421febcf8951d829dc2d6f1087cc1fc5}
+\index{translation\+\_\+action@{translation\+\_\+action}!current\+\_\+position@{current\+\_\+position}}
+\index{current\+\_\+position@{current\+\_\+position}!translation\+\_\+action@{translation\+\_\+action}}
+\subsubsection[{\texorpdfstring{current\+\_\+position}{current_position}}]{\setlength{\rightskip}{0pt plus 5cm}geometry\+\_\+msgs\+::\+Point translation\+\_\+action\+::current\+\_\+position\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classtranslation__action_ab631cf920d18e691fcafb05c5d014baf}{}\label{classtranslation__action_ab631cf920d18e691fcafb05c5d014baf}
+Position courrante \index{translation\+\_\+action@{translation\+\_\+action}!error\+\_\+integral@{error\+\_\+integral}}
+\index{error\+\_\+integral@{error\+\_\+integral}!translation\+\_\+action@{translation\+\_\+action}}
+\subsubsection[{\texorpdfstring{error\+\_\+integral}{error_integral}}]{\setlength{\rightskip}{0pt plus 5cm}float translation\+\_\+action\+::error\+\_\+integral\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classtranslation__action_a08c753f34a47c55ae61a7e2f1533b3cf}{}\label{classtranslation__action_a08c753f34a47c55ae61a7e2f1533b3cf}
+Intégrale de l\textquotesingle{}erreur \index{translation\+\_\+action@{translation\+\_\+action}!error\+\_\+previous@{error\+\_\+previous}}
+\index{error\+\_\+previous@{error\+\_\+previous}!translation\+\_\+action@{translation\+\_\+action}}
+\subsubsection[{\texorpdfstring{error\+\_\+previous}{error_previous}}]{\setlength{\rightskip}{0pt plus 5cm}float translation\+\_\+action\+::error\+\_\+previous\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classtranslation__action_aa3ac2f4fc74779444d7dcf4c6b92ec11}{}\label{classtranslation__action_aa3ac2f4fc74779444d7dcf4c6b92ec11}
+Erreur précédente \index{translation\+\_\+action@{translation\+\_\+action}!init\+\_\+obstacle@{init\+\_\+obstacle}}
+\index{init\+\_\+obstacle@{init\+\_\+obstacle}!translation\+\_\+action@{translation\+\_\+action}}
+\subsubsection[{\texorpdfstring{init\+\_\+obstacle}{init_obstacle}}]{\setlength{\rightskip}{0pt plus 5cm}bool translation\+\_\+action\+::init\+\_\+obstacle\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classtranslation__action_a27a6e128fa79d4e87a4d28f5fcb163dc}{}\label{classtranslation__action_a27a6e128fa79d4e87a4d28f5fcb163dc}
+check if the first \char`\"{}closest\+\_\+obstacle\char`\"{} has been published or not \index{translation\+\_\+action@{translation\+\_\+action}!n@{n}}
+\index{n@{n}!translation\+\_\+action@{translation\+\_\+action}}
+\subsubsection[{\texorpdfstring{n}{n}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Node\+Handle translation\+\_\+action\+::n\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classtranslation__action_a778b85167923da6ca704d6acfa7947ed}{}\label{classtranslation__action_a778b85167923da6ca704d6acfa7947ed}
+Le noeud \index{translation\+\_\+action@{translation\+\_\+action}!new\+\_\+odom@{new\+\_\+odom}}
+\index{new\+\_\+odom@{new\+\_\+odom}!translation\+\_\+action@{translation\+\_\+action}}
+\subsubsection[{\texorpdfstring{new\+\_\+odom}{new_odom}}]{\setlength{\rightskip}{0pt plus 5cm}bool translation\+\_\+action\+::new\+\_\+odom\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classtranslation__action_aeb14a0c0ae0c7b25150d20752b587c3c}{}\label{classtranslation__action_aeb14a0c0ae0c7b25150d20752b587c3c}
+check if new data from odometry are available \index{translation\+\_\+action@{translation\+\_\+action}!new\+\_\+translation\+\_\+to\+\_\+do@{new\+\_\+translation\+\_\+to\+\_\+do}}
+\index{new\+\_\+translation\+\_\+to\+\_\+do@{new\+\_\+translation\+\_\+to\+\_\+do}!translation\+\_\+action@{translation\+\_\+action}}
+\subsubsection[{\texorpdfstring{new\+\_\+translation\+\_\+to\+\_\+do}{new_translation_to_do}}]{\setlength{\rightskip}{0pt plus 5cm}bool translation\+\_\+action\+::new\+\_\+translation\+\_\+to\+\_\+do\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classtranslation__action_ac46c0be691bf4f3a281dc5295718a672}{}\label{classtranslation__action_ac46c0be691bf4f3a281dc5295718a672}
+check if a new /translation\+\_\+to\+\_\+do is available or not \index{translation\+\_\+action@{translation\+\_\+action}!pub\+\_\+cmd\+\_\+vel@{pub\+\_\+cmd\+\_\+vel}}
+\index{pub\+\_\+cmd\+\_\+vel@{pub\+\_\+cmd\+\_\+vel}!translation\+\_\+action@{translation\+\_\+action}}
+\subsubsection[{\texorpdfstring{pub\+\_\+cmd\+\_\+vel}{pub_cmd_vel}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Publisher translation\+\_\+action\+::pub\+\_\+cmd\+\_\+vel\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classtranslation__action_a1a4a9e78d808b6d86ca8f59a510b7639}{}\label{classtranslation__action_a1a4a9e78d808b6d86ca8f59a510b7639}
+communication with cmd\+\_\+vel to send command to the mobile robot \index{translation\+\_\+action@{translation\+\_\+action}!pub\+\_\+translation\+\_\+done@{pub\+\_\+translation\+\_\+done}}
+\index{pub\+\_\+translation\+\_\+done@{pub\+\_\+translation\+\_\+done}!translation\+\_\+action@{translation\+\_\+action}}
+\subsubsection[{\texorpdfstring{pub\+\_\+translation\+\_\+done}{pub_translation_done}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Publisher translation\+\_\+action\+::pub\+\_\+translation\+\_\+done\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classtranslation__action_a8e07db9c45af311e71fe1927b6aeb424}{}\label{classtranslation__action_a8e07db9c45af311e71fe1927b6aeb424}
+communication with decision \index{translation\+\_\+action@{translation\+\_\+action}!start\+\_\+position@{start\+\_\+position}}
+\index{start\+\_\+position@{start\+\_\+position}!translation\+\_\+action@{translation\+\_\+action}}
+\subsubsection[{\texorpdfstring{start\+\_\+position}{start_position}}]{\setlength{\rightskip}{0pt plus 5cm}geometry\+\_\+msgs\+::\+Point translation\+\_\+action\+::start\+\_\+position\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classtranslation__action_aa8774a6f4dbbab014e9c8672ee048f7f}{}\label{classtranslation__action_aa8774a6f4dbbab014e9c8672ee048f7f}
+Position de départ \index{translation\+\_\+action@{translation\+\_\+action}!sub\+\_\+obstacle\+\_\+detection@{sub\+\_\+obstacle\+\_\+detection}}
+\index{sub\+\_\+obstacle\+\_\+detection@{sub\+\_\+obstacle\+\_\+detection}!translation\+\_\+action@{translation\+\_\+action}}
+\subsubsection[{\texorpdfstring{sub\+\_\+obstacle\+\_\+detection}{sub_obstacle_detection}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Subscriber translation\+\_\+action\+::sub\+\_\+obstacle\+\_\+detection\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classtranslation__action_af307cb9a0696fcefff6665f9332ddb7e}{}\label{classtranslation__action_af307cb9a0696fcefff6665f9332ddb7e}
+communication with \hyperlink{classobstacle__detection}{obstacle\+\_\+detection} \index{translation\+\_\+action@{translation\+\_\+action}!sub\+\_\+odometry@{sub\+\_\+odometry}}
+\index{sub\+\_\+odometry@{sub\+\_\+odometry}!translation\+\_\+action@{translation\+\_\+action}}
+\subsubsection[{\texorpdfstring{sub\+\_\+odometry}{sub_odometry}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Subscriber translation\+\_\+action\+::sub\+\_\+odometry\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classtranslation__action_ae6cf88e1a84564744bc11d0973b10cd5}{}\label{classtranslation__action_ae6cf88e1a84564744bc11d0973b10cd5}
+communication with odometry \index{translation\+\_\+action@{translation\+\_\+action}!sub\+\_\+translation\+\_\+to\+\_\+do@{sub\+\_\+translation\+\_\+to\+\_\+do}}
+\index{sub\+\_\+translation\+\_\+to\+\_\+do@{sub\+\_\+translation\+\_\+to\+\_\+do}!translation\+\_\+action@{translation\+\_\+action}}
+\subsubsection[{\texorpdfstring{sub\+\_\+translation\+\_\+to\+\_\+do}{sub_translation_to_do}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Subscriber translation\+\_\+action\+::sub\+\_\+translation\+\_\+to\+\_\+do\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classtranslation__action_aeb8895ac2cc5a98f5f10e28ebc2117e6}{}\label{classtranslation__action_aeb8895ac2cc5a98f5f10e28ebc2117e6}
+Reçoit les translations a éffectuer \index{translation\+\_\+action@{translation\+\_\+action}!translation\+\_\+to\+\_\+do@{translation\+\_\+to\+\_\+do}}
+\index{translation\+\_\+to\+\_\+do@{translation\+\_\+to\+\_\+do}!translation\+\_\+action@{translation\+\_\+action}}
+\subsubsection[{\texorpdfstring{translation\+\_\+to\+\_\+do}{translation_to_do}}]{\setlength{\rightskip}{0pt plus 5cm}float translation\+\_\+action\+::translation\+\_\+to\+\_\+do\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classtranslation__action_a5811a9d811697668e153543dfaf1d2d0}{}\label{classtranslation__action_a5811a9d811697668e153543dfaf1d2d0}
+Translation à effectuée 
+
+La documentation de cette classe a été générée à partir du fichier suivant \+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{translation__action__node_8cpp}{translation\+\_\+action\+\_\+node.\+cpp}\end{DoxyCompactItemize}

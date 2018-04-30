@@ -1,0 +1,106 @@
+\hypertarget{persons__detection__node_8cpp}{}\section{Référence du fichier persons\+\_\+detection\+\_\+node.\+cpp}
+\label{persons__detection__node_8cpp}\index{persons\+\_\+detection\+\_\+node.\+cpp@{persons\+\_\+detection\+\_\+node.\+cpp}}
+
+
+Neud pour la détection de personnes  Groupe 7.  
+
+
+{\ttfamily \#include \char`\"{}ros/ros.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ros/time.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sensor\+\_\+msgs/\+Laser\+Scan.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}visualization\+\_\+msgs/\+Marker.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}geometry\+\_\+msgs/\+Point.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}geometry\+\_\+msgs/\+Pose\+Array.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}geometry\+\_\+msgs/\+Pose.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}std\+\_\+msgs/\+Color\+R\+G\+B\+A.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$cmath$>$}\\*
+{\ttfamily \#include \char`\"{}std\+\_\+msgs/\+Bool.\+h\char`\"{}}\\*
+Graphe des dépendances par inclusion de persons\+\_\+detection\+\_\+node.\+cpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{persons__detection__node_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classmoving__persons__detector}{moving\+\_\+persons\+\_\+detector}
+\begin{DoxyCompactList}\small\item\em Détecte les personnes et les groupes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{persons__detection__node_8cpp_a709da7b9e1c2848cb6c69a545c6e05d0}{cluster\+\_\+threshold}~0.\+2
+\item 
+\#define \hyperlink{persons__detection__node_8cpp_ae6095eddd47a8cb26f5b45e49187bb02}{detection\+\_\+threshold}~0.\+2
+\item 
+\#define \hyperlink{persons__detection__node_8cpp_a92dbe0db25628989b794cc93b67e1571}{dynamic\+\_\+threshold}~0
+\item 
+\#define \hyperlink{persons__detection__node_8cpp_aa2fdb1ea3da051bb30fe1edb9951e889}{group\+\_\+person\+\_\+threshold}~0.\+8
+\item 
+\#define \hyperlink{persons__detection__node_8cpp_a3966a6eabc388975b51acf5f6e4ad235}{leg\+\_\+size\+\_\+min}~0.\+1
+\item 
+\#define \hyperlink{persons__detection__node_8cpp_a72777780f3427bf299bbec7640b6cb1a}{leg\+\_\+size\+\_\+max}~0.\+3
+\item 
+\#define \hyperlink{persons__detection__node_8cpp_a68fa36224acb098fe17c1324ceda84d6}{legs\+\_\+distance\+\_\+max}~1
+\item 
+\#define \hyperlink{persons__detection__node_8cpp_aeb857e941c056f14dc583d14be995c10}{distance\+\_\+person}~1.\+5
+\item 
+\#define \hyperlink{persons__detection__node_8cpp_a00809aad6f43c127152f5b0f32776402}{iter\+\_\+person}~10
+\item 
+\#define \hyperlink{persons__detection__node_8cpp_a1313c948b75a0a0cfb0fad8334bc1d13}{min\+\_\+view}~7
+\end{DoxyCompactItemize}
+\subsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{persons__detection__node_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Neud pour la détection de personnes  Groupe 7. 
+
+
+
+\subsection{Documentation des macros}
+\index{persons\+\_\+detection\+\_\+node.\+cpp@{persons\+\_\+detection\+\_\+node.\+cpp}!cluster\+\_\+threshold@{cluster\+\_\+threshold}}
+\index{cluster\+\_\+threshold@{cluster\+\_\+threshold}!persons\+\_\+detection\+\_\+node.\+cpp@{persons\+\_\+detection\+\_\+node.\+cpp}}
+\subsubsection[{\texorpdfstring{cluster\+\_\+threshold}{cluster_threshold}}]{\setlength{\rightskip}{0pt plus 5cm}\#define cluster\+\_\+threshold~0.\+2}\hypertarget{persons__detection__node_8cpp_a709da7b9e1c2848cb6c69a545c6e05d0}{}\label{persons__detection__node_8cpp_a709da7b9e1c2848cb6c69a545c6e05d0}
+Distance entre deux points pour qu\textquotesingle{}ils appartiennent au même cluster \index{persons\+\_\+detection\+\_\+node.\+cpp@{persons\+\_\+detection\+\_\+node.\+cpp}!detection\+\_\+threshold@{detection\+\_\+threshold}}
+\index{detection\+\_\+threshold@{detection\+\_\+threshold}!persons\+\_\+detection\+\_\+node.\+cpp@{persons\+\_\+detection\+\_\+node.\+cpp}}
+\subsubsection[{\texorpdfstring{detection\+\_\+threshold}{detection_threshold}}]{\setlength{\rightskip}{0pt plus 5cm}\#define detection\+\_\+threshold~0.\+2}\hypertarget{persons__detection__node_8cpp_ae6095eddd47a8cb26f5b45e49187bb02}{}\label{persons__detection__node_8cpp_ae6095eddd47a8cb26f5b45e49187bb02}
+\index{persons\+\_\+detection\+\_\+node.\+cpp@{persons\+\_\+detection\+\_\+node.\+cpp}!distance\+\_\+person@{distance\+\_\+person}}
+\index{distance\+\_\+person@{distance\+\_\+person}!persons\+\_\+detection\+\_\+node.\+cpp@{persons\+\_\+detection\+\_\+node.\+cpp}}
+\subsubsection[{\texorpdfstring{distance\+\_\+person}{distance_person}}]{\setlength{\rightskip}{0pt plus 5cm}\#define distance\+\_\+person~1.\+5}\hypertarget{persons__detection__node_8cpp_aeb857e941c056f14dc583d14be995c10}{}\label{persons__detection__node_8cpp_aeb857e941c056f14dc583d14be995c10}
+Distance maximale entre deux personnes d\textquotesingle{}un même groupe \index{persons\+\_\+detection\+\_\+node.\+cpp@{persons\+\_\+detection\+\_\+node.\+cpp}!dynamic\+\_\+threshold@{dynamic\+\_\+threshold}}
+\index{dynamic\+\_\+threshold@{dynamic\+\_\+threshold}!persons\+\_\+detection\+\_\+node.\+cpp@{persons\+\_\+detection\+\_\+node.\+cpp}}
+\subsubsection[{\texorpdfstring{dynamic\+\_\+threshold}{dynamic_threshold}}]{\setlength{\rightskip}{0pt plus 5cm}\#define dynamic\+\_\+threshold~0}\hypertarget{persons__detection__node_8cpp_a92dbe0db25628989b794cc93b67e1571}{}\label{persons__detection__node_8cpp_a92dbe0db25628989b794cc93b67e1571}
+Taux de points dynamique \index{persons\+\_\+detection\+\_\+node.\+cpp@{persons\+\_\+detection\+\_\+node.\+cpp}!group\+\_\+person\+\_\+threshold@{group\+\_\+person\+\_\+threshold}}
+\index{group\+\_\+person\+\_\+threshold@{group\+\_\+person\+\_\+threshold}!persons\+\_\+detection\+\_\+node.\+cpp@{persons\+\_\+detection\+\_\+node.\+cpp}}
+\subsubsection[{\texorpdfstring{group\+\_\+person\+\_\+threshold}{group_person_threshold}}]{\setlength{\rightskip}{0pt plus 5cm}\#define group\+\_\+person\+\_\+threshold~0.\+8}\hypertarget{persons__detection__node_8cpp_aa2fdb1ea3da051bb30fe1edb9951e889}{}\label{persons__detection__node_8cpp_aa2fdb1ea3da051bb30fe1edb9951e889}
+\index{persons\+\_\+detection\+\_\+node.\+cpp@{persons\+\_\+detection\+\_\+node.\+cpp}!iter\+\_\+person@{iter\+\_\+person}}
+\index{iter\+\_\+person@{iter\+\_\+person}!persons\+\_\+detection\+\_\+node.\+cpp@{persons\+\_\+detection\+\_\+node.\+cpp}}
+\subsubsection[{\texorpdfstring{iter\+\_\+person}{iter_person}}]{\setlength{\rightskip}{0pt plus 5cm}\#define iter\+\_\+person~10}\hypertarget{persons__detection__node_8cpp_a00809aad6f43c127152f5b0f32776402}{}\label{persons__detection__node_8cpp_a00809aad6f43c127152f5b0f32776402}
+Nombre d\textquotesingle{}iteration pour la détection \index{persons\+\_\+detection\+\_\+node.\+cpp@{persons\+\_\+detection\+\_\+node.\+cpp}!leg\+\_\+size\+\_\+max@{leg\+\_\+size\+\_\+max}}
+\index{leg\+\_\+size\+\_\+max@{leg\+\_\+size\+\_\+max}!persons\+\_\+detection\+\_\+node.\+cpp@{persons\+\_\+detection\+\_\+node.\+cpp}}
+\subsubsection[{\texorpdfstring{leg\+\_\+size\+\_\+max}{leg_size_max}}]{\setlength{\rightskip}{0pt plus 5cm}\#define leg\+\_\+size\+\_\+max~0.\+3}\hypertarget{persons__detection__node_8cpp_a72777780f3427bf299bbec7640b6cb1a}{}\label{persons__detection__node_8cpp_a72777780f3427bf299bbec7640b6cb1a}
+Largeur maximale d\textquotesingle{}une jambe \index{persons\+\_\+detection\+\_\+node.\+cpp@{persons\+\_\+detection\+\_\+node.\+cpp}!leg\+\_\+size\+\_\+min@{leg\+\_\+size\+\_\+min}}
+\index{leg\+\_\+size\+\_\+min@{leg\+\_\+size\+\_\+min}!persons\+\_\+detection\+\_\+node.\+cpp@{persons\+\_\+detection\+\_\+node.\+cpp}}
+\subsubsection[{\texorpdfstring{leg\+\_\+size\+\_\+min}{leg_size_min}}]{\setlength{\rightskip}{0pt plus 5cm}\#define leg\+\_\+size\+\_\+min~0.\+1}\hypertarget{persons__detection__node_8cpp_a3966a6eabc388975b51acf5f6e4ad235}{}\label{persons__detection__node_8cpp_a3966a6eabc388975b51acf5f6e4ad235}
+Largeur minimale d\textquotesingle{}une jambe \index{persons\+\_\+detection\+\_\+node.\+cpp@{persons\+\_\+detection\+\_\+node.\+cpp}!legs\+\_\+distance\+\_\+max@{legs\+\_\+distance\+\_\+max}}
+\index{legs\+\_\+distance\+\_\+max@{legs\+\_\+distance\+\_\+max}!persons\+\_\+detection\+\_\+node.\+cpp@{persons\+\_\+detection\+\_\+node.\+cpp}}
+\subsubsection[{\texorpdfstring{legs\+\_\+distance\+\_\+max}{legs_distance_max}}]{\setlength{\rightskip}{0pt plus 5cm}\#define legs\+\_\+distance\+\_\+max~1}\hypertarget{persons__detection__node_8cpp_a68fa36224acb098fe17c1324ceda84d6}{}\label{persons__detection__node_8cpp_a68fa36224acb098fe17c1324ceda84d6}
+Distance maximale entre deux jambes d\textquotesingle{}une personne \index{persons\+\_\+detection\+\_\+node.\+cpp@{persons\+\_\+detection\+\_\+node.\+cpp}!min\+\_\+view@{min\+\_\+view}}
+\index{min\+\_\+view@{min\+\_\+view}!persons\+\_\+detection\+\_\+node.\+cpp@{persons\+\_\+detection\+\_\+node.\+cpp}}
+\subsubsection[{\texorpdfstring{min\+\_\+view}{min_view}}]{\setlength{\rightskip}{0pt plus 5cm}\#define min\+\_\+view~7}\hypertarget{persons__detection__node_8cpp_a1313c948b75a0a0cfb0fad8334bc1d13}{}\label{persons__detection__node_8cpp_a1313c948b75a0a0cfb0fad8334bc1d13}
+Nombre de vue minimum pour la détection 
+
+\subsection{Documentation des fonctions}
+\index{persons\+\_\+detection\+\_\+node.\+cpp@{persons\+\_\+detection\+\_\+node.\+cpp}!main@{main}}
+\index{main@{main}!persons\+\_\+detection\+\_\+node.\+cpp@{persons\+\_\+detection\+\_\+node.\+cpp}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$$\ast$argv)}{main(int argc, char **argv)}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}\hypertarget{persons__detection__node_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{}\label{persons__detection__node_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}

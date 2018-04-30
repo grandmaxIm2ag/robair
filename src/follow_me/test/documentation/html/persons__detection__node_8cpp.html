@@ -1,0 +1,314 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>Robot distributeur de Café: Référence du fichier persons_detection_node.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Robot distributeur de Café
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.11 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Page&#160;principale</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="files.html"><span>Fichiers</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Recherche" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Liste&#160;des&#160;fichiers</span></a></li>
+      <li><a href="globals.html"><span>Membres&#160;de&#160;fichier</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Fonctions</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier persons_detection_node.cpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Neud pour la détection de personnes  Groupe 7.  
+<a href="#details">Plus de détails...</a></p>
+<div class="textblock"><code>#include &quot;ros/ros.h&quot;</code><br />
+<code>#include &quot;ros/time.h&quot;</code><br />
+<code>#include &quot;sensor_msgs/LaserScan.h&quot;</code><br />
+<code>#include &quot;visualization_msgs/Marker.h&quot;</code><br />
+<code>#include &quot;geometry_msgs/Point.h&quot;</code><br />
+<code>#include &quot;geometry_msgs/PoseArray.h&quot;</code><br />
+<code>#include &quot;geometry_msgs/Pose.h&quot;</code><br />
+<code>#include &quot;std_msgs/ColorRGBA.h&quot;</code><br />
+<code>#include &lt;cmath&gt;</code><br />
+<code>#include &quot;std_msgs/Bool.h&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Graphe des dépendances par inclusion de persons_detection_node.cpp:</div>
+<div class="dyncontent">
+<div class="center"><img src="persons__detection__node_8cpp__incl.png" border="0" usemap="#persons__detection__node_8cpp" alt=""/></div>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmoving__persons__detector.html">moving_persons_detector</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Détecte les personnes et les groupes.  <a href="classmoving__persons__detector.html#details">Plus de détails...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a709da7b9e1c2848cb6c69a545c6e05d0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="persons__detection__node_8cpp.html#a709da7b9e1c2848cb6c69a545c6e05d0">cluster_threshold</a>&#160;&#160;&#160;0.2</td></tr>
+<tr class="separator:a709da7b9e1c2848cb6c69a545c6e05d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6095eddd47a8cb26f5b45e49187bb02"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="persons__detection__node_8cpp.html#ae6095eddd47a8cb26f5b45e49187bb02">detection_threshold</a>&#160;&#160;&#160;0.2</td></tr>
+<tr class="separator:ae6095eddd47a8cb26f5b45e49187bb02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92dbe0db25628989b794cc93b67e1571"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="persons__detection__node_8cpp.html#a92dbe0db25628989b794cc93b67e1571">dynamic_threshold</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a92dbe0db25628989b794cc93b67e1571"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2fdb1ea3da051bb30fe1edb9951e889"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="persons__detection__node_8cpp.html#aa2fdb1ea3da051bb30fe1edb9951e889">group_person_threshold</a>&#160;&#160;&#160;0.8</td></tr>
+<tr class="separator:aa2fdb1ea3da051bb30fe1edb9951e889"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3966a6eabc388975b51acf5f6e4ad235"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="persons__detection__node_8cpp.html#a3966a6eabc388975b51acf5f6e4ad235">leg_size_min</a>&#160;&#160;&#160;0.1</td></tr>
+<tr class="separator:a3966a6eabc388975b51acf5f6e4ad235"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72777780f3427bf299bbec7640b6cb1a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="persons__detection__node_8cpp.html#a72777780f3427bf299bbec7640b6cb1a">leg_size_max</a>&#160;&#160;&#160;0.3</td></tr>
+<tr class="separator:a72777780f3427bf299bbec7640b6cb1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68fa36224acb098fe17c1324ceda84d6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="persons__detection__node_8cpp.html#a68fa36224acb098fe17c1324ceda84d6">legs_distance_max</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a68fa36224acb098fe17c1324ceda84d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb857e941c056f14dc583d14be995c10"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="persons__detection__node_8cpp.html#aeb857e941c056f14dc583d14be995c10">distance_person</a>&#160;&#160;&#160;1.5</td></tr>
+<tr class="separator:aeb857e941c056f14dc583d14be995c10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00809aad6f43c127152f5b0f32776402"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="persons__detection__node_8cpp.html#a00809aad6f43c127152f5b0f32776402">iter_person</a>&#160;&#160;&#160;10</td></tr>
+<tr class="separator:a00809aad6f43c127152f5b0f32776402"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1313c948b75a0a0cfb0fad8334bc1d13"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="persons__detection__node_8cpp.html#a1313c948b75a0a0cfb0fad8334bc1d13">min_view</a>&#160;&#160;&#160;7</td></tr>
+<tr class="separator:a1313c948b75a0a0cfb0fad8334bc1d13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="persons__detection__node_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
+<tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Neud pour la détection de personnes  Groupe 7. </p>
+</div><h2 class="groupheader">Documentation des macros</h2>
+<a class="anchor" id="a709da7b9e1c2848cb6c69a545c6e05d0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define cluster_threshold&#160;&#160;&#160;0.2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Distance entre deux points pour qu'ils appartiennent au même cluster </p>
+
+</div>
+</div>
+<a class="anchor" id="ae6095eddd47a8cb26f5b45e49187bb02"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define detection_threshold&#160;&#160;&#160;0.2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aeb857e941c056f14dc583d14be995c10"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define distance_person&#160;&#160;&#160;1.5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Distance maximale entre deux personnes d'un même groupe </p>
+
+</div>
+</div>
+<a class="anchor" id="a92dbe0db25628989b794cc93b67e1571"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define dynamic_threshold&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Taux de points dynamique </p>
+
+</div>
+</div>
+<a class="anchor" id="aa2fdb1ea3da051bb30fe1edb9951e889"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define group_person_threshold&#160;&#160;&#160;0.8</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a00809aad6f43c127152f5b0f32776402"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define iter_person&#160;&#160;&#160;10</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Nombre d'iteration pour la détection </p>
+
+</div>
+</div>
+<a class="anchor" id="a72777780f3427bf299bbec7640b6cb1a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define leg_size_max&#160;&#160;&#160;0.3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Largeur maximale d'une jambe </p>
+
+</div>
+</div>
+<a class="anchor" id="a3966a6eabc388975b51acf5f6e4ad235"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define leg_size_min&#160;&#160;&#160;0.1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Largeur minimale d'une jambe </p>
+
+</div>
+</div>
+<a class="anchor" id="a68fa36224acb098fe17c1324ceda84d6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define legs_distance_max&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Distance maximale entre deux jambes d'une personne </p>
+
+</div>
+</div>
+<a class="anchor" id="a1313c948b75a0a0cfb0fad8334bc1d13"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define min_view&#160;&#160;&#160;7</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Nombre de vue minimum pour la détection </p>
+
+</div>
+</div>
+<h2 class="groupheader">Documentation des fonctions</h2>
+<a class="anchor" id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>argv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.11
+</small></address>
+</body>
+</html>
