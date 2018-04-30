@@ -1,0 +1,528 @@
+\hypertarget{classmoving__persons__detector}{}\section{Référence de la classe moving\+\_\+persons\+\_\+detector}
+\label{classmoving__persons__detector}\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+
+
+Détecte les personnes et les groupes.  
+
+
+\subsection*{Fonctions membres publiques}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classmoving__persons__detector_ab7d7bf4e0edf8a64a8a43e0a8dad3083}{moving\+\_\+persons\+\_\+detector} ()
+\item 
+void \hyperlink{classmoving__persons__detector_a7f3a34bf99f2070b44c3a2424a4a4559}{finish\+\_\+move\+\_\+\+Callback} (const std\+\_\+msgs\+::\+Bool\+::\+Const\+Ptr \&a)
+\begin{DoxyCompactList}\small\item\em réception des messages du topic finish\+\_\+move \end{DoxyCompactList}\item 
+void \hyperlink{classmoving__persons__detector_a83ca0ba4254abe369da899d54984502d}{update} ()
+\begin{DoxyCompactList}\small\item\em Met à jour le noeud. \end{DoxyCompactList}\item 
+void \hyperlink{classmoving__persons__detector_a8b1c0d12b9eca4cb94b195fbf5847726}{send\+\_\+goal\+\_\+to\+\_\+reach} ()
+\begin{DoxyCompactList}\small\item\em envoie du but \end{DoxyCompactList}\item 
+void \hyperlink{classmoving__persons__detector_a833595f068de84045e6d67ab68c474dd}{store\+\_\+background} ()
+\begin{DoxyCompactList}\small\item\em Enregistre les points. \end{DoxyCompactList}\item 
+void \hyperlink{classmoving__persons__detector_a5c0563104a7d043297d9db0a0fd1ad3f}{detect\+\_\+motion} ()
+\begin{DoxyCompactList}\small\item\em detecte la mouvement des points \end{DoxyCompactList}\item 
+void \hyperlink{classmoving__persons__detector_a985ef636f8e95332f1559681aff3414f}{perform\+\_\+clustering} ()
+\begin{DoxyCompactList}\small\item\em Effectue le clustering des points. \end{DoxyCompactList}\item 
+void \hyperlink{classmoving__persons__detector_ab84737ca7963b67f6aa8a9b9bf4322b0}{detect\+\_\+moving\+\_\+legs} ()
+\begin{DoxyCompactList}\small\item\em Effectue la détection des jambes. \end{DoxyCompactList}\item 
+void \hyperlink{classmoving__persons__detector_af1519f7b134ebe1742d4837b675f0810}{detect\+\_\+moving\+\_\+persons} ()
+\begin{DoxyCompactList}\small\item\em Détect les personnes. \end{DoxyCompactList}\item 
+geometry\+\_\+msgs\+::\+Point \hyperlink{classmoving__persons__detector_a56e54848546290d3dd0c06956763ee30}{closest\+\_\+group} ()
+\begin{DoxyCompactList}\small\item\em renvoie le groupe le plus proche du robot \end{DoxyCompactList}\item 
+void \hyperlink{classmoving__persons__detector_af5443988d657ef8a8491a31e5e8ec9fa}{scan\+Callback} (const sensor\+\_\+msgs\+::\+Laser\+Scan\+::\+Const\+Ptr \&scan)
+\begin{DoxyCompactList}\small\item\em callback du scan du laser \end{DoxyCompactList}\item 
+void \hyperlink{classmoving__persons__detector_adc5abaf5a29ad580e32491549e4cf784}{robot\+\_\+moving\+Callback} (const std\+\_\+msgs\+::\+Bool\+::\+Const\+Ptr \&state)
+\begin{DoxyCompactList}\small\item\em callback de l\textquotesingle{}état du robot \end{DoxyCompactList}\item 
+float \hyperlink{classmoving__persons__detector_a2724a72050ae34ba6d1a2804941d9758}{distance\+Points} (geometry\+\_\+msgs\+::\+Point pa, geometry\+\_\+msgs\+::\+Point pb)
+\begin{DoxyCompactList}\small\item\em Revoie la distance entre deux points. \end{DoxyCompactList}\item 
+void \hyperlink{classmoving__persons__detector_ab8a95eb655a08e7507bae53976739233}{populate\+Marker\+Reference} ()
+\begin{DoxyCompactList}\small\item\em affichage des points \end{DoxyCompactList}\item 
+void \hyperlink{classmoving__persons__detector_ac3ea794336284aefb88e9b78a3ce8f8f}{populate\+Marker\+Topic} ()
+\begin{DoxyCompactList}\small\item\em affichage des points \end{DoxyCompactList}\item 
+void \hyperlink{classmoving__persons__detector_aa198d0acd452104d0292c613af3ca520}{send\+\_\+token} (bool b)
+\begin{DoxyCompactList}\small\item\em Envoie du token. \end{DoxyCompactList}\item 
+void \hyperlink{classmoving__persons__detector_a73acba9d4ee78f4cfb1bf0659334cd49}{print\+\_\+sorce} ()
+\begin{DoxyCompactList}\small\item\em affichage des scores \end{DoxyCompactList}\item 
+void \hyperlink{classmoving__persons__detector_aa2f36db42b79877062d4d9326995eb4d}{reset\+\_\+score} ()
+\begin{DoxyCompactList}\small\item\em Suppression des scores. \end{DoxyCompactList}\item 
+void \hyperlink{classmoving__persons__detector_a963302ef27df7f685e48ab4d0c5cb674}{detect\+\_\+group} ()
+\begin{DoxyCompactList}\small\item\em Recherche les différents groupes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Attributs privés}
+\begin{DoxyCompactItemize}
+\item 
+ros\+::\+Node\+Handle \hyperlink{classmoving__persons__detector_ac7ce090922b1fbb39792fe80249c2ac7}{n}
+\item 
+ros\+::\+Subscriber \hyperlink{classmoving__persons__detector_a4927f845c4631be26ced13aa0f306161}{sub\+\_\+scan}
+\item 
+ros\+::\+Subscriber \hyperlink{classmoving__persons__detector_a2ebd9075ece54b52335ba5aa7c7e073e}{sub\+\_\+robot\+\_\+moving}
+\item 
+ros\+::\+Subscriber \hyperlink{classmoving__persons__detector_a212ab693f8f575f3770d76efd51bb215}{sub\+\_\+finish\+\_\+move}
+\item 
+ros\+::\+Publisher \hyperlink{classmoving__persons__detector_a76a32d740a76752eb8d806ed50f1dbdd}{pub\+\_\+moving\+\_\+persons\+\_\+detector}
+\item 
+ros\+::\+Publisher \hyperlink{classmoving__persons__detector_adb07f5fa4d75d6c8f2e037a9b9e38e7a}{pub\+\_\+moving\+\_\+persons\+\_\+detector\+\_\+marker}
+\item 
+int \hyperlink{classmoving__persons__detector_ad6c97c267707ec5b67e3295899ccb40d}{nb\+\_\+beams}
+\item 
+float \hyperlink{classmoving__persons__detector_a92cf37109057a74bd655a7d4366c29e4}{range\+\_\+min}
+\item 
+float \hyperlink{classmoving__persons__detector_a93be1d4fd3177968890c7e8917f047ab}{range\+\_\+max}
+\item 
+float \hyperlink{classmoving__persons__detector_a57cb7dfbf0b886b6cfb87c0c9f9e4cf1}{angle\+\_\+min}
+\item 
+float \hyperlink{classmoving__persons__detector_acc6274815996d0b9e2882df73d951a17}{angle\+\_\+max}
+\item 
+float \hyperlink{classmoving__persons__detector_a87b53ed0ee82616d481cb0b68351f971}{angle\+\_\+inc}
+\item 
+float \hyperlink{classmoving__persons__detector_a07152a36a51361a3f7b7ebdf9cf809c1}{range} \mbox{[}1000\mbox{]}
+\item 
+geometry\+\_\+msgs\+::\+Point \hyperlink{classmoving__persons__detector_a8e17523454477a9e7ed1e87c9f42816b}{current\+\_\+scan} \mbox{[}1000\mbox{]}
+\item 
+bool \hyperlink{classmoving__persons__detector_a49ade373e545c987b519a7c2e686820c}{new\+\_\+goal}
+\item 
+float \hyperlink{classmoving__persons__detector_ab6c082d9a769d1065f400e449320c3ad}{background} \mbox{[}1000\mbox{]}
+\item 
+bool \hyperlink{classmoving__persons__detector_a32f205edd674741153028305da0103a2}{dynamic} \mbox{[}1000\mbox{]}
+\item 
+int \hyperlink{classmoving__persons__detector_a62bb0f7e285afa97978df71473259d58}{nb\+\_\+cluster}
+\item 
+int \hyperlink{classmoving__persons__detector_a8453207bfdcffd1e45ab9dcc73210e60}{cluster} \mbox{[}1000\mbox{]}
+\item 
+float \hyperlink{classmoving__persons__detector_ace70d87779974b46c12273865b36ccf1}{cluster\+\_\+size} \mbox{[}1000\mbox{]}
+\item 
+geometry\+\_\+msgs\+::\+Point \hyperlink{classmoving__persons__detector_a4a961028d83e2d74b5af1e53593be67c}{cluster\+\_\+middle} \mbox{[}1000\mbox{]}
+\item 
+int \hyperlink{classmoving__persons__detector_a729d1bcf6929766ce3a6e6f5fe0a56d1}{cluster\+\_\+dynamic} \mbox{[}1000\mbox{]}
+\item 
+int \hyperlink{classmoving__persons__detector_aa8bb9b30e452cb90530b96328f07d54a}{cluster\+\_\+start} \mbox{[}1000\mbox{]}
+\item 
+int \hyperlink{classmoving__persons__detector_a0d32b0ae38b8f9b26c007faabafe7450}{cluster\+\_\+end} \mbox{[}1000\mbox{]}
+\item 
+int \hyperlink{classmoving__persons__detector_aee7e42a55781f7c7297c7355296c6666}{nb\+\_\+moving\+\_\+legs\+\_\+detected}
+\item 
+geometry\+\_\+msgs\+::\+Point \hyperlink{classmoving__persons__detector_a412141d71e00568c403f083c9c7b5410}{moving\+\_\+leg\+\_\+detected} \mbox{[}1000\mbox{]}
+\item 
+int \hyperlink{classmoving__persons__detector_a7f2bae601889ce3c935ae218814e6be9}{nb\+\_\+moving\+\_\+persons\+\_\+detected}
+\item 
+geometry\+\_\+msgs\+::\+Point \hyperlink{classmoving__persons__detector_a20d0b31be1b975603b3967e8de6da662}{moving\+\_\+persons\+\_\+detected} \mbox{[}1000\mbox{]}
+\item 
+geometry\+\_\+msgs\+::\+Point \hyperlink{classmoving__persons__detector_af718cc27ac29e0ca034fbafe542cf23c}{goal\+\_\+to\+\_\+reach}
+\item 
+int \hyperlink{classmoving__persons__detector_a207858cf1fc0675c38eb41a5d8edf245}{nb\+\_\+pts}
+\item 
+geometry\+\_\+msgs\+::\+Point \hyperlink{classmoving__persons__detector_a7a74890a878182e5e70a7a72feb6b648}{display} \mbox{[}2000\mbox{]}
+\item 
+std\+\_\+msgs\+::\+Color\+R\+G\+BA \hyperlink{classmoving__persons__detector_af658a75f3cf4bd684fb2a282ce52af04}{colors} \mbox{[}2000\mbox{]}
+\item 
+bool \hyperlink{classmoving__persons__detector_a782b66e8437a7e2d8501d0eefe4eedc4}{previous\+\_\+robot\+\_\+moving}
+\item 
+bool \hyperlink{classmoving__persons__detector_ac3e2309e03a591892b8b13ba51df6831}{current\+\_\+robot\+\_\+moving}
+\item 
+ros\+::\+Publisher \hyperlink{classmoving__persons__detector_a8e87dbae89154f33ce2a2275c1599b10}{pub\+\_\+goal\+\_\+to\+\_\+reach}
+\item 
+bool \hyperlink{classmoving__persons__detector_a379e4d7d62fc6b2a163464b728177463}{new\+\_\+laser}
+\item 
+bool \hyperlink{classmoving__persons__detector_a4eace803293c56e7ee5b33093ea3cdea}{new\+\_\+robot}
+\item 
+ros\+::\+Publisher \hyperlink{classmoving__persons__detector_af6a77470dc3e40277e9e8e08d4afd7cf}{pub\+\_\+token}
+\item 
+int \hyperlink{classmoving__persons__detector_a798768403d1a8a3964ca22723fbd3918}{nb\+\_\+iter}
+\item 
+int \hyperlink{classmoving__persons__detector_ab92fa10f71867379e997220065b5ce38}{score} \mbox{[}1000\mbox{]}
+\item 
+int \hyperlink{classmoving__persons__detector_a7f33b7e0a227a032dc845a74cc805837}{nb\+\_\+group\+\_\+detected}
+\item 
+geometry\+\_\+msgs\+::\+Point \hyperlink{classmoving__persons__detector_a40e04cd6cda49ccc016b5881d048c46a}{group\+\_\+detected} \mbox{[}1000\mbox{]}
+\item 
+bool \hyperlink{classmoving__persons__detector_ab9eaeb335101abe8964220a7f41fdcab}{finish\+\_\+move}
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Détecte les personnes et les groupes. 
+
+\subsection{Documentation des constructeurs et destructeur}
+\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{moving\+\_\+persons\+\_\+detector()}{moving_persons_detector()}}]{\setlength{\rightskip}{0pt plus 5cm}moving\+\_\+persons\+\_\+detector\+::moving\+\_\+persons\+\_\+detector (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classmoving__persons__detector_ab7d7bf4e0edf8a64a8a43e0a8dad3083}{}\label{classmoving__persons__detector_ab7d7bf4e0edf8a64a8a43e0a8dad3083}
+Constructeur de la classe moving\+\_\+person\+\_\+detector 
+
+\subsection{Documentation des fonctions membres}
+\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!closest\+\_\+group@{closest\+\_\+group}}
+\index{closest\+\_\+group@{closest\+\_\+group}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{closest\+\_\+group()}{closest_group()}}]{\setlength{\rightskip}{0pt plus 5cm}geometry\+\_\+msgs\+::\+Point moving\+\_\+persons\+\_\+detector\+::closest\+\_\+group (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classmoving__persons__detector_a56e54848546290d3dd0c06956763ee30}{}\label{classmoving__persons__detector_a56e54848546290d3dd0c06956763ee30}
+
+
+renvoie le groupe le plus proche du robot 
+
+\begin{DoxyReturn}{Renvoie}
+le groupe le plus proche 
+\end{DoxyReturn}
+\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!detect\+\_\+group@{detect\+\_\+group}}
+\index{detect\+\_\+group@{detect\+\_\+group}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{detect\+\_\+group()}{detect_group()}}]{\setlength{\rightskip}{0pt plus 5cm}void moving\+\_\+persons\+\_\+detector\+::detect\+\_\+group (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classmoving__persons__detector_a963302ef27df7f685e48ab4d0c5cb674}{}\label{classmoving__persons__detector_a963302ef27df7f685e48ab4d0c5cb674}
+
+
+Recherche les différents groupes. 
+
+\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!detect\+\_\+motion@{detect\+\_\+motion}}
+\index{detect\+\_\+motion@{detect\+\_\+motion}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{detect\+\_\+motion()}{detect_motion()}}]{\setlength{\rightskip}{0pt plus 5cm}moving\+\_\+persons\+\_\+detector\+::detect\+\_\+motion (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classmoving__persons__detector_a5c0563104a7d043297d9db0a0fd1ad3f}{}\label{classmoving__persons__detector_a5c0563104a7d043297d9db0a0fd1ad3f}
+
+
+detecte la mouvement des points 
+
+\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!detect\+\_\+moving\+\_\+legs@{detect\+\_\+moving\+\_\+legs}}
+\index{detect\+\_\+moving\+\_\+legs@{detect\+\_\+moving\+\_\+legs}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{detect\+\_\+moving\+\_\+legs()}{detect_moving_legs()}}]{\setlength{\rightskip}{0pt plus 5cm}moving\+\_\+persons\+\_\+detector\+::detect\+\_\+moving\+\_\+legs (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classmoving__persons__detector_ab84737ca7963b67f6aa8a9b9bf4322b0}{}\label{classmoving__persons__detector_ab84737ca7963b67f6aa8a9b9bf4322b0}
+
+
+Effectue la détection des jambes. 
+
+Chaque jambe a un score qui lui est attribué, le score est incrémenté à chaque fois qu\textquotesingle{}une jambe est revue Si deux jambes sont assez proches, le score augments
+
+Affichage des james\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!detect\+\_\+moving\+\_\+persons@{detect\+\_\+moving\+\_\+persons}}
+\index{detect\+\_\+moving\+\_\+persons@{detect\+\_\+moving\+\_\+persons}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{detect\+\_\+moving\+\_\+persons()}{detect_moving_persons()}}]{\setlength{\rightskip}{0pt plus 5cm}moving\+\_\+persons\+\_\+detector\+::detect\+\_\+moving\+\_\+persons (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classmoving__persons__detector_af1519f7b134ebe1742d4837b675f0810}{}\label{classmoving__persons__detector_af1519f7b134ebe1742d4837b675f0810}
+
+
+Détect les personnes. 
+
+Une personnes possède deux jambes espacé d\textquotesingle{}au plus une certaines tailles, chaque score doit avoir un score d\textquotesingle{}au moins 7 \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!distance\+Points@{distance\+Points}}
+\index{distance\+Points@{distance\+Points}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{distance\+Points(geometry\+\_\+msgs\+::\+Point pa, geometry\+\_\+msgs\+::\+Point pb)}{distancePoints(geometry_msgs::Point pa, geometry_msgs::Point pb)}}]{\setlength{\rightskip}{0pt plus 5cm}moving\+\_\+persons\+\_\+detector\+::distance\+Points (
+\begin{DoxyParamCaption}
+\item[{geometry\+\_\+msgs\+::\+Point}]{pa, }
+\item[{geometry\+\_\+msgs\+::\+Point}]{pb}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classmoving__persons__detector_a2724a72050ae34ba6d1a2804941d9758}{}\label{classmoving__persons__detector_a2724a72050ae34ba6d1a2804941d9758}
+
+
+Revoie la distance entre deux points. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em pa} & le premier point \\
+\hline
+{\em pb} & le second point \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+la distance entre le point pa et le point pb 
+\end{DoxyReturn}
+\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!finish\+\_\+move\+\_\+\+Callback@{finish\+\_\+move\+\_\+\+Callback}}
+\index{finish\+\_\+move\+\_\+\+Callback@{finish\+\_\+move\+\_\+\+Callback}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{finish\+\_\+move\+\_\+\+Callback(const std\+\_\+msgs\+::\+Bool\+::\+Const\+Ptr \&a)}{finish_move_Callback(const std_msgs::Bool::ConstPtr &a)}}]{\setlength{\rightskip}{0pt plus 5cm}moving\+\_\+persons\+\_\+detector\+::finish\+\_\+move\+\_\+\+Callback (
+\begin{DoxyParamCaption}
+\item[{const std\+\_\+msgs\+::\+Bool\+::\+Const\+Ptr \&}]{a}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classmoving__persons__detector_a7f3a34bf99f2070b44c3a2424a4a4559}{}\label{classmoving__persons__detector_a7f3a34bf99f2070b44c3a2424a4a4559}
+
+
+réception des messages du topic finish\+\_\+move 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em a} & \+: le message \\
+\hline
+\end{DoxyParams}
+\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!perform\+\_\+clustering@{perform\+\_\+clustering}}
+\index{perform\+\_\+clustering@{perform\+\_\+clustering}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{perform\+\_\+clustering()}{perform_clustering()}}]{\setlength{\rightskip}{0pt plus 5cm}moving\+\_\+persons\+\_\+detector\+::perform\+\_\+clustering (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classmoving__persons__detector_a985ef636f8e95332f1559681aff3414f}{}\label{classmoving__persons__detector_a985ef636f8e95332f1559681aff3414f}
+
+
+Effectue le clustering des points. 
+
+Si deux points sont distancé d\textquotesingle{}au plus cluster\+\_\+threshold, alors il font parties du même cluster, sinon ils sont dans deux clusters diffrents
+
+cluster\+\_\+start\mbox{[}i\mbox{]} \+: contient le début du cluster i cluster\+\_\+end\mbox{[}i\mbox{]} \+: contient la fin du cluster i
+
+On vérifie que les clusters sont dynamique\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!populate\+Marker\+Reference@{populate\+Marker\+Reference}}
+\index{populate\+Marker\+Reference@{populate\+Marker\+Reference}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{populate\+Marker\+Reference()}{populateMarkerReference()}}]{\setlength{\rightskip}{0pt plus 5cm}moving\+\_\+persons\+\_\+detector\+::populate\+Marker\+Reference (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classmoving__persons__detector_ab8a95eb655a08e7507bae53976739233}{}\label{classmoving__persons__detector_ab8a95eb655a08e7507bae53976739233}
+
+
+affichage des points 
+
+\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!populate\+Marker\+Topic@{populate\+Marker\+Topic}}
+\index{populate\+Marker\+Topic@{populate\+Marker\+Topic}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{populate\+Marker\+Topic()}{populateMarkerTopic()}}]{\setlength{\rightskip}{0pt plus 5cm}moving\+\_\+persons\+\_\+detector\+::populate\+Marker\+Topic (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classmoving__persons__detector_ac3ea794336284aefb88e9b78a3ce8f8f}{}\label{classmoving__persons__detector_ac3ea794336284aefb88e9b78a3ce8f8f}
+
+
+affichage des points 
+
+\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!print\+\_\+sorce@{print\+\_\+sorce}}
+\index{print\+\_\+sorce@{print\+\_\+sorce}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{print\+\_\+sorce()}{print_sorce()}}]{\setlength{\rightskip}{0pt plus 5cm}moving\+\_\+persons\+\_\+detector\+::print\+\_\+sorce (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classmoving__persons__detector_a73acba9d4ee78f4cfb1bf0659334cd49}{}\label{classmoving__persons__detector_a73acba9d4ee78f4cfb1bf0659334cd49}
+
+
+affichage des scores 
+
+\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!reset\+\_\+score@{reset\+\_\+score}}
+\index{reset\+\_\+score@{reset\+\_\+score}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{reset\+\_\+score()}{reset_score()}}]{\setlength{\rightskip}{0pt plus 5cm}moving\+\_\+persons\+\_\+detector\+::reset\+\_\+score (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classmoving__persons__detector_aa2f36db42b79877062d4d9326995eb4d}{}\label{classmoving__persons__detector_aa2f36db42b79877062d4d9326995eb4d}
+
+
+Suppression des scores. 
+
+\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!robot\+\_\+moving\+Callback@{robot\+\_\+moving\+Callback}}
+\index{robot\+\_\+moving\+Callback@{robot\+\_\+moving\+Callback}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{robot\+\_\+moving\+Callback(const std\+\_\+msgs\+::\+Bool\+::\+Const\+Ptr \&state)}{robot_movingCallback(const std_msgs::Bool::ConstPtr &state)}}]{\setlength{\rightskip}{0pt plus 5cm}moving\+\_\+persons\+\_\+detector\+::robot\+\_\+moving\+Callback (
+\begin{DoxyParamCaption}
+\item[{const std\+\_\+msgs\+::\+Bool\+::\+Const\+Ptr \&}]{state}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classmoving__persons__detector_adc5abaf5a29ad580e32491549e4cf784}{}\label{classmoving__persons__detector_adc5abaf5a29ad580e32491549e4cf784}
+
+
+callback de l\textquotesingle{}état du robot 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em state} & l\textquotesingle{}état \\
+\hline
+\end{DoxyParams}
+\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!scan\+Callback@{scan\+Callback}}
+\index{scan\+Callback@{scan\+Callback}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{scan\+Callback(const sensor\+\_\+msgs\+::\+Laser\+Scan\+::\+Const\+Ptr \&scan)}{scanCallback(const sensor_msgs::LaserScan::ConstPtr &scan)}}]{\setlength{\rightskip}{0pt plus 5cm}moving\+\_\+persons\+\_\+detector\+::scan\+Callback (
+\begin{DoxyParamCaption}
+\item[{const sensor\+\_\+msgs\+::\+Laser\+Scan\+::\+Const\+Ptr \&}]{scan}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classmoving__persons__detector_af5443988d657ef8a8491a31e5e8ec9fa}{}\label{classmoving__persons__detector_af5443988d657ef8a8491a31e5e8ec9fa}
+
+
+callback du scan du laser 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em scan} & le scan \\
+\hline
+\end{DoxyParams}
+\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!send\+\_\+goal\+\_\+to\+\_\+reach@{send\+\_\+goal\+\_\+to\+\_\+reach}}
+\index{send\+\_\+goal\+\_\+to\+\_\+reach@{send\+\_\+goal\+\_\+to\+\_\+reach}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{send\+\_\+goal\+\_\+to\+\_\+reach()}{send_goal_to_reach()}}]{\setlength{\rightskip}{0pt plus 5cm}moving\+\_\+persons\+\_\+detector\+::send\+\_\+goal\+\_\+to\+\_\+reach (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classmoving__persons__detector_a8b1c0d12b9eca4cb94b195fbf5847726}{}\label{classmoving__persons__detector_a8b1c0d12b9eca4cb94b195fbf5847726}
+
+
+envoie du but 
+
+\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!send\+\_\+token@{send\+\_\+token}}
+\index{send\+\_\+token@{send\+\_\+token}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{send\+\_\+token(bool b)}{send_token(bool b)}}]{\setlength{\rightskip}{0pt plus 5cm}moving\+\_\+persons\+\_\+detector\+::send\+\_\+token (
+\begin{DoxyParamCaption}
+\item[{bool}]{b}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classmoving__persons__detector_aa198d0acd452104d0292c613af3ca520}{}\label{classmoving__persons__detector_aa198d0acd452104d0292c613af3ca520}
+
+
+Envoie du token. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em b} & la valeur du token \\
+\hline
+\end{DoxyParams}
+\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!store\+\_\+background@{store\+\_\+background}}
+\index{store\+\_\+background@{store\+\_\+background}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{store\+\_\+background()}{store_background()}}]{\setlength{\rightskip}{0pt plus 5cm}moving\+\_\+persons\+\_\+detector\+::store\+\_\+background (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classmoving__persons__detector_a833595f068de84045e6d67ab68c474dd}{}\label{classmoving__persons__detector_a833595f068de84045e6d67ab68c474dd}
+
+
+Enregistre les points. 
+
+\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!update@{update}}
+\index{update@{update}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{update()}{update()}}]{\setlength{\rightskip}{0pt plus 5cm}moving\+\_\+persons\+\_\+detector\+::update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classmoving__persons__detector_a83ca0ba4254abe369da899d54984502d}{}\label{classmoving__persons__detector_a83ca0ba4254abe369da899d54984502d}
+
+
+Met à jour le noeud. 
+
+
+
+\subsection{Documentation des données membres}
+\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!angle\+\_\+inc@{angle\+\_\+inc}}
+\index{angle\+\_\+inc@{angle\+\_\+inc}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{angle\+\_\+inc}{angle_inc}}]{\setlength{\rightskip}{0pt plus 5cm}float moving\+\_\+persons\+\_\+detector\+::angle\+\_\+inc\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_a87b53ed0ee82616d481cb0b68351f971}{}\label{classmoving__persons__detector_a87b53ed0ee82616d481cb0b68351f971}
+\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!angle\+\_\+max@{angle\+\_\+max}}
+\index{angle\+\_\+max@{angle\+\_\+max}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{angle\+\_\+max}{angle_max}}]{\setlength{\rightskip}{0pt plus 5cm}float moving\+\_\+persons\+\_\+detector\+::angle\+\_\+max\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_acc6274815996d0b9e2882df73d951a17}{}\label{classmoving__persons__detector_acc6274815996d0b9e2882df73d951a17}
+\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!angle\+\_\+min@{angle\+\_\+min}}
+\index{angle\+\_\+min@{angle\+\_\+min}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{angle\+\_\+min}{angle_min}}]{\setlength{\rightskip}{0pt plus 5cm}float moving\+\_\+persons\+\_\+detector\+::angle\+\_\+min\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_a57cb7dfbf0b886b6cfb87c0c9f9e4cf1}{}\label{classmoving__persons__detector_a57cb7dfbf0b886b6cfb87c0c9f9e4cf1}
+\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!background@{background}}
+\index{background@{background}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{background}{background}}]{\setlength{\rightskip}{0pt plus 5cm}float moving\+\_\+persons\+\_\+detector\+::background\mbox{[}1000\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_ab6c082d9a769d1065f400e449320c3ad}{}\label{classmoving__persons__detector_ab6c082d9a769d1065f400e449320c3ad}
+Sauvegarde des points \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!cluster@{cluster}}
+\index{cluster@{cluster}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{cluster}{cluster}}]{\setlength{\rightskip}{0pt plus 5cm}int moving\+\_\+persons\+\_\+detector\+::cluster\mbox{[}1000\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_a8453207bfdcffd1e45ab9dcc73210e60}{}\label{classmoving__persons__detector_a8453207bfdcffd1e45ab9dcc73210e60}
+Tableau des cluster \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!cluster\+\_\+dynamic@{cluster\+\_\+dynamic}}
+\index{cluster\+\_\+dynamic@{cluster\+\_\+dynamic}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{cluster\+\_\+dynamic}{cluster_dynamic}}]{\setlength{\rightskip}{0pt plus 5cm}int moving\+\_\+persons\+\_\+detector\+::cluster\+\_\+dynamic\mbox{[}1000\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_a729d1bcf6929766ce3a6e6f5fe0a56d1}{}\label{classmoving__persons__detector_a729d1bcf6929766ce3a6e6f5fe0a56d1}
+Les clusters dynamiques \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!cluster\+\_\+end@{cluster\+\_\+end}}
+\index{cluster\+\_\+end@{cluster\+\_\+end}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{cluster\+\_\+end}{cluster_end}}]{\setlength{\rightskip}{0pt plus 5cm}int moving\+\_\+persons\+\_\+detector\+::cluster\+\_\+end\mbox{[}1000\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_a0d32b0ae38b8f9b26c007faabafe7450}{}\label{classmoving__persons__detector_a0d32b0ae38b8f9b26c007faabafe7450}
+\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!cluster\+\_\+middle@{cluster\+\_\+middle}}
+\index{cluster\+\_\+middle@{cluster\+\_\+middle}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{cluster\+\_\+middle}{cluster_middle}}]{\setlength{\rightskip}{0pt plus 5cm}geometry\+\_\+msgs\+::\+Point moving\+\_\+persons\+\_\+detector\+::cluster\+\_\+middle\mbox{[}1000\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_a4a961028d83e2d74b5af1e53593be67c}{}\label{classmoving__persons__detector_a4a961028d83e2d74b5af1e53593be67c}
+Positions des clusters \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!cluster\+\_\+size@{cluster\+\_\+size}}
+\index{cluster\+\_\+size@{cluster\+\_\+size}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{cluster\+\_\+size}{cluster_size}}]{\setlength{\rightskip}{0pt plus 5cm}float moving\+\_\+persons\+\_\+detector\+::cluster\+\_\+size\mbox{[}1000\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_ace70d87779974b46c12273865b36ccf1}{}\label{classmoving__persons__detector_ace70d87779974b46c12273865b36ccf1}
+Tableau des tailles de cluster \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!cluster\+\_\+start@{cluster\+\_\+start}}
+\index{cluster\+\_\+start@{cluster\+\_\+start}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{cluster\+\_\+start}{cluster_start}}]{\setlength{\rightskip}{0pt plus 5cm}int moving\+\_\+persons\+\_\+detector\+::cluster\+\_\+start\mbox{[}1000\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_aa8bb9b30e452cb90530b96328f07d54a}{}\label{classmoving__persons__detector_aa8bb9b30e452cb90530b96328f07d54a}
+Premier indice du débbut et de la fin de chaque cluster \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!colors@{colors}}
+\index{colors@{colors}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{colors}{colors}}]{\setlength{\rightskip}{0pt plus 5cm}std\+\_\+msgs\+::\+Color\+R\+G\+BA moving\+\_\+persons\+\_\+detector\+::colors\mbox{[}2000\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_af658a75f3cf4bd684fb2a282ce52af04}{}\label{classmoving__persons__detector_af658a75f3cf4bd684fb2a282ce52af04}
+Les couleurs \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!current\+\_\+robot\+\_\+moving@{current\+\_\+robot\+\_\+moving}}
+\index{current\+\_\+robot\+\_\+moving@{current\+\_\+robot\+\_\+moving}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{current\+\_\+robot\+\_\+moving}{current_robot_moving}}]{\setlength{\rightskip}{0pt plus 5cm}bool moving\+\_\+persons\+\_\+detector\+::current\+\_\+robot\+\_\+moving\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_ac3e2309e03a591892b8b13ba51df6831}{}\label{classmoving__persons__detector_ac3e2309e03a591892b8b13ba51df6831}
+\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!current\+\_\+scan@{current\+\_\+scan}}
+\index{current\+\_\+scan@{current\+\_\+scan}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{current\+\_\+scan}{current_scan}}]{\setlength{\rightskip}{0pt plus 5cm}geometry\+\_\+msgs\+::\+Point moving\+\_\+persons\+\_\+detector\+::current\+\_\+scan\mbox{[}1000\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_a8e17523454477a9e7ed1e87c9f42816b}{}\label{classmoving__persons__detector_a8e17523454477a9e7ed1e87c9f42816b}
+Les différents points reçus \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!display@{display}}
+\index{display@{display}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{display}{display}}]{\setlength{\rightskip}{0pt plus 5cm}geometry\+\_\+msgs\+::\+Point moving\+\_\+persons\+\_\+detector\+::display\mbox{[}2000\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_a7a74890a878182e5e70a7a72feb6b648}{}\label{classmoving__persons__detector_a7a74890a878182e5e70a7a72feb6b648}
+Les points à afficher \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!dynamic@{dynamic}}
+\index{dynamic@{dynamic}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{dynamic}{dynamic}}]{\setlength{\rightskip}{0pt plus 5cm}bool moving\+\_\+persons\+\_\+detector\+::dynamic\mbox{[}1000\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_a32f205edd674741153028305da0103a2}{}\label{classmoving__persons__detector_a32f205edd674741153028305da0103a2}
+booléen indiquant si le ième point est dynamique \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!finish\+\_\+move@{finish\+\_\+move}}
+\index{finish\+\_\+move@{finish\+\_\+move}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{finish\+\_\+move}{finish_move}}]{\setlength{\rightskip}{0pt plus 5cm}bool moving\+\_\+persons\+\_\+detector\+::finish\+\_\+move\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_ab9eaeb335101abe8964220a7f41fdcab}{}\label{classmoving__persons__detector_ab9eaeb335101abe8964220a7f41fdcab}
+Vérifie que le robot a fini son mouvement \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!goal\+\_\+to\+\_\+reach@{goal\+\_\+to\+\_\+reach}}
+\index{goal\+\_\+to\+\_\+reach@{goal\+\_\+to\+\_\+reach}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{goal\+\_\+to\+\_\+reach}{goal_to_reach}}]{\setlength{\rightskip}{0pt plus 5cm}geometry\+\_\+msgs\+::\+Point moving\+\_\+persons\+\_\+detector\+::goal\+\_\+to\+\_\+reach\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_af718cc27ac29e0ca034fbafe542cf23c}{}\label{classmoving__persons__detector_af718cc27ac29e0ca034fbafe542cf23c}
+Le point à atteindre pour le robot \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!group\+\_\+detected@{group\+\_\+detected}}
+\index{group\+\_\+detected@{group\+\_\+detected}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{group\+\_\+detected}{group_detected}}]{\setlength{\rightskip}{0pt plus 5cm}geometry\+\_\+msgs\+::\+Point moving\+\_\+persons\+\_\+detector\+::group\+\_\+detected\mbox{[}1000\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_a40e04cd6cda49ccc016b5881d048c46a}{}\label{classmoving__persons__detector_a40e04cd6cda49ccc016b5881d048c46a}
+to store the middle of each group \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!moving\+\_\+leg\+\_\+detected@{moving\+\_\+leg\+\_\+detected}}
+\index{moving\+\_\+leg\+\_\+detected@{moving\+\_\+leg\+\_\+detected}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{moving\+\_\+leg\+\_\+detected}{moving_leg_detected}}]{\setlength{\rightskip}{0pt plus 5cm}geometry\+\_\+msgs\+::\+Point moving\+\_\+persons\+\_\+detector\+::moving\+\_\+leg\+\_\+detected\mbox{[}1000\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_a412141d71e00568c403f083c9c7b5410}{}\label{classmoving__persons__detector_a412141d71e00568c403f083c9c7b5410}
+Les positions des différentes jambes \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!moving\+\_\+persons\+\_\+detected@{moving\+\_\+persons\+\_\+detected}}
+\index{moving\+\_\+persons\+\_\+detected@{moving\+\_\+persons\+\_\+detected}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{moving\+\_\+persons\+\_\+detected}{moving_persons_detected}}]{\setlength{\rightskip}{0pt plus 5cm}geometry\+\_\+msgs\+::\+Point moving\+\_\+persons\+\_\+detector\+::moving\+\_\+persons\+\_\+detected\mbox{[}1000\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_a20d0b31be1b975603b3967e8de6da662}{}\label{classmoving__persons__detector_a20d0b31be1b975603b3967e8de6da662}
+Position des différentes personnes \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!n@{n}}
+\index{n@{n}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{n}{n}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Node\+Handle moving\+\_\+persons\+\_\+detector\+::n\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_ac7ce090922b1fbb39792fe80249c2ac7}{}\label{classmoving__persons__detector_ac7ce090922b1fbb39792fe80249c2ac7}
+Handle du noeud \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!nb\+\_\+beams@{nb\+\_\+beams}}
+\index{nb\+\_\+beams@{nb\+\_\+beams}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{nb\+\_\+beams}{nb_beams}}]{\setlength{\rightskip}{0pt plus 5cm}int moving\+\_\+persons\+\_\+detector\+::nb\+\_\+beams\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_ad6c97c267707ec5b67e3295899ccb40d}{}\label{classmoving__persons__detector_ad6c97c267707ec5b67e3295899ccb40d}
+Nombre de points récupérés \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!nb\+\_\+cluster@{nb\+\_\+cluster}}
+\index{nb\+\_\+cluster@{nb\+\_\+cluster}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{nb\+\_\+cluster}{nb_cluster}}]{\setlength{\rightskip}{0pt plus 5cm}int moving\+\_\+persons\+\_\+detector\+::nb\+\_\+cluster\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_a62bb0f7e285afa97978df71473259d58}{}\label{classmoving__persons__detector_a62bb0f7e285afa97978df71473259d58}
+Nombre de cluster \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!nb\+\_\+group\+\_\+detected@{nb\+\_\+group\+\_\+detected}}
+\index{nb\+\_\+group\+\_\+detected@{nb\+\_\+group\+\_\+detected}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{nb\+\_\+group\+\_\+detected}{nb_group_detected}}]{\setlength{\rightskip}{0pt plus 5cm}int moving\+\_\+persons\+\_\+detector\+::nb\+\_\+group\+\_\+detected\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_a7f33b7e0a227a032dc845a74cc805837}{}\label{classmoving__persons__detector_a7f33b7e0a227a032dc845a74cc805837}
+to perform detection of moving legs and to store them \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!nb\+\_\+iter@{nb\+\_\+iter}}
+\index{nb\+\_\+iter@{nb\+\_\+iter}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{nb\+\_\+iter}{nb_iter}}]{\setlength{\rightskip}{0pt plus 5cm}int moving\+\_\+persons\+\_\+detector\+::nb\+\_\+iter\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_a798768403d1a8a3964ca22723fbd3918}{}\label{classmoving__persons__detector_a798768403d1a8a3964ca22723fbd3918}
+Nombre d\textquotesingle{}iteration \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!nb\+\_\+moving\+\_\+legs\+\_\+detected@{nb\+\_\+moving\+\_\+legs\+\_\+detected}}
+\index{nb\+\_\+moving\+\_\+legs\+\_\+detected@{nb\+\_\+moving\+\_\+legs\+\_\+detected}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{nb\+\_\+moving\+\_\+legs\+\_\+detected}{nb_moving_legs_detected}}]{\setlength{\rightskip}{0pt plus 5cm}int moving\+\_\+persons\+\_\+detector\+::nb\+\_\+moving\+\_\+legs\+\_\+detected\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_aee7e42a55781f7c7297c7355296c6666}{}\label{classmoving__persons__detector_aee7e42a55781f7c7297c7355296c6666}
+Nombre de jambes détectés \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!nb\+\_\+moving\+\_\+persons\+\_\+detected@{nb\+\_\+moving\+\_\+persons\+\_\+detected}}
+\index{nb\+\_\+moving\+\_\+persons\+\_\+detected@{nb\+\_\+moving\+\_\+persons\+\_\+detected}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{nb\+\_\+moving\+\_\+persons\+\_\+detected}{nb_moving_persons_detected}}]{\setlength{\rightskip}{0pt plus 5cm}int moving\+\_\+persons\+\_\+detector\+::nb\+\_\+moving\+\_\+persons\+\_\+detected\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_a7f2bae601889ce3c935ae218814e6be9}{}\label{classmoving__persons__detector_a7f2bae601889ce3c935ae218814e6be9}
+Nombre de personnes détectées \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!nb\+\_\+pts@{nb\+\_\+pts}}
+\index{nb\+\_\+pts@{nb\+\_\+pts}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{nb\+\_\+pts}{nb_pts}}]{\setlength{\rightskip}{0pt plus 5cm}int moving\+\_\+persons\+\_\+detector\+::nb\+\_\+pts\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_a207858cf1fc0675c38eb41a5d8edf245}{}\label{classmoving__persons__detector_a207858cf1fc0675c38eb41a5d8edf245}
+Nombre point à afficher \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!new\+\_\+goal@{new\+\_\+goal}}
+\index{new\+\_\+goal@{new\+\_\+goal}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{new\+\_\+goal}{new_goal}}]{\setlength{\rightskip}{0pt plus 5cm}bool moving\+\_\+persons\+\_\+detector\+::new\+\_\+goal\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_a49ade373e545c987b519a7c2e686820c}{}\label{classmoving__persons__detector_a49ade373e545c987b519a7c2e686820c}
+Booléen indiquant si un nouveau bu a \&t\& détecté \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!new\+\_\+laser@{new\+\_\+laser}}
+\index{new\+\_\+laser@{new\+\_\+laser}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{new\+\_\+laser}{new_laser}}]{\setlength{\rightskip}{0pt plus 5cm}bool moving\+\_\+persons\+\_\+detector\+::new\+\_\+laser\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_a379e4d7d62fc6b2a163464b728177463}{}\label{classmoving__persons__detector_a379e4d7d62fc6b2a163464b728177463}
+to check if new data of laser is available or not \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!new\+\_\+robot@{new\+\_\+robot}}
+\index{new\+\_\+robot@{new\+\_\+robot}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{new\+\_\+robot}{new_robot}}]{\setlength{\rightskip}{0pt plus 5cm}bool moving\+\_\+persons\+\_\+detector\+::new\+\_\+robot\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_a4eace803293c56e7ee5b33093ea3cdea}{}\label{classmoving__persons__detector_a4eace803293c56e7ee5b33093ea3cdea}
+\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!previous\+\_\+robot\+\_\+moving@{previous\+\_\+robot\+\_\+moving}}
+\index{previous\+\_\+robot\+\_\+moving@{previous\+\_\+robot\+\_\+moving}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{previous\+\_\+robot\+\_\+moving}{previous_robot_moving}}]{\setlength{\rightskip}{0pt plus 5cm}bool moving\+\_\+persons\+\_\+detector\+::previous\+\_\+robot\+\_\+moving\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_a782b66e8437a7e2d8501d0eefe4eedc4}{}\label{classmoving__persons__detector_a782b66e8437a7e2d8501d0eefe4eedc4}
+\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!pub\+\_\+goal\+\_\+to\+\_\+reach@{pub\+\_\+goal\+\_\+to\+\_\+reach}}
+\index{pub\+\_\+goal\+\_\+to\+\_\+reach@{pub\+\_\+goal\+\_\+to\+\_\+reach}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{pub\+\_\+goal\+\_\+to\+\_\+reach}{pub_goal_to_reach}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Publisher moving\+\_\+persons\+\_\+detector\+::pub\+\_\+goal\+\_\+to\+\_\+reach\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_a8e87dbae89154f33ce2a2275c1599b10}{}\label{classmoving__persons__detector_a8e87dbae89154f33ce2a2275c1599b10}
+Publish goal\+\_\+to\+\_\+reach \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!pub\+\_\+moving\+\_\+persons\+\_\+detector@{pub\+\_\+moving\+\_\+persons\+\_\+detector}}
+\index{pub\+\_\+moving\+\_\+persons\+\_\+detector@{pub\+\_\+moving\+\_\+persons\+\_\+detector}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{pub\+\_\+moving\+\_\+persons\+\_\+detector}{pub_moving_persons_detector}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Publisher moving\+\_\+persons\+\_\+detector\+::pub\+\_\+moving\+\_\+persons\+\_\+detector\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_a76a32d740a76752eb8d806ed50f1dbdd}{}\label{classmoving__persons__detector_a76a32d740a76752eb8d806ed50f1dbdd}
+Topic pour donner les personnes détectées \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!pub\+\_\+moving\+\_\+persons\+\_\+detector\+\_\+marker@{pub\+\_\+moving\+\_\+persons\+\_\+detector\+\_\+marker}}
+\index{pub\+\_\+moving\+\_\+persons\+\_\+detector\+\_\+marker@{pub\+\_\+moving\+\_\+persons\+\_\+detector\+\_\+marker}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{pub\+\_\+moving\+\_\+persons\+\_\+detector\+\_\+marker}{pub_moving_persons_detector_marker}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Publisher moving\+\_\+persons\+\_\+detector\+::pub\+\_\+moving\+\_\+persons\+\_\+detector\+\_\+marker\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_adb07f5fa4d75d6c8f2e037a9b9e38e7a}{}\label{classmoving__persons__detector_adb07f5fa4d75d6c8f2e037a9b9e38e7a}
+Topic pour le marker \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!pub\+\_\+token@{pub\+\_\+token}}
+\index{pub\+\_\+token@{pub\+\_\+token}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{pub\+\_\+token}{pub_token}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Publisher moving\+\_\+persons\+\_\+detector\+::pub\+\_\+token\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_af6a77470dc3e40277e9e8e08d4afd7cf}{}\label{classmoving__persons__detector_af6a77470dc3e40277e9e8e08d4afd7cf}
+Publish token \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!range@{range}}
+\index{range@{range}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{range}{range}}]{\setlength{\rightskip}{0pt plus 5cm}float moving\+\_\+persons\+\_\+detector\+::range\mbox{[}1000\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_a07152a36a51361a3f7b7ebdf9cf809c1}{}\label{classmoving__persons__detector_a07152a36a51361a3f7b7ebdf9cf809c1}
+\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!range\+\_\+max@{range\+\_\+max}}
+\index{range\+\_\+max@{range\+\_\+max}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{range\+\_\+max}{range_max}}]{\setlength{\rightskip}{0pt plus 5cm}float moving\+\_\+persons\+\_\+detector\+::range\+\_\+max\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_a93be1d4fd3177968890c7e8917f047ab}{}\label{classmoving__persons__detector_a93be1d4fd3177968890c7e8917f047ab}
+\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!range\+\_\+min@{range\+\_\+min}}
+\index{range\+\_\+min@{range\+\_\+min}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{range\+\_\+min}{range_min}}]{\setlength{\rightskip}{0pt plus 5cm}float moving\+\_\+persons\+\_\+detector\+::range\+\_\+min\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_a92cf37109057a74bd655a7d4366c29e4}{}\label{classmoving__persons__detector_a92cf37109057a74bd655a7d4366c29e4}
+\index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!score@{score}}
+\index{score@{score}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{score}{score}}]{\setlength{\rightskip}{0pt plus 5cm}int moving\+\_\+persons\+\_\+detector\+::score\mbox{[}1000\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_ab92fa10f71867379e997220065b5ce38}{}\label{classmoving__persons__detector_ab92fa10f71867379e997220065b5ce38}
+Score de chaque jambe \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!sub\+\_\+finish\+\_\+move@{sub\+\_\+finish\+\_\+move}}
+\index{sub\+\_\+finish\+\_\+move@{sub\+\_\+finish\+\_\+move}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{sub\+\_\+finish\+\_\+move}{sub_finish_move}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Subscriber moving\+\_\+persons\+\_\+detector\+::sub\+\_\+finish\+\_\+move\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_a212ab693f8f575f3770d76efd51bb215}{}\label{classmoving__persons__detector_a212ab693f8f575f3770d76efd51bb215}
+Abonnement pour la fin du robot \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!sub\+\_\+robot\+\_\+moving@{sub\+\_\+robot\+\_\+moving}}
+\index{sub\+\_\+robot\+\_\+moving@{sub\+\_\+robot\+\_\+moving}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{sub\+\_\+robot\+\_\+moving}{sub_robot_moving}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Subscriber moving\+\_\+persons\+\_\+detector\+::sub\+\_\+robot\+\_\+moving\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_a2ebd9075ece54b52335ba5aa7c7e073e}{}\label{classmoving__persons__detector_a2ebd9075ece54b52335ba5aa7c7e073e}
+Abonnement pour l\textquotesingle{}état du robot \index{moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}!sub\+\_\+scan@{sub\+\_\+scan}}
+\index{sub\+\_\+scan@{sub\+\_\+scan}!moving\+\_\+persons\+\_\+detector@{moving\+\_\+persons\+\_\+detector}}
+\subsubsection[{\texorpdfstring{sub\+\_\+scan}{sub_scan}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Subscriber moving\+\_\+persons\+\_\+detector\+::sub\+\_\+scan\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmoving__persons__detector_a4927f845c4631be26ced13aa0f306161}{}\label{classmoving__persons__detector_a4927f845c4631be26ced13aa0f306161}
+Abonnement pour le scan du laser 
+
+La documentation de cette classe a été générée à partir du fichier suivant \+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{persons__detection__node_8cpp}{persons\+\_\+detection\+\_\+node.\+cpp}\end{DoxyCompactItemize}

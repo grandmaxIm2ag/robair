@@ -1,3 +1,9 @@
+/**
+ * \file robot_moving_node.cpp
+ * \brief Détect les ouvement du robot
+ * \Authors O.Aycard
+ */
+
 // Signal handling
 #include <signal.h>
 
@@ -19,92 +25,135 @@
 #include "tf/message_filter.h"
 
 
+
+/**
+ *
+ */
 int nb_static = 5;
 
 using namespace std;
 
+/**
+ * \class robot_moving_lectures
+ * \brief Vérifie que le robot est en mouvement
+ */
 class robot_moving_lectures {
 private:
 
+    /**
+     * Le noeud
+     */
     ros::NodeHandle n;
 
-     // communication with person_detector
+    /**
+     * communication with person_detector
+     */
     ros::Publisher pub_robot_moving;
 
-    // communication with odometry
+    /**
+     * communication with odometry
+     */
     ros::Subscriber sub_odometry;
 
+    /**
+     * La position
+     */
     geometry_msgs::Point position, not_moving_position;
+    /**
+     * L'orientation
+     */
     float orientation, not_moving_orientation;
+    /**
+     *
+     */
     int count;
+    /**
+     *
+     */
     bool moving;
-    bool new_odom;//to check if new data of odometry is available or not
+    /**
+     *  check if new data of odometry is available or not
+     */
+    bool new_odom;
 
 public:
 
-robot_moving_lectures() {
+    /**
+     * \fn robot_moving_lectures()
+     * \brief constructeur
+     */
+    robot_moving_lectures() {
 
-    // communication with person_detector
-    pub_robot_moving = n.advertise<std_msgs::Bool>("robot_moving", 2);   
+	// communication with person_detector
+	pub_robot_moving = n.advertise<std_msgs::Bool>("robot_moving", 2);   
 
-    // communication with odometry
-    sub_odometry = n.subscribe("odom", 1, &robot_moving_lectures::odomCallback, this);
+	// communication with odometry
+	sub_odometry = n.subscribe("odom", 1, &robot_moving_lectures::odomCallback, this);
 
-    moving = 1;
-    count = 0;
-    not_moving_position.x = 0;
-    not_moving_position.y = 0;
-    not_moving_orientation = 0;
-    new_odom = false;
+	moving = 1;
+	count = 0;
+	not_moving_position.x = 0;
+	not_moving_position.y = 0;
+	not_moving_orientation = 0;
+	new_odom = false;
 
-    ros::Rate r(20);//this node is updated at 20hz
+	ros::Rate r(20);//this node is updated at 20hz
 
-    while (ros::ok()) {
-        ros::spinOnce();
-        update();
-        r.sleep();
-    }
+	while (ros::ok()) {
+	    ros::spinOnce();
+	    update();
+	    r.sleep();
+	}
 
-}//robot_moving_lectures
+    }//robot_moving_lectures
 
-void odomCallback(const nav_msgs::Odometry::ConstPtr& o) {
+    /**
+     * \fn odomCallback(const nav_msgs::Odometry::ConstPtr& o)
+     * \brief callback de l'ondométrie
+     * \param o le message
+     */
+    void odomCallback(const nav_msgs::Odometry::ConstPtr& o) {
 
-    new_odom = true;
-    position.x = o->pose.pose.position.x;
-    position.y = o->pose.pose.position.y;
-    orientation = tf::getYaw(o->pose.pose.orientation);
+	new_odom = true;
+	position.x = o->pose.pose.position.x;
+	position.y = o->pose.pose.position.y;
+	orientation = tf::getYaw(o->pose.pose.orientation);
 
-}//odomCallback
+    }//odomCallback
 
-void update() {
+    /**
+     * \fn update()
+     * \brief mise à jour du noeud
+     */
+    void update() {
 
-    if ( new_odom ) {//we wait for new data of odometry
-        new_odom = false;
-        if ( ( not_moving_position.x == position.x ) && ( not_moving_position.y == position.y ) && ( not_moving_orientation == orientation ) ) {
-            count++;
-            if ( ( count == nb_static ) && ( moving ) ) {
-                ROS_INFO("robot is not moving");
-                moving = false;
-            }
-        }
-        else {
-            not_moving_position.x = position.x;
-            not_moving_position.y = position.y;
-            not_moving_orientation = orientation;
-            count = 0;
-            if ( !moving ) {
-                ROS_INFO("robot is moving");
-                moving = true;
-            }
-        }
+	if ( new_odom ) {//we wait for new data of odometry
+	    new_odom = false;
+	    if ( ( not_moving_position.x == position.x ) && ( not_moving_position.y == position.y ) && ( not_moving_orientation == orientation ) ) {
+		count++;
+		if ( ( count == nb_static ) && ( moving ) ) {
+		    ROS_INFO("robot is not moving");
+		    moving = false;
+		}
+	    }
+	    else {
+		not_moving_position.x = position.x;
+		not_moving_position.y = position.y;
+		not_moving_orientation = orientation;
+		count = 0;
+		if ( !moving ) {
+		    ROS_INFO("robot is moving");
+		    moving = true;
+		}
+	    }
 
-        std_msgs::Bool robot_moving_msg;
-        robot_moving_msg.data = moving;
+	    std_msgs::Bool robot_moving_msg;
+	    robot_moving_msg.data = moving;
 
-        pub_robot_moving.publish(robot_moving_msg);
-    }
+	    pub_robot_moving.publish(robot_moving_msg);
+	}
 
-}//update
+    }//update
 
 };
 

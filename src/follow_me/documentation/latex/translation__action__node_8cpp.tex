@@ -1,0 +1,80 @@
+\hypertarget{translation__action__node_8cpp}{}\section{Référence du fichier translation\+\_\+action\+\_\+node.\+cpp}
+\label{translation__action__node_8cpp}\index{translation\+\_\+action\+\_\+node.\+cpp@{translation\+\_\+action\+\_\+node.\+cpp}}
+
+
+Noeud pour effectuer des translation  O.\+Aycard.  
+
+
+{\ttfamily \#include \char`\"{}ros/ros.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sensor\+\_\+msgs/\+Laser\+Scan.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}visualization\+\_\+msgs/\+Marker.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}geometry\+\_\+msgs/\+Point.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}std\+\_\+msgs/\+Color\+R\+G\+B\+A.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}std\+\_\+msgs/\+Float32.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$cmath$>$}\\*
+{\ttfamily \#include \char`\"{}nav\+\_\+msgs/\+Odometry.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$tf/transform\+\_\+datatypes.\+h$>$}\\*
+Graphe des dépendances par inclusion de translation\+\_\+action\+\_\+node.\+cpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{translation__action__node_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classtranslation__action}{translation\+\_\+action}
+\begin{DoxyCompactList}\small\item\em Gère les translations du robot. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{translation__action__node_8cpp_a4e7b3388a51eede7d0c430d606162c1a}{security\+\_\+distance}~0.\+5
+\item 
+\#define \hyperlink{translation__action__node_8cpp_a1c9b17ecd759bf14bd10c47d68771173}{translation\+\_\+error}~0.\+1
+\item 
+\#define \hyperlink{translation__action__node_8cpp_a4a22f30a94d579ec099493eaa3e3cfec}{kp}~0.\+5
+\item 
+\#define \hyperlink{translation__action__node_8cpp_ac208d4a15168228961f22ff0619bd468}{ki}~0
+\item 
+\#define \hyperlink{translation__action__node_8cpp_a731039d1eebab67f74b726ab9aec55a6}{kd}~0
+\end{DoxyCompactItemize}
+\subsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{translation__action__node_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Noeud pour effectuer des translation  O.\+Aycard. 
+
+
+
+\subsection{Documentation des macros}
+\index{translation\+\_\+action\+\_\+node.\+cpp@{translation\+\_\+action\+\_\+node.\+cpp}!kd@{kd}}
+\index{kd@{kd}!translation\+\_\+action\+\_\+node.\+cpp@{translation\+\_\+action\+\_\+node.\+cpp}}
+\subsubsection[{\texorpdfstring{kd}{kd}}]{\setlength{\rightskip}{0pt plus 5cm}\#define kd~0}\hypertarget{translation__action__node_8cpp_a731039d1eebab67f74b726ab9aec55a6}{}\label{translation__action__node_8cpp_a731039d1eebab67f74b726ab9aec55a6}
+coefficient kd \index{translation\+\_\+action\+\_\+node.\+cpp@{translation\+\_\+action\+\_\+node.\+cpp}!ki@{ki}}
+\index{ki@{ki}!translation\+\_\+action\+\_\+node.\+cpp@{translation\+\_\+action\+\_\+node.\+cpp}}
+\subsubsection[{\texorpdfstring{ki}{ki}}]{\setlength{\rightskip}{0pt plus 5cm}\#define ki~0}\hypertarget{translation__action__node_8cpp_ac208d4a15168228961f22ff0619bd468}{}\label{translation__action__node_8cpp_ac208d4a15168228961f22ff0619bd468}
+coefficient ki \index{translation\+\_\+action\+\_\+node.\+cpp@{translation\+\_\+action\+\_\+node.\+cpp}!kp@{kp}}
+\index{kp@{kp}!translation\+\_\+action\+\_\+node.\+cpp@{translation\+\_\+action\+\_\+node.\+cpp}}
+\subsubsection[{\texorpdfstring{kp}{kp}}]{\setlength{\rightskip}{0pt plus 5cm}\#define kp~0.\+5}\hypertarget{translation__action__node_8cpp_a4a22f30a94d579ec099493eaa3e3cfec}{}\label{translation__action__node_8cpp_a4a22f30a94d579ec099493eaa3e3cfec}
+coefficient kp \index{translation\+\_\+action\+\_\+node.\+cpp@{translation\+\_\+action\+\_\+node.\+cpp}!security\+\_\+distance@{security\+\_\+distance}}
+\index{security\+\_\+distance@{security\+\_\+distance}!translation\+\_\+action\+\_\+node.\+cpp@{translation\+\_\+action\+\_\+node.\+cpp}}
+\subsubsection[{\texorpdfstring{security\+\_\+distance}{security_distance}}]{\setlength{\rightskip}{0pt plus 5cm}\#define security\+\_\+distance~0.\+5}\hypertarget{translation__action__node_8cpp_a4e7b3388a51eede7d0c430d606162c1a}{}\label{translation__action__node_8cpp_a4e7b3388a51eede7d0c430d606162c1a}
+Distance de sécurité \index{translation\+\_\+action\+\_\+node.\+cpp@{translation\+\_\+action\+\_\+node.\+cpp}!translation\+\_\+error@{translation\+\_\+error}}
+\index{translation\+\_\+error@{translation\+\_\+error}!translation\+\_\+action\+\_\+node.\+cpp@{translation\+\_\+action\+\_\+node.\+cpp}}
+\subsubsection[{\texorpdfstring{translation\+\_\+error}{translation_error}}]{\setlength{\rightskip}{0pt plus 5cm}\#define translation\+\_\+error~0.\+1}\hypertarget{translation__action__node_8cpp_a1c9b17ecd759bf14bd10c47d68771173}{}\label{translation__action__node_8cpp_a1c9b17ecd759bf14bd10c47d68771173}
+Erreur pour la translation 
+
+\subsection{Documentation des fonctions}
+\index{translation\+\_\+action\+\_\+node.\+cpp@{translation\+\_\+action\+\_\+node.\+cpp}!main@{main}}
+\index{main@{main}!translation\+\_\+action\+\_\+node.\+cpp@{translation\+\_\+action\+\_\+node.\+cpp}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$$\ast$argv)}{main(int argc, char **argv)}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}\hypertarget{translation__action__node_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{}\label{translation__action__node_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}

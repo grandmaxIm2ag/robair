@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(follow_me)
+project(cofee_distributor)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -108,7 +108,7 @@ include_directories(
 # )
 
 ## Declare a cpp executable
-add_executable(moving_persons_detector_node src/moving_persons_detector_node.cpp)
+add_executable(persons_detection_node src/persons_detection_node.cpp)
 add_executable(robot_moving_node src/robot_moving_node.cpp)
 add_executable(decision_node src/decision_node.cpp)
 add_executable(rotation_action_node src/rotation_action_node.cpp)
@@ -120,7 +120,7 @@ add_executable(obstacle_detection_node src/obstacle_detection_node.cpp)
 # add_dependencies(datmo_node datmo_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(moving_persons_detector_node
+target_link_libraries(persons_detection_node
   ${catkin_LIBRARIES}
 )
 target_link_libraries(robot_moving_node

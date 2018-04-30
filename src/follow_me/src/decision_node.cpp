@@ -1,3 +1,8 @@
+/**
+ * \file decision_node.cpp
+ * \brief Noeud de décision
+ * \Authors Groupe 7
+ */
 #include "ros/ros.h"
 #include <geometry_msgs/Twist.h>
 #include "geometry_msgs/Point.h"
@@ -15,17 +20,22 @@
 using namespace std;
 
 /**
- * \file decision_node.cpp
- * \brief Noeud de décision
- * \author Groupe 7
+ * temps d'attente
  */
-
 #define duration_sleep 10
+
+/**
+ * \Class decision
+ * \brief Neud de décision
+ * 
+ * décide des différententes rotations translation que le robot doit faire en
+ * fonction du but à atteindre
+ */
 class decision {
 private:
 
     /**
-     *
+     * Le noeud
      */
     ros::NodeHandle n;
 
@@ -64,42 +74,60 @@ private:
     ros::Subscriber sub_translation_done;
 
     /**
+     * check if there is a /rotation_to_do
      */
-    bool cond_rotation;//boolean to check if there is a /rotation_to_do
+    bool cond_rotation;
     /**
+     * check if there is a /translation_to_do
      */
-    bool cond_translation;//boolean to check if there is a /translation_to_do
+    bool cond_translation;
     /**
+     * Rotation à faire
      */
     float rotation_to_do;
     /**
+     * Vrifie qu'une rotation a été faite
      */
     float rotation_done;
     /**
+     * Translation a faire
      */
     float translation_to_do;
     /**
+     * Vérifie qu'une translation est faite
      */
     float translation_done;
     /**
+     * check if a new /goal_to_reach is available or not
      */
-    bool new_goal_to_reach;//to check if a new /goal_to_reach is available or not
+    bool new_goal_to_reach;
     /**
+     * check if a new /rotation_done is available or not
      */
-    bool new_rotation_done;//to check if a new /rotation_done is available or not
+    bool new_rotation_done;
     /**
+     * check if a new /translation_done is available or not
      */
-    bool new_translation_done;//to check if a new /translation_done is available or not
+    bool new_translation_done;
     /**
+     * Le point à rejoindre
      */
     geometry_msgs::Point goal_to_reach;
     /**
+     * Le point finalement atteint
      */
     geometry_msgs::Point goal_reached;
     /**
+     * 
      */
     bool goal;
+    /**
+     * Token pour la savoir si le but est aléatoire
+     */
     bool token;
+    /**
+     * Booléen indiquant qu'on fait un demi tour
+     */
     bool halfturn;
 public:
 
@@ -186,7 +214,6 @@ public:
             cond_rotation = false;
             new_rotation_done = false;
 
-            //the rotation_to_do is0 done so we perform the translation_to_do
             if(!halfturn){
                 ROS_INFO("halfturn : %d", halfturn);
                 std_msgs::Float32 msg_translation_to_do;
@@ -218,6 +245,8 @@ public:
             
             new_goal_to_reach = false;
 
+	    //Si token est a ttrue, nous devons faire un demi tour (le but
+	    // n'était pas aléatoire )
             if(token) {
                 ROS_INFO("Déut demi tours");
                 cond_rotation = true;
@@ -236,7 +265,9 @@ public:
     }// update
 
     /**
-     *
+     * \fn send_finish_move(bool b)
+     * \brief Envoie un booléen sur le topic finish_move
+     * \param b la valeur envoyée
      */
     void send_finish_move(bool b) {
         std_msgs::Bool msg_finish_move;
