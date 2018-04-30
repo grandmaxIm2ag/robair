@@ -1,0 +1,274 @@
+\hypertarget{classdecision}{}\section{Référence de la classe decision}
+\label{classdecision}\index{decision@{decision}}
+
+
+Neud de décision.  
+
+
+\subsection*{Fonctions membres publiques}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classdecision_a00772c969f42d590e57f3eb37bafe6a6}{decision} ()
+\item 
+void \hyperlink{classdecision_a5fbd0cdaffc906d31560227560136b59}{update} ()
+\begin{DoxyCompactList}\small\item\em Met à jour le noeud. \end{DoxyCompactList}\item 
+void \hyperlink{classdecision_a1564bdf825aa8a746ec900279269de81}{send\+\_\+finish\+\_\+move} (bool b)
+\begin{DoxyCompactList}\small\item\em Envoie un booléen sur le topic finish\+\_\+move. \end{DoxyCompactList}\item 
+void \hyperlink{classdecision_afddf261c387d28dde5e6881343518ca7}{goal\+\_\+to\+\_\+reach\+Callback} (const geometry\+\_\+msgs\+::\+Point\+::\+Const\+Ptr \&g)
+\begin{DoxyCompactList}\small\item\em Callback pour l\textquotesingle{}inscription au topic goal\+\_\+to\+\_\+reach. \end{DoxyCompactList}\item 
+void \hyperlink{classdecision_ad6c2257e2304ad3a078d2b64cf425caa}{rotation\+\_\+done\+Callback} (const std\+\_\+msgs\+::\+Float32\+::\+Const\+Ptr \&a)
+\begin{DoxyCompactList}\small\item\em Callback pour l\textquotesingle{}inscription au rotation\+\_\+done. \end{DoxyCompactList}\item 
+void \hyperlink{classdecision_a7e0da40a27e1c320329a5b81f6044c57}{token\+\_\+\+Callback} (const std\+\_\+msgs\+::\+Bool\+::\+Const\+Ptr \&a)
+\item 
+void \hyperlink{classdecision_ab874f222aac437a05fe8bc8c5d8963b4}{translation\+\_\+done\+Callback} (const std\+\_\+msgs\+::\+Float32\+::\+Const\+Ptr \&r)
+\begin{DoxyCompactList}\small\item\em Callback pour l\textquotesingle{}inscription au translation\+\_\+done. \end{DoxyCompactList}\item 
+float \hyperlink{classdecision_a1b6988efc70e0a25ddb7be0f372d2ad2}{distance\+Points} (geometry\+\_\+msgs\+::\+Point pa, geometry\+\_\+msgs\+::\+Point pb)
+\begin{DoxyCompactList}\small\item\em Revoie la distance entre deux points. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Attributs privés}
+\begin{DoxyCompactItemize}
+\item 
+ros\+::\+Node\+Handle \hyperlink{classdecision_a3757d1a1da5a045caff6b58c8b71f559}{n}
+\item 
+ros\+::\+Publisher \hyperlink{classdecision_ae19f3ccf052d2d7fa227038ee1f5b188}{pub\+\_\+goal\+\_\+reached}
+\item 
+ros\+::\+Publisher \hyperlink{classdecision_af35e8bab2af3a5737120d14148aea79b}{pub\+\_\+finish\+\_\+move}
+\item 
+ros\+::\+Subscriber \hyperlink{classdecision_a088684a934191a0ad40f3e61ad3691ed}{sub\+\_\+goal\+\_\+to\+\_\+reach}
+\item 
+ros\+::\+Subscriber \hyperlink{classdecision_a02e3400afdb00b874d96f1f49b9bb929}{sub\+\_\+token}
+\item 
+ros\+::\+Publisher \hyperlink{classdecision_ad558fa4353559c47a042cd6619c8d2a7}{pub\+\_\+rotation\+\_\+to\+\_\+do}
+\item 
+ros\+::\+Subscriber \hyperlink{classdecision_a429cdcb43bc24e661fd361c77f66c82c}{sub\+\_\+rotation\+\_\+done}
+\item 
+ros\+::\+Publisher \hyperlink{classdecision_af74b71a091485c829679882417c113d5}{pub\+\_\+translation\+\_\+to\+\_\+do}
+\item 
+ros\+::\+Subscriber \hyperlink{classdecision_abec51fe792a7230e4afe73dca2eb83dd}{sub\+\_\+translation\+\_\+done}
+\item 
+bool \hyperlink{classdecision_ac1ed0807df9d2681e605d9091572efe5}{cond\+\_\+rotation}
+\item 
+bool \hyperlink{classdecision_a87f539f24dbb7d16c3785e41ef0db3d5}{cond\+\_\+translation}
+\item 
+float \hyperlink{classdecision_ab8f9703ded89c8fa9d3be694934188c7}{rotation\+\_\+to\+\_\+do}
+\item 
+float \hyperlink{classdecision_afbccffed34269bd18f004232facbced2}{rotation\+\_\+done}
+\item 
+float \hyperlink{classdecision_ad49356a943ddd0a5e11cef4fe00ab201}{translation\+\_\+to\+\_\+do}
+\item 
+float \hyperlink{classdecision_a7917b74f63ec0ad3d43ceb7d06a56f0c}{translation\+\_\+done}
+\item 
+bool \hyperlink{classdecision_a5e8a80eb8c5d11f884079c643754b0d8}{new\+\_\+goal\+\_\+to\+\_\+reach}
+\item 
+bool \hyperlink{classdecision_ae07d154e37ffd5bded5e957aab39aa3a}{new\+\_\+rotation\+\_\+done}
+\item 
+bool \hyperlink{classdecision_ac07d8a1fb9e3ea92c94d06dc90ac892e}{new\+\_\+translation\+\_\+done}
+\item 
+geometry\+\_\+msgs\+::\+Point \hyperlink{classdecision_ae66e7abace6dd621f23831885e1065be}{goal\+\_\+to\+\_\+reach}
+\item 
+geometry\+\_\+msgs\+::\+Point \hyperlink{classdecision_a2a762dcba1f72fb4b43a11bea161a923}{goal\+\_\+reached}
+\item 
+bool \hyperlink{classdecision_af7efe696deb9c664fe19861db0854b69}{goal}
+\item 
+bool \hyperlink{classdecision_ad347764216715ba6d588aa4000cda267}{token}
+\item 
+bool \hyperlink{classdecision_a717e13fdffeb73ec9d8a63682ea31822}{halfturn}
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Neud de décision. 
+
+decision décide des différententes rotations translation que le robot doit faire en fonction du but à atteindre 
+
+\subsection{Documentation des constructeurs et destructeur}
+\index{decision@{decision}!decision@{decision}}
+\index{decision@{decision}!decision@{decision}}
+\subsubsection[{\texorpdfstring{decision()}{decision()}}]{\setlength{\rightskip}{0pt plus 5cm}decision\+::decision (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classdecision_a00772c969f42d590e57f3eb37bafe6a6}{}\label{classdecision_a00772c969f42d590e57f3eb37bafe6a6}
+Constructeur de la classe Decision 
+
+\subsection{Documentation des fonctions membres}
+\index{decision@{decision}!distance\+Points@{distance\+Points}}
+\index{distance\+Points@{distance\+Points}!decision@{decision}}
+\subsubsection[{\texorpdfstring{distance\+Points(geometry\+\_\+msgs\+::\+Point pa, geometry\+\_\+msgs\+::\+Point pb)}{distancePoints(geometry_msgs::Point pa, geometry_msgs::Point pb)}}]{\setlength{\rightskip}{0pt plus 5cm}decision\+::distance\+Points (
+\begin{DoxyParamCaption}
+\item[{geometry\+\_\+msgs\+::\+Point}]{pa, }
+\item[{geometry\+\_\+msgs\+::\+Point}]{pb}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classdecision_a1b6988efc70e0a25ddb7be0f372d2ad2}{}\label{classdecision_a1b6988efc70e0a25ddb7be0f372d2ad2}
+
+
+Revoie la distance entre deux points. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em pa} & le premier point \\
+\hline
+{\em pb} & le second point \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+la distance entre le point pa et le point pb 
+\end{DoxyReturn}
+\index{decision@{decision}!goal\+\_\+to\+\_\+reach\+Callback@{goal\+\_\+to\+\_\+reach\+Callback}}
+\index{goal\+\_\+to\+\_\+reach\+Callback@{goal\+\_\+to\+\_\+reach\+Callback}!decision@{decision}}
+\subsubsection[{\texorpdfstring{goal\+\_\+to\+\_\+reach\+Callback(const geometry\+\_\+msgs\+::\+Point\+::\+Const\+Ptr \&g)}{goal_to_reachCallback(const geometry_msgs::Point::ConstPtr &g)}}]{\setlength{\rightskip}{0pt plus 5cm}decision\+::goal\+\_\+to\+\_\+reach\+Callback (
+\begin{DoxyParamCaption}
+\item[{const geometry\+\_\+msgs\+::\+Point\+::\+Const\+Ptr \&}]{g}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classdecision_afddf261c387d28dde5e6881343518ca7}{}\label{classdecision_afddf261c387d28dde5e6881343518ca7}
+
+
+Callback pour l\textquotesingle{}inscription au topic goal\+\_\+to\+\_\+reach. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em g} & le point reçu \\
+\hline
+\end{DoxyParams}
+\index{decision@{decision}!rotation\+\_\+done\+Callback@{rotation\+\_\+done\+Callback}}
+\index{rotation\+\_\+done\+Callback@{rotation\+\_\+done\+Callback}!decision@{decision}}
+\subsubsection[{\texorpdfstring{rotation\+\_\+done\+Callback(const std\+\_\+msgs\+::\+Float32\+::\+Const\+Ptr \&a)}{rotation_doneCallback(const std_msgs::Float32::ConstPtr &a)}}]{\setlength{\rightskip}{0pt plus 5cm}decision\+::rotation\+\_\+done\+Callback (
+\begin{DoxyParamCaption}
+\item[{const std\+\_\+msgs\+::\+Float32\+::\+Const\+Ptr \&}]{a}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classdecision_ad6c2257e2304ad3a078d2b64cf425caa}{}\label{classdecision_ad6c2257e2304ad3a078d2b64cf425caa}
+
+
+Callback pour l\textquotesingle{}inscription au rotation\+\_\+done. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em a} & l\textquotesingle{}angle parcouru \\
+\hline
+\end{DoxyParams}
+\index{decision@{decision}!send\+\_\+finish\+\_\+move@{send\+\_\+finish\+\_\+move}}
+\index{send\+\_\+finish\+\_\+move@{send\+\_\+finish\+\_\+move}!decision@{decision}}
+\subsubsection[{\texorpdfstring{send\+\_\+finish\+\_\+move(bool b)}{send_finish_move(bool b)}}]{\setlength{\rightskip}{0pt plus 5cm}decision\+::send\+\_\+finish\+\_\+move (
+\begin{DoxyParamCaption}
+\item[{bool}]{b}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classdecision_a1564bdf825aa8a746ec900279269de81}{}\label{classdecision_a1564bdf825aa8a746ec900279269de81}
+
+
+Envoie un booléen sur le topic finish\+\_\+move. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em b} & la valeur envoyée \\
+\hline
+\end{DoxyParams}
+\index{decision@{decision}!token\+\_\+\+Callback@{token\+\_\+\+Callback}}
+\index{token\+\_\+\+Callback@{token\+\_\+\+Callback}!decision@{decision}}
+\subsubsection[{\texorpdfstring{token\+\_\+\+Callback(const std\+\_\+msgs\+::\+Bool\+::\+Const\+Ptr \&a)}{token_Callback(const std_msgs::Bool::ConstPtr &a)}}]{\setlength{\rightskip}{0pt plus 5cm}void decision\+::token\+\_\+\+Callback (
+\begin{DoxyParamCaption}
+\item[{const std\+\_\+msgs\+::\+Bool\+::\+Const\+Ptr \&}]{a}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classdecision_a7e0da40a27e1c320329a5b81f6044c57}{}\label{classdecision_a7e0da40a27e1c320329a5b81f6044c57}
+\index{decision@{decision}!translation\+\_\+done\+Callback@{translation\+\_\+done\+Callback}}
+\index{translation\+\_\+done\+Callback@{translation\+\_\+done\+Callback}!decision@{decision}}
+\subsubsection[{\texorpdfstring{translation\+\_\+done\+Callback(const std\+\_\+msgs\+::\+Float32\+::\+Const\+Ptr \&r)}{translation_doneCallback(const std_msgs::Float32::ConstPtr &r)}}]{\setlength{\rightskip}{0pt plus 5cm}decision\+::translation\+\_\+done\+Callback (
+\begin{DoxyParamCaption}
+\item[{const std\+\_\+msgs\+::\+Float32\+::\+Const\+Ptr \&}]{r}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classdecision_ab874f222aac437a05fe8bc8c5d8963b4}{}\label{classdecision_ab874f222aac437a05fe8bc8c5d8963b4}
+
+
+Callback pour l\textquotesingle{}inscription au translation\+\_\+done. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em r} & distance effectuée \\
+\hline
+\end{DoxyParams}
+\index{decision@{decision}!update@{update}}
+\index{update@{update}!decision@{decision}}
+\subsubsection[{\texorpdfstring{update()}{update()}}]{\setlength{\rightskip}{0pt plus 5cm}decision\+::update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classdecision_a5fbd0cdaffc906d31560227560136b59}{}\label{classdecision_a5fbd0cdaffc906d31560227560136b59}
+
+
+Met à jour le noeud. 
+
+
+
+\subsection{Documentation des données membres}
+\index{decision@{decision}!cond\+\_\+rotation@{cond\+\_\+rotation}}
+\index{cond\+\_\+rotation@{cond\+\_\+rotation}!decision@{decision}}
+\subsubsection[{\texorpdfstring{cond\+\_\+rotation}{cond_rotation}}]{\setlength{\rightskip}{0pt plus 5cm}bool decision\+::cond\+\_\+rotation\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classdecision_ac1ed0807df9d2681e605d9091572efe5}{}\label{classdecision_ac1ed0807df9d2681e605d9091572efe5}
+check if there is a /rotation\+\_\+to\+\_\+do \index{decision@{decision}!cond\+\_\+translation@{cond\+\_\+translation}}
+\index{cond\+\_\+translation@{cond\+\_\+translation}!decision@{decision}}
+\subsubsection[{\texorpdfstring{cond\+\_\+translation}{cond_translation}}]{\setlength{\rightskip}{0pt plus 5cm}bool decision\+::cond\+\_\+translation\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classdecision_a87f539f24dbb7d16c3785e41ef0db3d5}{}\label{classdecision_a87f539f24dbb7d16c3785e41ef0db3d5}
+check if there is a /translation\+\_\+to\+\_\+do \index{decision@{decision}!goal@{goal}}
+\index{goal@{goal}!decision@{decision}}
+\subsubsection[{\texorpdfstring{goal}{goal}}]{\setlength{\rightskip}{0pt plus 5cm}bool decision\+::goal\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classdecision_af7efe696deb9c664fe19861db0854b69}{}\label{classdecision_af7efe696deb9c664fe19861db0854b69}
+\index{decision@{decision}!goal\+\_\+reached@{goal\+\_\+reached}}
+\index{goal\+\_\+reached@{goal\+\_\+reached}!decision@{decision}}
+\subsubsection[{\texorpdfstring{goal\+\_\+reached}{goal_reached}}]{\setlength{\rightskip}{0pt plus 5cm}geometry\+\_\+msgs\+::\+Point decision\+::goal\+\_\+reached\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classdecision_a2a762dcba1f72fb4b43a11bea161a923}{}\label{classdecision_a2a762dcba1f72fb4b43a11bea161a923}
+Le point finalement atteint \index{decision@{decision}!goal\+\_\+to\+\_\+reach@{goal\+\_\+to\+\_\+reach}}
+\index{goal\+\_\+to\+\_\+reach@{goal\+\_\+to\+\_\+reach}!decision@{decision}}
+\subsubsection[{\texorpdfstring{goal\+\_\+to\+\_\+reach}{goal_to_reach}}]{\setlength{\rightskip}{0pt plus 5cm}geometry\+\_\+msgs\+::\+Point decision\+::goal\+\_\+to\+\_\+reach\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classdecision_ae66e7abace6dd621f23831885e1065be}{}\label{classdecision_ae66e7abace6dd621f23831885e1065be}
+Le point à rejoindre \index{decision@{decision}!halfturn@{halfturn}}
+\index{halfturn@{halfturn}!decision@{decision}}
+\subsubsection[{\texorpdfstring{halfturn}{halfturn}}]{\setlength{\rightskip}{0pt plus 5cm}bool decision\+::halfturn\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classdecision_a717e13fdffeb73ec9d8a63682ea31822}{}\label{classdecision_a717e13fdffeb73ec9d8a63682ea31822}
+Booléen indiquant qu\textquotesingle{}on fait un demi tour \index{decision@{decision}!n@{n}}
+\index{n@{n}!decision@{decision}}
+\subsubsection[{\texorpdfstring{n}{n}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Node\+Handle decision\+::n\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classdecision_a3757d1a1da5a045caff6b58c8b71f559}{}\label{classdecision_a3757d1a1da5a045caff6b58c8b71f559}
+Le noeud \index{decision@{decision}!new\+\_\+goal\+\_\+to\+\_\+reach@{new\+\_\+goal\+\_\+to\+\_\+reach}}
+\index{new\+\_\+goal\+\_\+to\+\_\+reach@{new\+\_\+goal\+\_\+to\+\_\+reach}!decision@{decision}}
+\subsubsection[{\texorpdfstring{new\+\_\+goal\+\_\+to\+\_\+reach}{new_goal_to_reach}}]{\setlength{\rightskip}{0pt plus 5cm}bool decision\+::new\+\_\+goal\+\_\+to\+\_\+reach\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classdecision_a5e8a80eb8c5d11f884079c643754b0d8}{}\label{classdecision_a5e8a80eb8c5d11f884079c643754b0d8}
+check if a new /goal\+\_\+to\+\_\+reach is available or not \index{decision@{decision}!new\+\_\+rotation\+\_\+done@{new\+\_\+rotation\+\_\+done}}
+\index{new\+\_\+rotation\+\_\+done@{new\+\_\+rotation\+\_\+done}!decision@{decision}}
+\subsubsection[{\texorpdfstring{new\+\_\+rotation\+\_\+done}{new_rotation_done}}]{\setlength{\rightskip}{0pt plus 5cm}bool decision\+::new\+\_\+rotation\+\_\+done\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classdecision_ae07d154e37ffd5bded5e957aab39aa3a}{}\label{classdecision_ae07d154e37ffd5bded5e957aab39aa3a}
+check if a new /rotation\+\_\+done is available or not \index{decision@{decision}!new\+\_\+translation\+\_\+done@{new\+\_\+translation\+\_\+done}}
+\index{new\+\_\+translation\+\_\+done@{new\+\_\+translation\+\_\+done}!decision@{decision}}
+\subsubsection[{\texorpdfstring{new\+\_\+translation\+\_\+done}{new_translation_done}}]{\setlength{\rightskip}{0pt plus 5cm}bool decision\+::new\+\_\+translation\+\_\+done\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classdecision_ac07d8a1fb9e3ea92c94d06dc90ac892e}{}\label{classdecision_ac07d8a1fb9e3ea92c94d06dc90ac892e}
+check if a new /translation\+\_\+done is available or not \index{decision@{decision}!pub\+\_\+finish\+\_\+move@{pub\+\_\+finish\+\_\+move}}
+\index{pub\+\_\+finish\+\_\+move@{pub\+\_\+finish\+\_\+move}!decision@{decision}}
+\subsubsection[{\texorpdfstring{pub\+\_\+finish\+\_\+move}{pub_finish_move}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Publisher decision\+::pub\+\_\+finish\+\_\+move\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classdecision_af35e8bab2af3a5737120d14148aea79b}{}\label{classdecision_af35e8bab2af3a5737120d14148aea79b}
+Pour la publication de la fin du déplacement \index{decision@{decision}!pub\+\_\+goal\+\_\+reached@{pub\+\_\+goal\+\_\+reached}}
+\index{pub\+\_\+goal\+\_\+reached@{pub\+\_\+goal\+\_\+reached}!decision@{decision}}
+\subsubsection[{\texorpdfstring{pub\+\_\+goal\+\_\+reached}{pub_goal_reached}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Publisher decision\+::pub\+\_\+goal\+\_\+reached\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classdecision_ae19f3ccf052d2d7fa227038ee1f5b188}{}\label{classdecision_ae19f3ccf052d2d7fa227038ee1f5b188}
+Pour la publication du point atteint \index{decision@{decision}!pub\+\_\+rotation\+\_\+to\+\_\+do@{pub\+\_\+rotation\+\_\+to\+\_\+do}}
+\index{pub\+\_\+rotation\+\_\+to\+\_\+do@{pub\+\_\+rotation\+\_\+to\+\_\+do}!decision@{decision}}
+\subsubsection[{\texorpdfstring{pub\+\_\+rotation\+\_\+to\+\_\+do}{pub_rotation_to_do}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Publisher decision\+::pub\+\_\+rotation\+\_\+to\+\_\+do\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classdecision_ad558fa4353559c47a042cd6619c8d2a7}{}\label{classdecision_ad558fa4353559c47a042cd6619c8d2a7}
+Pour la publication la rotation à faire \index{decision@{decision}!pub\+\_\+translation\+\_\+to\+\_\+do@{pub\+\_\+translation\+\_\+to\+\_\+do}}
+\index{pub\+\_\+translation\+\_\+to\+\_\+do@{pub\+\_\+translation\+\_\+to\+\_\+do}!decision@{decision}}
+\subsubsection[{\texorpdfstring{pub\+\_\+translation\+\_\+to\+\_\+do}{pub_translation_to_do}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Publisher decision\+::pub\+\_\+translation\+\_\+to\+\_\+do\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classdecision_af74b71a091485c829679882417c113d5}{}\label{classdecision_af74b71a091485c829679882417c113d5}
+Pour la publication la translation à faire \index{decision@{decision}!rotation\+\_\+done@{rotation\+\_\+done}}
+\index{rotation\+\_\+done@{rotation\+\_\+done}!decision@{decision}}
+\subsubsection[{\texorpdfstring{rotation\+\_\+done}{rotation_done}}]{\setlength{\rightskip}{0pt plus 5cm}float decision\+::rotation\+\_\+done\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classdecision_afbccffed34269bd18f004232facbced2}{}\label{classdecision_afbccffed34269bd18f004232facbced2}
+Vrifie qu\textquotesingle{}une rotation a été faite \index{decision@{decision}!rotation\+\_\+to\+\_\+do@{rotation\+\_\+to\+\_\+do}}
+\index{rotation\+\_\+to\+\_\+do@{rotation\+\_\+to\+\_\+do}!decision@{decision}}
+\subsubsection[{\texorpdfstring{rotation\+\_\+to\+\_\+do}{rotation_to_do}}]{\setlength{\rightskip}{0pt plus 5cm}float decision\+::rotation\+\_\+to\+\_\+do\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classdecision_ab8f9703ded89c8fa9d3be694934188c7}{}\label{classdecision_ab8f9703ded89c8fa9d3be694934188c7}
+Rotation à faire \index{decision@{decision}!sub\+\_\+goal\+\_\+to\+\_\+reach@{sub\+\_\+goal\+\_\+to\+\_\+reach}}
+\index{sub\+\_\+goal\+\_\+to\+\_\+reach@{sub\+\_\+goal\+\_\+to\+\_\+reach}!decision@{decision}}
+\subsubsection[{\texorpdfstring{sub\+\_\+goal\+\_\+to\+\_\+reach}{sub_goal_to_reach}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Subscriber decision\+::sub\+\_\+goal\+\_\+to\+\_\+reach\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classdecision_a088684a934191a0ad40f3e61ad3691ed}{}\label{classdecision_a088684a934191a0ad40f3e61ad3691ed}
+Pour la réception du point à atteindre \index{decision@{decision}!sub\+\_\+rotation\+\_\+done@{sub\+\_\+rotation\+\_\+done}}
+\index{sub\+\_\+rotation\+\_\+done@{sub\+\_\+rotation\+\_\+done}!decision@{decision}}
+\subsubsection[{\texorpdfstring{sub\+\_\+rotation\+\_\+done}{sub_rotation_done}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Subscriber decision\+::sub\+\_\+rotation\+\_\+done\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classdecision_a429cdcb43bc24e661fd361c77f66c82c}{}\label{classdecision_a429cdcb43bc24e661fd361c77f66c82c}
+Pour la réception de la roation faite \index{decision@{decision}!sub\+\_\+token@{sub\+\_\+token}}
+\index{sub\+\_\+token@{sub\+\_\+token}!decision@{decision}}
+\subsubsection[{\texorpdfstring{sub\+\_\+token}{sub_token}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Subscriber decision\+::sub\+\_\+token\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classdecision_a02e3400afdb00b874d96f1f49b9bb929}{}\label{classdecision_a02e3400afdb00b874d96f1f49b9bb929}
+\index{decision@{decision}!sub\+\_\+translation\+\_\+done@{sub\+\_\+translation\+\_\+done}}
+\index{sub\+\_\+translation\+\_\+done@{sub\+\_\+translation\+\_\+done}!decision@{decision}}
+\subsubsection[{\texorpdfstring{sub\+\_\+translation\+\_\+done}{sub_translation_done}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Subscriber decision\+::sub\+\_\+translation\+\_\+done\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classdecision_abec51fe792a7230e4afe73dca2eb83dd}{}\label{classdecision_abec51fe792a7230e4afe73dca2eb83dd}
+Pour la réception de la tanslation faite \index{decision@{decision}!token@{token}}
+\index{token@{token}!decision@{decision}}
+\subsubsection[{\texorpdfstring{token}{token}}]{\setlength{\rightskip}{0pt plus 5cm}bool decision\+::token\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classdecision_ad347764216715ba6d588aa4000cda267}{}\label{classdecision_ad347764216715ba6d588aa4000cda267}
+Token pour la savoir si le but est aléatoire \index{decision@{decision}!translation\+\_\+done@{translation\+\_\+done}}
+\index{translation\+\_\+done@{translation\+\_\+done}!decision@{decision}}
+\subsubsection[{\texorpdfstring{translation\+\_\+done}{translation_done}}]{\setlength{\rightskip}{0pt plus 5cm}float decision\+::translation\+\_\+done\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classdecision_a7917b74f63ec0ad3d43ceb7d06a56f0c}{}\label{classdecision_a7917b74f63ec0ad3d43ceb7d06a56f0c}
+Vérifie qu\textquotesingle{}une translation est faite \index{decision@{decision}!translation\+\_\+to\+\_\+do@{translation\+\_\+to\+\_\+do}}
+\index{translation\+\_\+to\+\_\+do@{translation\+\_\+to\+\_\+do}!decision@{decision}}
+\subsubsection[{\texorpdfstring{translation\+\_\+to\+\_\+do}{translation_to_do}}]{\setlength{\rightskip}{0pt plus 5cm}float decision\+::translation\+\_\+to\+\_\+do\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classdecision_ad49356a943ddd0a5e11cef4fe00ab201}{}\label{classdecision_ad49356a943ddd0a5e11cef4fe00ab201}
+Translation a faire 
+
+La documentation de cette classe a été générée à partir du fichier suivant \+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{decision__node_8cpp}{decision\+\_\+node.\+cpp}\end{DoxyCompactItemize}

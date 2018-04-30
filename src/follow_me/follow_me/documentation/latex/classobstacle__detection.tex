@@ -1,0 +1,206 @@
+\hypertarget{classobstacle__detection}{}\section{Référence de la classe obstacle\+\_\+detection}
+\label{classobstacle__detection}\index{obstacle\+\_\+detection@{obstacle\+\_\+detection}}
+
+
+Dètecte les obstacle.  
+
+
+\subsection*{Fonctions membres publiques}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classobstacle__detection_ab08b8acb922c41ba5f02162c96b6c2a3}{obstacle\+\_\+detection} ()
+\item 
+void \hyperlink{classobstacle__detection_a73c0891b4804320f065eca202ad37d3c}{update} ()
+\begin{DoxyCompactList}\small\item\em Met à jour le noeud. \end{DoxyCompactList}\item 
+void \hyperlink{classobstacle__detection_ac02d5622432bbc80baf85f5aed2fb96c}{scan\+Callback} (const sensor\+\_\+msgs\+::\+Laser\+Scan\+::\+Const\+Ptr \&scan)
+\begin{DoxyCompactList}\small\item\em callback du scan du laser \end{DoxyCompactList}\item 
+float \hyperlink{classobstacle__detection_ae49732fddd097ef980f5ced0cb92c36a}{distance\+Points} (geometry\+\_\+msgs\+::\+Point pa, geometry\+\_\+msgs\+::\+Point pb)
+\item 
+void \hyperlink{classobstacle__detection_a774f35d9c786a833adeedbd6e99238ce}{populate\+Marker\+Reference} ()
+\begin{DoxyCompactList}\small\item\em affichage des points \end{DoxyCompactList}\item 
+void \hyperlink{classobstacle__detection_a362d6d5ccf311fb071fd60054509ec0c}{populate\+Marker\+Topic} ()
+\begin{DoxyCompactList}\small\item\em affichage des points \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Attributs privés}
+\begin{DoxyCompactItemize}
+\item 
+ros\+::\+Node\+Handle \hyperlink{classobstacle__detection_af9d47d5799c2f8235a6b23e648017527}{n}
+\item 
+ros\+::\+Subscriber \hyperlink{classobstacle__detection_a6039f3306a252f69e94bdbbcd6b2586a}{sub\+\_\+laser}
+\item 
+ros\+::\+Publisher \hyperlink{classobstacle__detection_a8c385ba50b975608a9f7ca7dad292b14}{pub\+\_\+closest\+\_\+obstacle}
+\item 
+ros\+::\+Publisher \hyperlink{classobstacle__detection_a9a68c83350a4cdac4cda4f035b9fd53a}{pub\+\_\+closest\+\_\+obstacle\+\_\+marker}
+\item 
+int \hyperlink{classobstacle__detection_a165b85127bd657c5e02f64374ac99243}{nb\+\_\+beams}
+\item 
+float \hyperlink{classobstacle__detection_aa3b8ad63f9db233e9c54e3e793533c1e}{range\+\_\+min}
+\item 
+float \hyperlink{classobstacle__detection_a07b528b9821c2a024b6d4cf9a981f5cd}{range\+\_\+max}
+\item 
+float \hyperlink{classobstacle__detection_ad4d81d912a78379c7fa9d3bed5a46ba3}{angle\+\_\+min}
+\item 
+float \hyperlink{classobstacle__detection_ac2925fb29316055fb9ac63252df34e2d}{angle\+\_\+max}
+\item 
+float \hyperlink{classobstacle__detection_af11dfe5d4221ec764b2e0342bf140c96}{angle\+\_\+inc}
+\item 
+float \hyperlink{classobstacle__detection_ac8fac86b4054441a9aecc7d9453f4cd6}{range} \mbox{[}1000\mbox{]}
+\item 
+geometry\+\_\+msgs\+::\+Point \hyperlink{classobstacle__detection_abe28e799771603cfd242cff3cc8360e1}{current\+\_\+scan} \mbox{[}1000\mbox{]}
+\item 
+geometry\+\_\+msgs\+::\+Point \hyperlink{classobstacle__detection_a6619f1fc1e56dac5bf028c9dbab46773}{previous\+\_\+closest\+\_\+obstacle}
+\item 
+geometry\+\_\+msgs\+::\+Point \hyperlink{classobstacle__detection_a3fe5485079455a3179b0f30c2d29ac59}{closest\+\_\+obstacle}
+\item 
+bool \hyperlink{classobstacle__detection_afe40b9f71690dbb3595560e0f271c0b0}{new\+\_\+laser}
+\item 
+int \hyperlink{classobstacle__detection_ae1e9d58e1328625c5522e76faaa1b9d6}{nb\+\_\+pts}
+\item 
+geometry\+\_\+msgs\+::\+Point \hyperlink{classobstacle__detection_aa18bcd8cf14b32205e6716aec023e0f5}{display} \mbox{[}2000\mbox{]}
+\item 
+std\+\_\+msgs\+::\+Color\+R\+G\+BA \hyperlink{classobstacle__detection_a3ca3ada2b7bd7ea94c1ad2b53aa8b8f1}{colors} \mbox{[}2000\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Dètecte les obstacle. 
+
+\subsection{Documentation des constructeurs et destructeur}
+\index{obstacle\+\_\+detection@{obstacle\+\_\+detection}!obstacle\+\_\+detection@{obstacle\+\_\+detection}}
+\index{obstacle\+\_\+detection@{obstacle\+\_\+detection}!obstacle\+\_\+detection@{obstacle\+\_\+detection}}
+\subsubsection[{\texorpdfstring{obstacle\+\_\+detection()}{obstacle_detection()}}]{\setlength{\rightskip}{0pt plus 5cm}obstacle\+\_\+detection\+::obstacle\+\_\+detection (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classobstacle__detection_ab08b8acb922c41ba5f02162c96b6c2a3}{}\label{classobstacle__detection_ab08b8acb922c41ba5f02162c96b6c2a3}
+
+
+\subsection{Documentation des fonctions membres}
+\index{obstacle\+\_\+detection@{obstacle\+\_\+detection}!distance\+Points@{distance\+Points}}
+\index{distance\+Points@{distance\+Points}!obstacle\+\_\+detection@{obstacle\+\_\+detection}}
+\subsubsection[{\texorpdfstring{distance\+Points(geometry\+\_\+msgs\+::\+Point pa, geometry\+\_\+msgs\+::\+Point pb)}{distancePoints(geometry_msgs::Point pa, geometry_msgs::Point pb)}}]{\setlength{\rightskip}{0pt plus 5cm}obstacle\+\_\+detection\+::distance\+Points (
+\begin{DoxyParamCaption}
+\item[{geometry\+\_\+msgs\+::\+Point}]{pa, }
+\item[{geometry\+\_\+msgs\+::\+Point}]{pb}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classobstacle__detection_ae49732fddd097ef980f5ced0cb92c36a}{}\label{classobstacle__detection_ae49732fddd097ef980f5ced0cb92c36a}
+entre deux points 
+\begin{DoxyParams}{Paramètres}
+{\em pa} & un point \\
+\hline
+{\em pb} & un point \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+la distance 
+\end{DoxyReturn}
+\index{obstacle\+\_\+detection@{obstacle\+\_\+detection}!populate\+Marker\+Reference@{populate\+Marker\+Reference}}
+\index{populate\+Marker\+Reference@{populate\+Marker\+Reference}!obstacle\+\_\+detection@{obstacle\+\_\+detection}}
+\subsubsection[{\texorpdfstring{populate\+Marker\+Reference()}{populateMarkerReference()}}]{\setlength{\rightskip}{0pt plus 5cm}obstacle\+\_\+detection\+::populate\+Marker\+Reference (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classobstacle__detection_a774f35d9c786a833adeedbd6e99238ce}{}\label{classobstacle__detection_a774f35d9c786a833adeedbd6e99238ce}
+
+
+affichage des points 
+
+\index{obstacle\+\_\+detection@{obstacle\+\_\+detection}!populate\+Marker\+Topic@{populate\+Marker\+Topic}}
+\index{populate\+Marker\+Topic@{populate\+Marker\+Topic}!obstacle\+\_\+detection@{obstacle\+\_\+detection}}
+\subsubsection[{\texorpdfstring{populate\+Marker\+Topic()}{populateMarkerTopic()}}]{\setlength{\rightskip}{0pt plus 5cm}obstacle\+\_\+detection\+::populate\+Marker\+Topic (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classobstacle__detection_a362d6d5ccf311fb071fd60054509ec0c}{}\label{classobstacle__detection_a362d6d5ccf311fb071fd60054509ec0c}
+
+
+affichage des points 
+
+\index{obstacle\+\_\+detection@{obstacle\+\_\+detection}!scan\+Callback@{scan\+Callback}}
+\index{scan\+Callback@{scan\+Callback}!obstacle\+\_\+detection@{obstacle\+\_\+detection}}
+\subsubsection[{\texorpdfstring{scan\+Callback(const sensor\+\_\+msgs\+::\+Laser\+Scan\+::\+Const\+Ptr \&scan)}{scanCallback(const sensor_msgs::LaserScan::ConstPtr &scan)}}]{\setlength{\rightskip}{0pt plus 5cm}obstacle\+\_\+detection\+::scan\+Callback (
+\begin{DoxyParamCaption}
+\item[{const sensor\+\_\+msgs\+::\+Laser\+Scan\+::\+Const\+Ptr \&}]{scan}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classobstacle__detection_ac02d5622432bbc80baf85f5aed2fb96c}{}\label{classobstacle__detection_ac02d5622432bbc80baf85f5aed2fb96c}
+
+
+callback du scan du laser 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em scan} & le scan \\
+\hline
+\end{DoxyParams}
+\index{obstacle\+\_\+detection@{obstacle\+\_\+detection}!update@{update}}
+\index{update@{update}!obstacle\+\_\+detection@{obstacle\+\_\+detection}}
+\subsubsection[{\texorpdfstring{update()}{update()}}]{\setlength{\rightskip}{0pt plus 5cm}obstacle\+\_\+detection\+::update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classobstacle__detection_a73c0891b4804320f065eca202ad37d3c}{}\label{classobstacle__detection_a73c0891b4804320f065eca202ad37d3c}
+
+
+Met à jour le noeud. 
+
+
+
+\subsection{Documentation des données membres}
+\index{obstacle\+\_\+detection@{obstacle\+\_\+detection}!angle\+\_\+inc@{angle\+\_\+inc}}
+\index{angle\+\_\+inc@{angle\+\_\+inc}!obstacle\+\_\+detection@{obstacle\+\_\+detection}}
+\subsubsection[{\texorpdfstring{angle\+\_\+inc}{angle_inc}}]{\setlength{\rightskip}{0pt plus 5cm}float obstacle\+\_\+detection\+::angle\+\_\+inc\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classobstacle__detection_af11dfe5d4221ec764b2e0342bf140c96}{}\label{classobstacle__detection_af11dfe5d4221ec764b2e0342bf140c96}
+\index{obstacle\+\_\+detection@{obstacle\+\_\+detection}!angle\+\_\+max@{angle\+\_\+max}}
+\index{angle\+\_\+max@{angle\+\_\+max}!obstacle\+\_\+detection@{obstacle\+\_\+detection}}
+\subsubsection[{\texorpdfstring{angle\+\_\+max}{angle_max}}]{\setlength{\rightskip}{0pt plus 5cm}float obstacle\+\_\+detection\+::angle\+\_\+max\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classobstacle__detection_ac2925fb29316055fb9ac63252df34e2d}{}\label{classobstacle__detection_ac2925fb29316055fb9ac63252df34e2d}
+\index{obstacle\+\_\+detection@{obstacle\+\_\+detection}!angle\+\_\+min@{angle\+\_\+min}}
+\index{angle\+\_\+min@{angle\+\_\+min}!obstacle\+\_\+detection@{obstacle\+\_\+detection}}
+\subsubsection[{\texorpdfstring{angle\+\_\+min}{angle_min}}]{\setlength{\rightskip}{0pt plus 5cm}float obstacle\+\_\+detection\+::angle\+\_\+min\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classobstacle__detection_ad4d81d912a78379c7fa9d3bed5a46ba3}{}\label{classobstacle__detection_ad4d81d912a78379c7fa9d3bed5a46ba3}
+\index{obstacle\+\_\+detection@{obstacle\+\_\+detection}!closest\+\_\+obstacle@{closest\+\_\+obstacle}}
+\index{closest\+\_\+obstacle@{closest\+\_\+obstacle}!obstacle\+\_\+detection@{obstacle\+\_\+detection}}
+\subsubsection[{\texorpdfstring{closest\+\_\+obstacle}{closest_obstacle}}]{\setlength{\rightskip}{0pt plus 5cm}geometry\+\_\+msgs\+::\+Point obstacle\+\_\+detection\+::closest\+\_\+obstacle\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classobstacle__detection_a3fe5485079455a3179b0f30c2d29ac59}{}\label{classobstacle__detection_a3fe5485079455a3179b0f30c2d29ac59}
+Obstacle le plus proche \index{obstacle\+\_\+detection@{obstacle\+\_\+detection}!colors@{colors}}
+\index{colors@{colors}!obstacle\+\_\+detection@{obstacle\+\_\+detection}}
+\subsubsection[{\texorpdfstring{colors}{colors}}]{\setlength{\rightskip}{0pt plus 5cm}std\+\_\+msgs\+::\+Color\+R\+G\+BA obstacle\+\_\+detection\+::colors\mbox{[}2000\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classobstacle__detection_a3ca3ada2b7bd7ea94c1ad2b53aa8b8f1}{}\label{classobstacle__detection_a3ca3ada2b7bd7ea94c1ad2b53aa8b8f1}
+Les couleurs \index{obstacle\+\_\+detection@{obstacle\+\_\+detection}!current\+\_\+scan@{current\+\_\+scan}}
+\index{current\+\_\+scan@{current\+\_\+scan}!obstacle\+\_\+detection@{obstacle\+\_\+detection}}
+\subsubsection[{\texorpdfstring{current\+\_\+scan}{current_scan}}]{\setlength{\rightskip}{0pt plus 5cm}geometry\+\_\+msgs\+::\+Point obstacle\+\_\+detection\+::current\+\_\+scan\mbox{[}1000\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classobstacle__detection_abe28e799771603cfd242cff3cc8360e1}{}\label{classobstacle__detection_abe28e799771603cfd242cff3cc8360e1}
+Les points courrants \index{obstacle\+\_\+detection@{obstacle\+\_\+detection}!display@{display}}
+\index{display@{display}!obstacle\+\_\+detection@{obstacle\+\_\+detection}}
+\subsubsection[{\texorpdfstring{display}{display}}]{\setlength{\rightskip}{0pt plus 5cm}geometry\+\_\+msgs\+::\+Point obstacle\+\_\+detection\+::display\mbox{[}2000\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classobstacle__detection_aa18bcd8cf14b32205e6716aec023e0f5}{}\label{classobstacle__detection_aa18bcd8cf14b32205e6716aec023e0f5}
+Les points à afficher \index{obstacle\+\_\+detection@{obstacle\+\_\+detection}!n@{n}}
+\index{n@{n}!obstacle\+\_\+detection@{obstacle\+\_\+detection}}
+\subsubsection[{\texorpdfstring{n}{n}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Node\+Handle obstacle\+\_\+detection\+::n\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classobstacle__detection_af9d47d5799c2f8235a6b23e648017527}{}\label{classobstacle__detection_af9d47d5799c2f8235a6b23e648017527}
+Le noeud \index{obstacle\+\_\+detection@{obstacle\+\_\+detection}!nb\+\_\+beams@{nb\+\_\+beams}}
+\index{nb\+\_\+beams@{nb\+\_\+beams}!obstacle\+\_\+detection@{obstacle\+\_\+detection}}
+\subsubsection[{\texorpdfstring{nb\+\_\+beams}{nb_beams}}]{\setlength{\rightskip}{0pt plus 5cm}int obstacle\+\_\+detection\+::nb\+\_\+beams\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classobstacle__detection_a165b85127bd657c5e02f64374ac99243}{}\label{classobstacle__detection_a165b85127bd657c5e02f64374ac99243}
+to store, process and display laserdata \index{obstacle\+\_\+detection@{obstacle\+\_\+detection}!nb\+\_\+pts@{nb\+\_\+pts}}
+\index{nb\+\_\+pts@{nb\+\_\+pts}!obstacle\+\_\+detection@{obstacle\+\_\+detection}}
+\subsubsection[{\texorpdfstring{nb\+\_\+pts}{nb_pts}}]{\setlength{\rightskip}{0pt plus 5cm}int obstacle\+\_\+detection\+::nb\+\_\+pts\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classobstacle__detection_ae1e9d58e1328625c5522e76faaa1b9d6}{}\label{classobstacle__detection_ae1e9d58e1328625c5522e76faaa1b9d6}
+Nombre de point à afficher \index{obstacle\+\_\+detection@{obstacle\+\_\+detection}!new\+\_\+laser@{new\+\_\+laser}}
+\index{new\+\_\+laser@{new\+\_\+laser}!obstacle\+\_\+detection@{obstacle\+\_\+detection}}
+\subsubsection[{\texorpdfstring{new\+\_\+laser}{new_laser}}]{\setlength{\rightskip}{0pt plus 5cm}bool obstacle\+\_\+detection\+::new\+\_\+laser\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classobstacle__detection_afe40b9f71690dbb3595560e0f271c0b0}{}\label{classobstacle__detection_afe40b9f71690dbb3595560e0f271c0b0}
+Indique que de nouvelles données laser ont été reçues \index{obstacle\+\_\+detection@{obstacle\+\_\+detection}!previous\+\_\+closest\+\_\+obstacle@{previous\+\_\+closest\+\_\+obstacle}}
+\index{previous\+\_\+closest\+\_\+obstacle@{previous\+\_\+closest\+\_\+obstacle}!obstacle\+\_\+detection@{obstacle\+\_\+detection}}
+\subsubsection[{\texorpdfstring{previous\+\_\+closest\+\_\+obstacle}{previous_closest_obstacle}}]{\setlength{\rightskip}{0pt plus 5cm}geometry\+\_\+msgs\+::\+Point obstacle\+\_\+detection\+::previous\+\_\+closest\+\_\+obstacle\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classobstacle__detection_a6619f1fc1e56dac5bf028c9dbab46773}{}\label{classobstacle__detection_a6619f1fc1e56dac5bf028c9dbab46773}
+Précédent obstacle \index{obstacle\+\_\+detection@{obstacle\+\_\+detection}!pub\+\_\+closest\+\_\+obstacle@{pub\+\_\+closest\+\_\+obstacle}}
+\index{pub\+\_\+closest\+\_\+obstacle@{pub\+\_\+closest\+\_\+obstacle}!obstacle\+\_\+detection@{obstacle\+\_\+detection}}
+\subsubsection[{\texorpdfstring{pub\+\_\+closest\+\_\+obstacle}{pub_closest_obstacle}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Publisher obstacle\+\_\+detection\+::pub\+\_\+closest\+\_\+obstacle\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classobstacle__detection_a8c385ba50b975608a9f7ca7dad292b14}{}\label{classobstacle__detection_a8c385ba50b975608a9f7ca7dad292b14}
+communication with action \index{obstacle\+\_\+detection@{obstacle\+\_\+detection}!pub\+\_\+closest\+\_\+obstacle\+\_\+marker@{pub\+\_\+closest\+\_\+obstacle\+\_\+marker}}
+\index{pub\+\_\+closest\+\_\+obstacle\+\_\+marker@{pub\+\_\+closest\+\_\+obstacle\+\_\+marker}!obstacle\+\_\+detection@{obstacle\+\_\+detection}}
+\subsubsection[{\texorpdfstring{pub\+\_\+closest\+\_\+obstacle\+\_\+marker}{pub_closest_obstacle_marker}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Publisher obstacle\+\_\+detection\+::pub\+\_\+closest\+\_\+obstacle\+\_\+marker\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classobstacle__detection_a9a68c83350a4cdac4cda4f035b9fd53a}{}\label{classobstacle__detection_a9a68c83350a4cdac4cda4f035b9fd53a}
+\index{obstacle\+\_\+detection@{obstacle\+\_\+detection}!range@{range}}
+\index{range@{range}!obstacle\+\_\+detection@{obstacle\+\_\+detection}}
+\subsubsection[{\texorpdfstring{range}{range}}]{\setlength{\rightskip}{0pt plus 5cm}float obstacle\+\_\+detection\+::range\mbox{[}1000\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classobstacle__detection_ac8fac86b4054441a9aecc7d9453f4cd6}{}\label{classobstacle__detection_ac8fac86b4054441a9aecc7d9453f4cd6}
+\index{obstacle\+\_\+detection@{obstacle\+\_\+detection}!range\+\_\+max@{range\+\_\+max}}
+\index{range\+\_\+max@{range\+\_\+max}!obstacle\+\_\+detection@{obstacle\+\_\+detection}}
+\subsubsection[{\texorpdfstring{range\+\_\+max}{range_max}}]{\setlength{\rightskip}{0pt plus 5cm}float obstacle\+\_\+detection\+::range\+\_\+max\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classobstacle__detection_a07b528b9821c2a024b6d4cf9a981f5cd}{}\label{classobstacle__detection_a07b528b9821c2a024b6d4cf9a981f5cd}
+\index{obstacle\+\_\+detection@{obstacle\+\_\+detection}!range\+\_\+min@{range\+\_\+min}}
+\index{range\+\_\+min@{range\+\_\+min}!obstacle\+\_\+detection@{obstacle\+\_\+detection}}
+\subsubsection[{\texorpdfstring{range\+\_\+min}{range_min}}]{\setlength{\rightskip}{0pt plus 5cm}float obstacle\+\_\+detection\+::range\+\_\+min\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classobstacle__detection_aa3b8ad63f9db233e9c54e3e793533c1e}{}\label{classobstacle__detection_aa3b8ad63f9db233e9c54e3e793533c1e}
+\index{obstacle\+\_\+detection@{obstacle\+\_\+detection}!sub\+\_\+laser@{sub\+\_\+laser}}
+\index{sub\+\_\+laser@{sub\+\_\+laser}!obstacle\+\_\+detection@{obstacle\+\_\+detection}}
+\subsubsection[{\texorpdfstring{sub\+\_\+laser}{sub_laser}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Subscriber obstacle\+\_\+detection\+::sub\+\_\+laser\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classobstacle__detection_a6039f3306a252f69e94bdbbcd6b2586a}{}\label{classobstacle__detection_a6039f3306a252f69e94bdbbcd6b2586a}
+communication with laser\+\_\+scanner 
+
+La documentation de cette classe a été générée à partir du fichier suivant \+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{obstacle__detection__node_8cpp}{obstacle\+\_\+detection\+\_\+node.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,75 @@
+\hypertarget{rotation__action__node_8cpp}{}\section{Référence du fichier rotation\+\_\+action\+\_\+node.\+cpp}
+\label{rotation__action__node_8cpp}\index{rotation\+\_\+action\+\_\+node.\+cpp@{rotation\+\_\+action\+\_\+node.\+cpp}}
+
+
+Noeud pour effectuer des translation  O.\+Aycard.  
+
+
+{\ttfamily \#include \char`\"{}ros/ros.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$geometry\+\_\+msgs/\+Twist.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}geometry\+\_\+msgs/\+Point.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}geometry\+\_\+msgs/\+Quaternion.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}nav\+\_\+msgs/\+Odometry.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}std\+\_\+msgs/\+String.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}std\+\_\+msgs/\+Float32.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$cmath$>$}\\*
+{\ttfamily \#include $<$tf/transform\+\_\+datatypes.\+h$>$}\\*
+Graphe des dépendances par inclusion de rotation\+\_\+action\+\_\+node.\+cpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{rotation__action__node_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classrotation__action}{rotation\+\_\+action}
+\begin{DoxyCompactList}\small\item\em Gère la rotation du robot. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{rotation__action__node_8cpp_aac72bea45fe64e877f39a9f3af7f56b5}{rotation\+\_\+error}~0.\+2
+\item 
+\#define \hyperlink{rotation__action__node_8cpp_a4a22f30a94d579ec099493eaa3e3cfec}{kp}~0.\+5
+\item 
+\#define \hyperlink{rotation__action__node_8cpp_ac208d4a15168228961f22ff0619bd468}{ki}~0
+\item 
+\#define \hyperlink{rotation__action__node_8cpp_a731039d1eebab67f74b726ab9aec55a6}{kd}~0
+\end{DoxyCompactItemize}
+\subsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{rotation__action__node_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Noeud pour effectuer des translation  O.\+Aycard. 
+
+
+
+\subsection{Documentation des macros}
+\index{rotation\+\_\+action\+\_\+node.\+cpp@{rotation\+\_\+action\+\_\+node.\+cpp}!kd@{kd}}
+\index{kd@{kd}!rotation\+\_\+action\+\_\+node.\+cpp@{rotation\+\_\+action\+\_\+node.\+cpp}}
+\subsubsection[{\texorpdfstring{kd}{kd}}]{\setlength{\rightskip}{0pt plus 5cm}\#define kd~0}\hypertarget{rotation__action__node_8cpp_a731039d1eebab67f74b726ab9aec55a6}{}\label{rotation__action__node_8cpp_a731039d1eebab67f74b726ab9aec55a6}
+coefficient kd \index{rotation\+\_\+action\+\_\+node.\+cpp@{rotation\+\_\+action\+\_\+node.\+cpp}!ki@{ki}}
+\index{ki@{ki}!rotation\+\_\+action\+\_\+node.\+cpp@{rotation\+\_\+action\+\_\+node.\+cpp}}
+\subsubsection[{\texorpdfstring{ki}{ki}}]{\setlength{\rightskip}{0pt plus 5cm}\#define ki~0}\hypertarget{rotation__action__node_8cpp_ac208d4a15168228961f22ff0619bd468}{}\label{rotation__action__node_8cpp_ac208d4a15168228961f22ff0619bd468}
+coefficient ki \index{rotation\+\_\+action\+\_\+node.\+cpp@{rotation\+\_\+action\+\_\+node.\+cpp}!kp@{kp}}
+\index{kp@{kp}!rotation\+\_\+action\+\_\+node.\+cpp@{rotation\+\_\+action\+\_\+node.\+cpp}}
+\subsubsection[{\texorpdfstring{kp}{kp}}]{\setlength{\rightskip}{0pt plus 5cm}\#define kp~0.\+5}\hypertarget{rotation__action__node_8cpp_a4a22f30a94d579ec099493eaa3e3cfec}{}\label{rotation__action__node_8cpp_a4a22f30a94d579ec099493eaa3e3cfec}
+coefficient kp \index{rotation\+\_\+action\+\_\+node.\+cpp@{rotation\+\_\+action\+\_\+node.\+cpp}!rotation\+\_\+error@{rotation\+\_\+error}}
+\index{rotation\+\_\+error@{rotation\+\_\+error}!rotation\+\_\+action\+\_\+node.\+cpp@{rotation\+\_\+action\+\_\+node.\+cpp}}
+\subsubsection[{\texorpdfstring{rotation\+\_\+error}{rotation_error}}]{\setlength{\rightskip}{0pt plus 5cm}\#define rotation\+\_\+error~0.\+2}\hypertarget{rotation__action__node_8cpp_aac72bea45fe64e877f39a9f3af7f56b5}{}\label{rotation__action__node_8cpp_aac72bea45fe64e877f39a9f3af7f56b5}
+Erreur pour la rotation 
+
+\subsection{Documentation des fonctions}
+\index{rotation\+\_\+action\+\_\+node.\+cpp@{rotation\+\_\+action\+\_\+node.\+cpp}!main@{main}}
+\index{main@{main}!rotation\+\_\+action\+\_\+node.\+cpp@{rotation\+\_\+action\+\_\+node.\+cpp}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$$\ast$argv)}{main(int argc, char **argv)}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}\hypertarget{rotation__action__node_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{}\label{rotation__action__node_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}

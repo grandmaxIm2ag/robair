@@ -1,0 +1,67 @@
+\hypertarget{robot__moving__node_8cpp}{}\section{Référence du fichier robot\+\_\+moving\+\_\+node.\+cpp}
+\label{robot__moving__node_8cpp}\index{robot\+\_\+moving\+\_\+node.\+cpp@{robot\+\_\+moving\+\_\+node.\+cpp}}
+
+
+Détect les ouvement du robot  O.\+Aycard.  
+
+
+{\ttfamily \#include $<$signal.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}ros/ros.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sensor\+\_\+msgs/\+Laser\+Scan.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}visualization\+\_\+msgs/\+Marker.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}geometry\+\_\+msgs/\+Point.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}std\+\_\+msgs/\+Color\+R\+G\+B\+A.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}std\+\_\+msgs/\+Float32.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}std\+\_\+msgs/\+Bool.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$cmath$>$}\\*
+{\ttfamily \#include \char`\"{}nav\+\_\+msgs/\+Odometry.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$tf/transform\+\_\+datatypes.\+h$>$}\\*
+{\ttfamily \#include $<$tf/transform\+\_\+listener.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}std\+\_\+srvs/\+Empty.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}tf/transform\+\_\+broadcaster.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}message\+\_\+filters/subscriber.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}tf/message\+\_\+filter.\+h\char`\"{}}\\*
+Graphe des dépendances par inclusion de robot\+\_\+moving\+\_\+node.\+cpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{robot__moving__node_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classrobot__moving__lectures}{robot\+\_\+moving\+\_\+lectures}
+\begin{DoxyCompactList}\small\item\em Vérifie que le robot est en mouvement. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{robot__moving__node_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{robot__moving__node_8cpp_aa5218da2c57837e43c73faa2fef3ea67}{nb\+\_\+static} = 5
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Détect les ouvement du robot  O.\+Aycard. 
+
+
+
+\subsection{Documentation des fonctions}
+\index{robot\+\_\+moving\+\_\+node.\+cpp@{robot\+\_\+moving\+\_\+node.\+cpp}!main@{main}}
+\index{main@{main}!robot\+\_\+moving\+\_\+node.\+cpp@{robot\+\_\+moving\+\_\+node.\+cpp}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$$\ast$argv)}{main(int argc, char **argv)}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}\hypertarget{robot__moving__node_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{}\label{robot__moving__node_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}
+
+
+\subsection{Documentation des variables}
+\index{robot\+\_\+moving\+\_\+node.\+cpp@{robot\+\_\+moving\+\_\+node.\+cpp}!nb\+\_\+static@{nb\+\_\+static}}
+\index{nb\+\_\+static@{nb\+\_\+static}!robot\+\_\+moving\+\_\+node.\+cpp@{robot\+\_\+moving\+\_\+node.\+cpp}}
+\subsubsection[{\texorpdfstring{nb\+\_\+static}{nb_static}}]{\setlength{\rightskip}{0pt plus 5cm}int nb\+\_\+static = 5}\hypertarget{robot__moving__node_8cpp_aa5218da2c57837e43c73faa2fef3ea67}{}\label{robot__moving__node_8cpp_aa5218da2c57837e43c73faa2fef3ea67}
